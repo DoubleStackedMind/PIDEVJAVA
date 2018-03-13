@@ -18,7 +18,7 @@ public class DatabaseConnection {
 
     private DatabaseConnection() {
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/fosuser", "root", "");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/fosuser?useSSL=false", "root", "");
             System.out.println("Connexion établie!");
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());

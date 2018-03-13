@@ -6,6 +6,7 @@
 package edu.russie2018.IServices;
 
 import edu.russie2018.entities.Commandes;
+import edu.russie2018.entities.Lignedecommande;
 import java.util.List;
 
 /**
@@ -14,7 +15,7 @@ import java.util.List;
  */
 public interface ICommandes {
     
-    public void ajouterCommande(Commandes c);
+    public void ajouterCommande(Commandes c,Lignedecommande lc);
     public void supprimerCommande(Commandes c);
     public void modifierCommande(Commandes c);
     public List<Commandes> consulterCommandes();

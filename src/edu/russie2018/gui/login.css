@@ -1,0 +1,21 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+    -fx-background-image: url('file:C:/Users/samia/Documents/NetBeansProjects/PIDEV/Images/background.png');
+}
+
+.text-field {
+    -fx-background-color: transparent ;
+    -fx-background-insets: 0, 0 0 1 0 ;
+    -fx-background-radius: 0 ;
+    
+}
+.text-field:focused {
+    -fx-background-color: transparent;
+}
+
+.button {
+    -fx-background-color: transparent;
+}

@@ -5,12 +5,23 @@
  */
 package edu.russie2018.gui;
 
+import edu.russie2018.entities.User;
+import edu.russie2018.services.UserService;
+import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javax.activation.DataSource;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -20,15 +31,13 @@ import javafx.scene.control.TextField;
 public class LoginController implements Initializable {
 
     @FXML
-    private TextField tfusername ;
-    
+    private TextField tfusername;
+
     @FXML
-    private TextField tfpassword ;
+    private TextField tfpassword;
     @FXML
     private Button forgotpwd;
 
-    
-    
     /**
      * Initializes the controller class.
      */
@@ -39,6 +48,26 @@ public class LoginController implements Initializable {
         tfusername.setFocusTraversable(false);
         tfpassword.setPromptText("Password ...");
         tfpassword.setFocusTraversable(false);
-    }    
-    
+    }
+
+    public void Authentification(ActionEvent event) {
+        UserService us = new UserService();
+        User usr = new User();
+        usr.setUsername(tfusername.getText());
+        usr.setPassword(tfpassword.getText());
+        boolean verify = us.VerifyUser(usr);
+        if (verify) {
+            try {
+                JOptionPane.showMessageDialog(null, "привет "+usr.getUsername()+"!");
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("Shop.fxml"));
+                Parent root = loader.load();
+                tfusername.getScene().setRoot(root);
+            } catch (IOException ex) {
+                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+          
+        } else {
+
+        }
+    }
 }

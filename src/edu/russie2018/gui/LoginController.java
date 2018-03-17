@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -36,7 +37,9 @@ public class LoginController implements Initializable {
     @FXML
     private TextField tfpassword;
     @FXML
-    private Button forgotpwd;
+    private Button login;
+    @FXML
+    private Button closeButton;
 
     /**
      * Initializes the controller class.
@@ -50,6 +53,7 @@ public class LoginController implements Initializable {
         tfpassword.setFocusTraversable(false);
     }
 
+    @FXML
     public void Authentification(ActionEvent event) {
         UserService us = new UserService();
         User usr = new User();
@@ -69,5 +73,10 @@ public class LoginController implements Initializable {
         } else {
 
         }
+    }
+
+    @FXML
+    private void closeWindow(ActionEvent event) {
+        Platform.exit();
     }
 }

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.net.URL?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane2" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: transparent;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.russie2018.gui.CrudProduitsController">
+    <stylesheets>
+        <URL value="@crudproduits.css" />
+    </stylesheets>
+   <children>
+      <JFXButton fx:id="Ajouter" accessibleText="Ajouter" layoutX="76.0" layoutY="24.0" onAction="#ajouterProduit" prefHeight="165.0" prefWidth="187.0" style="-fx-background-color: rgba(0,0,0,0.3);" text=" Ajouter un Produit" textFill="WHITE">
+         <font>
+            <Font name="FontAwesome" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton accessibleText="Supprimer" layoutX="76.0" layoutY="200.0" prefHeight="165.0" prefWidth="187.0" style="-fx-background-color: rgba(0,0,0,0.3);" text=" Supprimer un Produit" textFill="WHITE">
+         <font>
+            <Font name="FontAwesome" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton accessibleText="Modifier" layoutX="353.0" layoutY="24.0" prefHeight="165.0" prefWidth="187.0" style="-fx-background-color: rgba(0,0,0,0.3);" text=" Modifier un Produit" textFill="WHITE">
+         <font>
+            <Font name="FontAwesome" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton accessibleText="Consulter" layoutX="353.0" layoutY="200.0" prefHeight="165.0" prefWidth="187.0" style="-fx-background-color: rgba(0,0,0,0.3);" text=" Consulter les Produits" textFill="WHITE">
+         <font>
+            <Font name="FontAwesome" size="15.0" />
+         </font>
+      </JFXButton>
+   </children>
+   <effect>
+      <Glow />
+   </effect>
+</AnchorPane>

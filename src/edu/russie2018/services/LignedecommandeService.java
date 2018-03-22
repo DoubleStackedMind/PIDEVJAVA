@@ -47,7 +47,7 @@ public class LignedecommandeService implements ILignedecommande {
                 while (myRes.next()) {
                     p.setIdProduit(myRes.getInt("id_produit"));
                     p.setNom(myRes.getString("nom"));
-                    p.setPrix(myRes.getDouble("prix"));
+                    p.setPrix(myRes.getFloat("prix"));
                     p.setImage(myRes.getString("image"));
                     myList.put(qt, p);
                 }
@@ -86,7 +86,7 @@ public class LignedecommandeService implements ILignedecommande {
 
     @Override
     public void modifierLigneDeCommande(Lignedecommande lc) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
     }
 
     @Override

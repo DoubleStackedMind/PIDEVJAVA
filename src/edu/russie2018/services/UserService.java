@@ -24,7 +24,7 @@ public class UserService implements IUser {
 
     Connection cnx;
 
-    public UserService() {
+    public UserService() { 
         cnx = DatabaseConnection.getInstance().getConnection();
     }
 

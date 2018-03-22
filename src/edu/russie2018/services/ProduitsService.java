@@ -8,9 +8,15 @@ package edu.russie2018.services;
 import edu.russie2018.IServices.IProduits;
 import edu.russie2018.entities.Produits;
 import edu.russie2018.utils.DatabaseConnection;
+import java.awt.Image;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.geometry.Pos;
+import javafx.scene.image.ImageView;
+import javafx.util.Duration;
+import javax.swing.ImageIcon;
+import org.controlsfx.control.Notifications;
 
 /**
  *
@@ -26,12 +32,13 @@ public class ProduitsService implements IProduits {
 
     @Override
     public void ajouterProduit(Produits p) {
+       
         try {
             String requete = "INSERT INTO produits (nom,prix,categorie,quantite,image,couleur,description,marque,composition) VALUES(?,?,?,?,?,?,?,?,?)";
 
             PreparedStatement pst = cnx.prepareStatement(requete);
             pst.setString(1, p.getNom());
-            pst.setDouble(2, p.getPrix());
+            pst.setFloat(2, p.getPrix());
             pst.setString(3, p.getCategorie());
             pst.setInt(4, p.getQuantite());
             pst.setString(5, p.getImage());
@@ -40,8 +47,7 @@ public class ProduitsService implements IProduits {
             pst.setString(8, p.getMarque());
             pst.setString(9, p.getComposition());
 
-            pst.executeUpdate();
-            System.out.println("Produit ajouté avec succées");
+            pst.executeUpdate(); 
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
@@ -92,7 +98,7 @@ public class ProduitsService implements IProduits {
             while (rs.next()) {
 
                 String nom = rs.getString("nom");
-                Double prix = rs.getDouble("prix");
+                Float prix = rs.getFloat("prix");
                 String categorie = rs.getString("categorie");
                 int quantite = rs.getInt("quantite");
                 String image = rs.getString("image");

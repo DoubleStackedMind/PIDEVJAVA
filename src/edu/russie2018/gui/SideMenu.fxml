@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.net.URL?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="300.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.russie2018.gui.SideMenuController">
+    <stylesheets>
+        <URL value="@sidemenu.css" />
+    </stylesheets>
+   <children>
+      <JFXButton fx:id="GS" accessibleText="GestionProduits" buttonType="RAISED" layoutY="153.0" prefHeight="68.0" prefWidth="300.0" ripplerFill="BLACK" style="-fx-background-color: rgba(0,0,0,0.3);" stylesheets="@sidemenu.css" text="   Gestion des Produits" textFill="WHITE">
+         <font>
+            <Font name="FontAwesome" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="GC" buttonType="RAISED" layoutY="228.0" prefHeight="68.0" prefWidth="300.0" style="-fx-background-color: rgba(0,0,0,0.3);" stylesheets="@sidemenu.css" text="   Gestion des commandes" textFill="WHITE">
+         <font>
+            <Font name="FontAwesome" size="15.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>

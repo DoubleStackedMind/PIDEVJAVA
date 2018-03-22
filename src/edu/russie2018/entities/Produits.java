@@ -13,7 +13,7 @@ public class Produits {
     
     private int idProduit;
     private String nom;
-    private double prix;
+    private float prix;
     private String categorie;
     private String couleur;
     private String description;
@@ -25,7 +25,7 @@ public class Produits {
     public Produits() {
     }
 
-    public Produits(String nom, double prix, String categorie, String couleur, String description, String marque, String composition, int quantite, String image) {
+    public Produits(String nom, float prix, String categorie, String couleur, String description, String marque, String composition, int quantite, String image) {
         this.nom = nom;
         this.prix = prix;
         this.categorie = categorie;
@@ -55,11 +55,11 @@ public class Produits {
         this.nom = nom;
     }
 
-    public double getPrix() {
+    public float getPrix() {
         return prix;
     }
 
-    public void setPrix(double prix) {
+    public void setPrix(float prix) {
         this.prix = prix;
     }
 

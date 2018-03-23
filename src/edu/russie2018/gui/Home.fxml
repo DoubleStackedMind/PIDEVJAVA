@@ -13,9 +13,9 @@
    <children>
       <JFXHamburger fx:id="hamburger" layoutX="964.0" layoutY="55.0" />
       <JFXDrawer fx:id="drawer" defaultDrawerSize="300.0" layoutY="38.0" prefHeight="735.0" prefWidth="322.0" />
-      <JFXDrawer fx:id="CrudDrawer" defaultDrawerSize="600.0" direction="BOTTOM" layoutX="303.0" layoutY="206.0" prefHeight="440.0" prefWidth="548.0" />
       <JFXButton fx:id="closeButton" layoutX="22.0" layoutY="11.0" onAction="#closeWindow" prefHeight="25.0" prefWidth="5.0" style="-fx-background-image: url('file:C:/Users/samia/Documents/NetBeansProjects/PIDEV/Images/close.png'); -fx-background-repeat: no-repeat; -fx-background-position: 90%; -fx-background-color: transparent;" text=" " />
       <JFXButton fx:id="minimizeButton" layoutX="42.0" layoutY="11.0" onAction="#minimizeWindow" style="-fx-background-image: url('file:C:/Users/samia/Documents/NetBeansProjects/PIDEV/Images/minimize.png'); -fx-background-color: transparent; -fx-background-repeat: no-repeat; -fx-background-position: 90%;" text=" " />
       <JFXButton fx:id="maximizeButton" layoutX="64.0" layoutY="11.0" onAction="#maximizeWindow" style="-fx-background-image: url('file:C:/Users/samia/Documents/NetBeansProjects/PIDEV/Images/maximize.png'); -fx-background-color: transparent; -fx-background-repeat: no-repeat; -fx-background-position: 90%;" text=" " />
+      <JFXDrawer fx:id="CrudDrawer" defaultDrawerSize="600.0" direction="BOTTOM" layoutX="303.0" layoutY="206.0" prefHeight="440.0" prefWidth="548.0" />
    </children>
 </AnchorPane>

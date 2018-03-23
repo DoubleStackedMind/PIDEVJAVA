@@ -26,7 +26,7 @@
             <Font name="FontAwesome" size="15.0" />
          </font>
       </JFXButton>
-      <JFXButton accessibleText="Consulter" layoutX="353.0" layoutY="200.0" prefHeight="165.0" prefWidth="187.0" style="-fx-background-color: rgba(0,0,0,0.3);" text=" Consulter les Produits" textFill="WHITE">
+      <JFXButton fx:id="afficherButton" accessibleText="Consulter" layoutX="353.0" layoutY="200.0" onAction="#consulterProduits" prefHeight="165.0" prefWidth="187.0" style="-fx-background-color: rgba(0,0,0,0.3);" text=" Consulter les Produits" textFill="WHITE">
          <font>
             <Font name="FontAwesome" size="15.0" />
          </font>

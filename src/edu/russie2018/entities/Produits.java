@@ -5,27 +5,30 @@
  */
 package edu.russie2018.entities;
 
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import javafx.beans.property.StringProperty;
+
 /**
  *
  * @author Sami
  */
-public class Produits {
+public class Produits extends RecursiveTreeObject<Produits>{
     
     private int idProduit;
-    private String nom;
+    private StringProperty nom;
     private float prix;
-    private String categorie;
-    private String couleur;
-    private String description;
-    private String marque;
-    private String composition;
+    private StringProperty categorie;
+    private StringProperty couleur;
+    private StringProperty description;
+    private StringProperty marque;
+    private StringProperty composition;
     private int quantite;
-    private String image;
+    private StringProperty image;
 
     public Produits() {
     }
 
-    public Produits(String nom, float prix, String categorie, String couleur, String description, String marque, String composition, int quantite, String image) {
+    public Produits(StringProperty nom, float prix, StringProperty categorie, StringProperty couleur, StringProperty description, StringProperty marque, StringProperty composition, int quantite, StringProperty image) {
         this.nom = nom;
         this.prix = prix;
         this.categorie = categorie;
@@ -47,11 +50,11 @@ public class Produits {
         this.idProduit = idProduit;
     }
 
-    public String getNom() {
+    public StringProperty getNom() {
         return nom;
     }
 
-    public void setNom(String nom) {
+    public void setNom(StringProperty nom) {
         this.nom = nom;
     }
 
@@ -63,43 +66,43 @@ public class Produits {
         this.prix = prix;
     }
 
-    public String getCategorie() {
+    public StringProperty getCategorie() {
         return categorie;
     }
 
-    public void setCategorie(String categorie) {
+    public void setCategorie(StringProperty categorie) {
         this.categorie = categorie;
     }
 
-    public String getCouleur() {
+    public StringProperty getCouleur() {
         return couleur;
     }
 
-    public void setCouleur(String couleur) {
+    public void setCouleur(StringProperty couleur) {
         this.couleur = couleur;
     }
 
-    public String getDescription() {
+    public StringProperty getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(StringProperty description) {
         this.description = description;
     }
 
-    public String getMarque() {
+    public StringProperty getMarque() {
         return marque;
     }
 
-    public void setMarque(String marque) {
+    public void setMarque(StringProperty marque) {
         this.marque = marque;
     }
 
-    public String getComposition() {
+    public StringProperty getComposition() {
         return composition;
     }
 
-    public void setComposition(String composition) {
+    public void setComposition(StringProperty composition) {
         this.composition = composition;
     }
 
@@ -111,11 +114,11 @@ public class Produits {
         this.quantite = quantite;
     }
 
-    public String getImage() {
+    public StringProperty getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(StringProperty image) {
         this.image = image;
     }
 
@@ -148,7 +151,6 @@ public class Produits {
         }
         return true;
     }
-    
     
     
 }

@@ -12,17 +12,21 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import javax.swing.JOptionPane;
 
 /**
@@ -45,6 +49,8 @@ public class LoginController implements Initializable {
     private Button minimizeButton;
     @FXML
     private Button maximizeButton;
+    @FXML
+    private AnchorPane AnchorPane2;
 
     /**
      * Initializes the controller class.
@@ -68,9 +74,11 @@ public class LoginController implements Initializable {
         if (verify) {
             try {
                 JOptionPane.showMessageDialog(null, "привет " + usr.getUsername() + "!");
+                
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("Home.fxml"));
                 Parent root = loader.load();
                 tfusername.getScene().setRoot(root);
+
             } catch (IOException ex) {
                 Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -96,17 +104,17 @@ public class LoginController implements Initializable {
         Screen screen = Screen.getPrimary();
         Rectangle2D bounds = screen.getVisualBounds();
         Stage primaryStage = (Stage) maximizeButton.getScene().getWindow();
-       // System.out.println(primaryStage.getHeight()+" "+primaryStage.getWidth()+" "+primaryStage.getX()+" "+primaryStage.getY());
-        if(primaryStage.getHeight() != bounds.getHeight()){
-        primaryStage.setX(bounds.getMinX());
-        primaryStage.setY(bounds.getMinY());
-        primaryStage.setWidth(bounds.getWidth());
-        primaryStage.setHeight(bounds.getHeight());
+        // System.out.println(primaryStage.getHeight()+" "+primaryStage.getWidth()+" "+primaryStage.getX()+" "+primaryStage.getY());
+        if (primaryStage.getHeight() != bounds.getHeight()) {
+            primaryStage.setX(bounds.getMinX());
+            primaryStage.setY(bounds.getMinY());
+            primaryStage.setWidth(bounds.getWidth());
+            primaryStage.setHeight(bounds.getHeight());
         } else {
-        primaryStage.setHeight(803);
-        primaryStage.setWidth(1025);
-        primaryStage.setX(171);
-        primaryStage.setY(-12);
+            primaryStage.setHeight(803);
+            primaryStage.setWidth(1025);
+            primaryStage.setX(171);
+            primaryStage.setY(-12);
         }
     }
 }

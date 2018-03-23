@@ -12,6 +12,8 @@ import java.awt.Image;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
@@ -37,15 +39,15 @@ public class ProduitsService implements IProduits {
             String requete = "INSERT INTO produits (nom,prix,categorie,quantite,image,couleur,description,marque,composition) VALUES(?,?,?,?,?,?,?,?,?)";
 
             PreparedStatement pst = cnx.prepareStatement(requete);
-            pst.setString(1, p.getNom());
-            pst.setFloat(2, p.getPrix());
-            pst.setString(3, p.getCategorie());
+            pst.setString(1, p.getNom().toString());
+           pst.setFloat(2, p.getPrix());
+            pst.setString(3, p.getCategorie().toString());
             pst.setInt(4, p.getQuantite());
-            pst.setString(5, p.getImage());
-            pst.setString(6, p.getCouleur());
-            pst.setString(7, p.getDescription());
-            pst.setString(8, p.getMarque());
-            pst.setString(9, p.getComposition());
+            pst.setString(5, p.getImage().toString());
+            pst.setString(6, p.getCouleur().toString());
+            pst.setString(7, p.getDescription().toString());
+            pst.setString(8, p.getMarque().toString());
+            pst.setString(9, p.getComposition().toString());
 
             pst.executeUpdate(); 
         } catch (SQLException ex) {
@@ -97,15 +99,15 @@ public class ProduitsService implements IProduits {
             ResultSet rs = pst.executeQuery("SELECT * from produits");
             while (rs.next()) {
 
-                String nom = rs.getString("nom");
+                StringProperty nom = new SimpleStringProperty(rs.getString("nom"));
                 Float prix = rs.getFloat("prix");
-                String categorie = rs.getString("categorie");
+                StringProperty categorie = new SimpleStringProperty(rs.getString("categorie"));
                 int quantite = rs.getInt("quantite");
-                String image = rs.getString("image");
-                String couleur = rs.getString("couleur");
-                String description = rs.getString("description");
-                String marque = rs.getString("marque");
-                String composition = rs.getString("composition");
+                StringProperty image =  new SimpleStringProperty(rs.getString("image"));
+                StringProperty couleur =  new SimpleStringProperty(rs.getString("couleur"));
+                StringProperty description = new SimpleStringProperty(rs.getString("description"));
+                StringProperty marque = new SimpleStringProperty(rs.getString("marque"));
+                StringProperty composition = new SimpleStringProperty(rs.getString("composition"));
 
                 myList.add(new Produits(nom, prix, categorie, couleur, description, marque, composition, quantite, image));
 

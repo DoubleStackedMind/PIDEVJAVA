@@ -17,6 +17,7 @@ import java.util.List;
 import java.lang.Integer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 
@@ -46,9 +47,9 @@ public class LignedecommandeService implements ILignedecommande {
             if (!myList.containsValue(prod)) {
                 while (myRes.next()) {
                     p.setIdProduit(myRes.getInt("id_produit"));
-                    p.setNom(myRes.getString("nom"));
+                    p.setNom(new SimpleStringProperty(myRes.getString("nom")));
                     p.setPrix(myRes.getFloat("prix"));
-                    p.setImage(myRes.getString("image"));
+                    p.setImage(new SimpleStringProperty(myRes.getString("image")));
                     myList.put(qt, p);
                 }
             } else {

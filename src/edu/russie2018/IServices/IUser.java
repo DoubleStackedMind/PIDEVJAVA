@@ -14,5 +14,6 @@ import edu.russie2018.entities.User;
 public interface IUser {
     
     public boolean VerifyUser(User usr);
+    public boolean VerifyIfAdmin(User usr);
     
 }

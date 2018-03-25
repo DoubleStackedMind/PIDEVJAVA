@@ -71,7 +71,8 @@ public class LoginController implements Initializable {
         usr.setUsername(tfusername.getText());
         usr.setPassword(tfpassword.getText());
         boolean verify = us.VerifyUser(usr);
-        if (verify) {
+        boolean verifyAd = us.VerifyIfAdmin(usr);
+        if (verify && !verifyAd) {
             try {
                 JOptionPane.showMessageDialog(null, "привет " + usr.getUsername() + "!");
                 
@@ -82,9 +83,17 @@ public class LoginController implements Initializable {
             } catch (IOException ex) {
                 Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
             }
+        } else if (verify && verifyAd) {
+            try {
+             JOptionPane.showMessageDialog(null, "привет " + usr.getUsername() + "!");
+                
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("Shop.fxml"));
+                Parent root = loader.load();
+                tfusername.getScene().setRoot(root);
 
-        } else {
-
+            } catch (IOException ex) {
+                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 

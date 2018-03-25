@@ -104,6 +104,7 @@ public class HomeController implements Initializable {
 
                 if (drawer.isShown()) {
                     drawer.close();
+                    CrudDrawer.close();
                     transition.autoReverseProperty();
                 } else {
                     drawer.open();

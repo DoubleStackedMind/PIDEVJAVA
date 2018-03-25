@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane fx:id="rootpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.russie2018.gui.TousLesProduitsController">
+   <children>
+      <AnchorPane fx:id="AnchorPane" prefHeight="800.0" prefWidth="1024.0" style="-fx-background-image: url('file:C:/Users/samia/Documents/NetBeansProjects/PIDEV/Images/mac-bar.png');">
+         <children>
+            <JFXButton fx:id="closeButton" layoutX="22.0" layoutY="11.0" onAction="#closeWindow" style="-fx-background-color: transparent; -fx-background-image: url('file:C:/Users/samia/Documents/NetBeansProjects/PIDEV/Images/close.png'); -fx-background-repeat: no-repeat; -fx-background-position: 90%;" text=" " />
+            <JFXButton fx:id="minimizeButton" layoutX="42.0" layoutY="11.0" onAction="#minimizeWindow" style="-fx-background-color: transparent; -fx-background-image: url('file:C:/Users/samia/Documents/NetBeansProjects/PIDEV/Images/minimize.png'); -fx-background-repeat: no-repeat; -fx-background-position: 90%;" text=" " />
+            <JFXButton fx:id="maximizeButton" layoutX="62.0" layoutY="11.0" onAction="#maximizeWindow" style="-fx-background-color: transparent; -fx-background-image: url('file:C:/Users/samia/Documents/NetBeansProjects/PIDEV/Images/maximize.png'); -fx-background-repeat: no-repeat; -fx-background-position: 90%;" text=" " />
+            <JFXListView layoutX="42.0" layoutY="78.0" prefHeight="668.0" prefWidth="949.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</Pane>

@@ -10,6 +10,8 @@ import com.jfoenix.controls.JFXColorPicker;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
+import com.jfoenix.controls.cells.editors.TextFieldEditorBuilder;
+import com.jfoenix.controls.cells.editors.base.GenericEditableTreeTableCell;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.russie2018.entities.Produits;
 import edu.russie2018.services.ProduitsService;
@@ -17,14 +19,15 @@ import java.io.File;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -36,10 +39,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeTableCell;
 import javafx.scene.control.TreeTableColumn;
+import javafx.scene.control.TreeTableColumn.CellEditEvent;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -58,6 +62,10 @@ public class CrudProduitsController implements Initializable {
     private JFXButton Ajouter;
     @FXML
     private JFXButton afficherButton;
+    @FXML
+    private JFXButton modifierProduit;
+    @FXML
+    private JFXButton supprimerButton;
 
     /**
      * Initializes the controller class.
@@ -187,10 +195,10 @@ public class CrudProduitsController implements Initializable {
 
     @FXML
     private void consulterProduits(ActionEvent event) {
-        
-             GaussianBlur effect = new GaussianBlur();
+
+        GaussianBlur effect = new GaussianBlur();
         Ajouter.getScene().getRoot().setEffect(effect);
-        
+
         JFXTreeTableColumn<Produits, String> nomProd = new JFXTreeTableColumn<>("Nom");
         nomProd.setPrefWidth(150);
         nomProd.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Produits, String>, ObservableValue<String>>() {
@@ -248,19 +256,325 @@ public class CrudProduitsController implements Initializable {
         treeview.getColumns().setAll(nomProd, prixProd, CatgProd, QteProd, MarqueProd);
         treeview.setRoot(root);
         treeview.setShowRoot(false);
-
-        FXMLLoader fxmlLoader = new FXMLLoader();       
-        fxmlLoader.setLocation(getClass().getResource("Home.fxml"));
-        HomeController c = (HomeController) fxmlLoader.getController();
+        treeview.getStylesheets().add(getClass().getResource("crudproduits.css").toExternalForm());
         Dialog diag = new Dialog();
         GridPane grid = new GridPane();
         grid.add(treeview, 0, 0);
+        TextField input = new TextField();
+        input.setPromptText("Rechercher ..");
+        grid.add(input, 0, 1);
+        input.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                treeview.setPredicate(new Predicate<TreeItem<Produits>>() {
+                    @Override
+                    public boolean test(TreeItem<Produits> t) {
+
+                        boolean flag = t.getValue().getCategorie().getValue().contains(newValue);
+                        return flag;
+                    }
+                });
+            }
+        });
         diag.getDialogPane().setContent(grid);
-         ButtonType Ajouter = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
+        ButtonType Ajouter = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
         diag.getDialogPane().getButtonTypes().add(Ajouter);
-        
+
         diag.showAndWait();
- if (!diag.isShowing()) {
+        if (!diag.isShowing()) {
+            this.Ajouter.getScene().getRoot().setEffect(null);
+        }
+    }
+
+    @FXML
+    private void modifierProduits(ActionEvent event) {
+
+        ProduitsService ps = new ProduitsService();
+
+        JFXTreeTableColumn<Produits, String> nomProd = new JFXTreeTableColumn<>("Nom");
+        nomProd.setPrefWidth(150);
+        nomProd.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Produits, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Produits, String> param) {
+                return param.getValue().getValue().getNom();
+            }
+        });
+
+        JFXTreeTableColumn<Produits, String> prixProd = new JFXTreeTableColumn<>("Prix");
+        prixProd.setPrefWidth(250);
+        prixProd.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Produits, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Produits, String> param) {
+                return new SimpleStringProperty(Float.toString(param.getValue().getValue().getPrix()));
+            }
+        });
+
+        JFXTreeTableColumn<Produits, String> CatgProd = new JFXTreeTableColumn<>("Categorie");
+        CatgProd.setPrefWidth(250);
+        CatgProd.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Produits, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Produits, String> param) {
+                return param.getValue().getValue().getCategorie();
+            }
+        });
+
+        JFXTreeTableColumn<Produits, String> QteProd = new JFXTreeTableColumn<>("Quantite");
+        QteProd.setPrefWidth(250);
+        QteProd.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Produits, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Produits, String> param) {
+                return new SimpleStringProperty(Integer.toString(param.getValue().getValue().getQuantite()));
+            }
+        });
+
+        JFXTreeTableColumn<Produits, String> MarqueProd = new JFXTreeTableColumn<>("Marque");
+        MarqueProd.setPrefWidth(250);
+        MarqueProd.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Produits, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Produits, String> param) {
+                return param.getValue().getValue().getMarque();
+            }
+        });
+
+        nomProd.setCellFactory((TreeTableColumn<Produits, String> param) -> {
+            return new GenericEditableTreeTableCell<>(
+                    new TextFieldEditorBuilder());
+        });
+        nomProd.setOnEditCommit((CellEditEvent<Produits, String> t) -> {
+            int id = t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().getIdProduit();
+
+            String newValue = t.getNewValue();
+            t.getTreeTableView()
+                    .getTreeItem(t.getTreeTablePosition()
+                            .getRow())
+                    .getValue().getNom().set(t.getNewValue());
+            ps.modifierProduit(id, "nom", newValue);
+        });
+
+        prixProd.setCellFactory((TreeTableColumn<Produits, String> param) -> {
+            return new GenericEditableTreeTableCell<>(
+                    new TextFieldEditorBuilder());
+        });
+        prixProd.setOnEditCommit((CellEditEvent<Produits, String> t) -> {
+            t.getTreeTableView()
+                    .getTreeItem(t.getTreeTablePosition()
+                            .getRow())
+                    .getValue().setPrix(Float.parseFloat(t.getNewValue()));
+        });
+
+        QteProd.setCellFactory((TreeTableColumn<Produits, String> param) -> {
+            return new GenericEditableTreeTableCell<>(
+                    new TextFieldEditorBuilder());
+        });
+        QteProd.setOnEditCommit((CellEditEvent<Produits, String> t) -> {
+            t.getTreeTableView()
+                    .getTreeItem(t.getTreeTablePosition()
+                            .getRow())
+                    .getValue().setQuantite(Integer.parseInt(t.getNewValue()));
+        });
+
+        MarqueProd.setCellFactory((TreeTableColumn<Produits, String> param) -> {
+            return new GenericEditableTreeTableCell<>(
+                    new TextFieldEditorBuilder());
+        });
+        MarqueProd.setOnEditCommit((CellEditEvent<Produits, String> t) -> {
+            t.getTreeTableView()
+                    .getTreeItem(t.getTreeTablePosition()
+                            .getRow())
+                    .getValue().getMarque().set(t.getNewValue());
+        });
+
+        CatgProd.setCellFactory((TreeTableColumn<Produits, String> param) -> {
+            return new GenericEditableTreeTableCell<>(
+                    new TextFieldEditorBuilder());
+        });
+        CatgProd.setOnEditCommit((CellEditEvent<Produits, String> t) -> {
+            t.getTreeTableView()
+                    .getTreeItem(t.getTreeTablePosition()
+                            .getRow())
+                    .getValue().getCategorie().set(t.getNewValue());
+        });
+
+        List<Produits> myLst;
+        myLst = ps.consulterProduits();
+        ObservableList<Produits> produits = FXCollections.observableArrayList();
+
+        myLst.forEach(p -> produits.add(p));
+
+        JFXTreeTableView<Produits> treeview = new JFXTreeTableView<>();
+        final TreeItem<Produits> root = new RecursiveTreeItem<Produits>(produits, RecursiveTreeObject::getChildren);
+        treeview.getColumns().setAll(nomProd, prixProd, CatgProd, QteProd, MarqueProd);
+        treeview.setRoot(root);
+        treeview.setShowRoot(false);
+        treeview.setEditable(true);
+//        treeview.textProperty()
+//                                  .bind(Bindings.createStringBinding(() -> PREFIX + treeview.getCurrentItemsCount() + POSTFIX,
+//                                                                     treeview.currentItemsCountProperty()));
+        treeview.getStylesheets().add(getClass().getResource("crudproduits.css").toExternalForm());
+        Dialog diag = new Dialog();
+        GridPane grid = new GridPane();
+        grid.add(treeview, 0, 0);
+        TextField input = new TextField();
+        input.setPromptText("Rechercher ..");
+        grid.add(input, 0, 1);
+        input.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                treeview.setPredicate(new Predicate<TreeItem<Produits>>() {
+                    @Override
+                    public boolean test(TreeItem<Produits> t) {
+
+                        boolean flag = t.getValue().getCategorie().getValue().contains(newValue);
+                        return flag;
+                    }
+                });
+            }
+        });
+        diag.getDialogPane().setContent(grid);
+        ButtonType Ajouter = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
+        diag.getDialogPane().getButtonTypes().add(Ajouter);
+        diag.setResultConverter(new Callback() {
+            @Override
+            public Object call(Object param) {
+                if (param == ButtonType.OK) {
+
+                }
+                return null;
+            }
+        });
+        diag.showAndWait();
+        if (!diag.isShowing()) {
+            this.Ajouter.getScene().getRoot().setEffect(null);
+        }
+
+    }
+
+    @FXML
+    private void supprimerProduits(ActionEvent event) {
+
+        GaussianBlur effect = new GaussianBlur();
+        Ajouter.getScene().getRoot().setEffect(effect);
+
+        JFXTreeTableColumn<Produits, String> nomProd = new JFXTreeTableColumn<>("Nom");
+        nomProd.setPrefWidth(150);
+        nomProd.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Produits, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Produits, String> param) {
+                return param.getValue().getValue().getNom();
+            }
+        });
+
+        JFXTreeTableColumn<Produits, String> prixProd = new JFXTreeTableColumn<>("Prix");
+        prixProd.setPrefWidth(250);
+        prixProd.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Produits, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Produits, String> param) {
+                return new SimpleStringProperty(Float.toString(param.getValue().getValue().getPrix()));
+            }
+        });
+
+        JFXTreeTableColumn<Produits, String> CatgProd = new JFXTreeTableColumn<>("Categorie");
+        CatgProd.setPrefWidth(250);
+        CatgProd.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Produits, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Produits, String> param) {
+                return param.getValue().getValue().getCategorie();
+            }
+        });
+
+        JFXTreeTableColumn<Produits, String> QteProd = new JFXTreeTableColumn<>("Quantite");
+        QteProd.setPrefWidth(250);
+        QteProd.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Produits, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Produits, String> param) {
+                return new SimpleStringProperty(Integer.toString(param.getValue().getValue().getQuantite()));
+            }
+        });
+
+        JFXTreeTableColumn<Produits, String> MarqueProd = new JFXTreeTableColumn<>("Marque");
+        MarqueProd.setPrefWidth(250);
+        MarqueProd.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Produits, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Produits, String> param) {
+                return param.getValue().getValue().getMarque();
+            }
+        });
+
+        ProduitsService ps = new ProduitsService();
+        List<Produits> myLst;
+        myLst = ps.consulterProduits();
+        ObservableList<Produits> produits = FXCollections.observableArrayList();
+
+        myLst.forEach(p -> produits.add(p));
+
+        JFXTreeTableView<Produits> treeview = new JFXTreeTableView<>();
+        final TreeItem<Produits> root = new RecursiveTreeItem<Produits>(produits, RecursiveTreeObject::getChildren);
+        treeview.getColumns().setAll(nomProd, prixProd, CatgProd, QteProd, MarqueProd);
+        treeview.setRoot(root);
+        treeview.setShowRoot(false);
+        treeview.getStylesheets().add(getClass().getResource("crudproduits.css").toExternalForm());
+        Dialog diag = new Dialog();
+        GridPane grid = new GridPane();
+        grid.add(treeview, 0, 0);
+        TextField input = new TextField();
+        input.setPromptText("Rechercher ..");
+        grid.add(input, 0, 1);
+        input.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                treeview.setPredicate(new Predicate<TreeItem<Produits>>() {
+                    @Override
+                    public boolean test(TreeItem<Produits> t) {
+
+                        boolean flag = t.getValue().getCategorie().getValue().contains(newValue);
+                        return flag;
+                    }
+                });
+            }
+        });
+
+        ButtonType Ajouter = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
+        JFXButton Supprimer = new JFXButton("Supprimer");
+        Supprimer.setOnAction(e -> {
+            Dialog confirmation = new Dialog();
+            GridPane grid2 = new GridPane();
+            Label l1 = new Label("Voulez-vous vraiment supprimer ce produit?");
+            grid2.add(l1, 2, 2);
+            confirmation.setTitle("Confirmation de suppression!");
+            confirmation.getDialogPane().setContent(grid2);
+            ButtonType Confi = new ButtonType("Supprimer", ButtonBar.ButtonData.OK_DONE);
+            ButtonType Ann = new ButtonType("Annuler", ButtonBar.ButtonData.OK_DONE);
+            confirmation.getDialogPane().getButtonTypes().add(Confi);
+            confirmation.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
+
+            confirmation.setResultConverter(new Callback<ButtonType, Produits>() {
+                @Override
+                public Produits call(ButtonType param) {
+                    if (param == Confi) {
+                        Produits p = treeview.getSelectionModel().getSelectedItem().getValue();
+                        ps.supprimerProduit(p);
+                        diag.close();
+                         Button cancelButton = (Button)confirmation.getDialogPane().lookupButton(ButtonType.CLOSE);
+                        cancelButton.fire();
+                        supprimerProduits(event);
+                    }
+
+                    return null;
+                }
+            });
+            
+            
+            
+            confirmation.showAndWait();
+        });
+
+        grid.add(Supprimer, 3, 3);
+        diag.getDialogPane().setContent(grid);
+
+        diag.getDialogPane().getButtonTypes().add(Ajouter);
+
+        diag.showAndWait();
+        if (!diag.isShowing()) {
             this.Ajouter.getScene().getRoot().setEffect(null);
         }
     }

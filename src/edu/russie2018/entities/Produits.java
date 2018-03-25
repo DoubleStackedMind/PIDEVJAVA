@@ -6,13 +6,14 @@
 package edu.russie2018.entities;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import java.io.Serializable;
 import javafx.beans.property.StringProperty;
 
 /**
  *
  * @author Sami
  */
-public class Produits extends RecursiveTreeObject<Produits>{
+public class Produits extends RecursiveTreeObject<Produits> implements Serializable {
     
     private int idProduit;
     private StringProperty nom;

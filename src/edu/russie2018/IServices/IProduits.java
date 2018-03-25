@@ -16,7 +16,7 @@ public interface IProduits {
     
     public void ajouterProduit(Produits p);
     public void supprimerProduit(Produits p);
-    public void modifierProduit(Produits p, int qt);
+    public void modifierProduit(int id,String object, Object obj);
     public List<Produits> consulterProduits();
     
 }

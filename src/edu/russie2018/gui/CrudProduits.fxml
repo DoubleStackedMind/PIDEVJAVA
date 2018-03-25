@@ -16,12 +16,12 @@
             <Font name="FontAwesome" size="15.0" />
          </font>
       </JFXButton>
-      <JFXButton accessibleText="Supprimer" layoutX="76.0" layoutY="200.0" prefHeight="165.0" prefWidth="187.0" style="-fx-background-color: rgba(0,0,0,0.3);" text=" Supprimer un Produit" textFill="WHITE">
+      <JFXButton fx:id="supprimerButton" accessibleText="Supprimer" layoutX="76.0" layoutY="200.0" onAction="#supprimerProduits" prefHeight="165.0" prefWidth="187.0" style="-fx-background-color: rgba(0,0,0,0.3);" text=" Supprimer un Produit" textFill="WHITE">
          <font>
             <Font name="FontAwesome" size="15.0" />
          </font>
       </JFXButton>
-      <JFXButton accessibleText="Modifier" layoutX="353.0" layoutY="24.0" prefHeight="165.0" prefWidth="187.0" style="-fx-background-color: rgba(0,0,0,0.3);" text=" Modifier un Produit" textFill="WHITE">
+      <JFXButton fx:id="modifierProduit" accessibleText="Modifier" layoutX="353.0" layoutY="24.0" onAction="#modifierProduits" prefHeight="165.0" prefWidth="187.0" style="-fx-background-color: rgba(0,0,0,0.3);" text=" Modifier un Produit" textFill="WHITE">
          <font>
             <Font name="FontAwesome" size="15.0" />
          </font>

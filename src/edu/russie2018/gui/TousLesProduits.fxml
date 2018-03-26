@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXListView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
@@ -12,7 +13,48 @@
             <JFXButton fx:id="closeButton" layoutX="22.0" layoutY="11.0" onAction="#closeWindow" style="-fx-background-color: transparent; -fx-background-image: url('file:C:/Users/samia/Documents/NetBeansProjects/PIDEV/Images/close.png'); -fx-background-repeat: no-repeat; -fx-background-position: 90%;" text=" " />
             <JFXButton fx:id="minimizeButton" layoutX="42.0" layoutY="11.0" onAction="#minimizeWindow" style="-fx-background-color: transparent; -fx-background-image: url('file:C:/Users/samia/Documents/NetBeansProjects/PIDEV/Images/minimize.png'); -fx-background-repeat: no-repeat; -fx-background-position: 90%;" text=" " />
             <JFXButton fx:id="maximizeButton" layoutX="62.0" layoutY="11.0" onAction="#maximizeWindow" style="-fx-background-color: transparent; -fx-background-image: url('file:C:/Users/samia/Documents/NetBeansProjects/PIDEV/Images/maximize.png'); -fx-background-repeat: no-repeat; -fx-background-position: 90%;" text=" " />
-            <JFXListView layoutX="42.0" layoutY="78.0" prefHeight="668.0" prefWidth="949.0" />
+            <Pane fx:id="pane1" layoutX="95.0" layoutY="123.0" prefHeight="276.0" prefWidth="236.0">
+               <children>
+                  <ImageView fx:id="image1" fitHeight="207.0" fitWidth="209.0" layoutX="13.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="label1" layoutX="2.0" layoutY="208.0" prefHeight="49.0" prefWidth="215.0" text="Label" />
+                  <JFXButton fx:id="AddToCart1" layoutX="156.0" layoutY="161.0" text="ADD TO CART" />
+               </children>
+            </Pane>
+            <Pane fx:id="pane2" layoutX="395.0" layoutY="123.0" prefHeight="276.0" prefWidth="236.0">
+               <children>
+                  <ImageView fx:id="image2" fitHeight="207.0" fitWidth="209.0" layoutX="13.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="label2" layoutX="2.0" layoutY="208.0" prefHeight="49.0" prefWidth="215.0" text="Label" />
+                  <JFXButton fx:id="AddToCart2" layoutX="133.0" layoutY="163.0" prefHeight="25.0" prefWidth="103.0" text="ADD TO CART" />
+               </children>
+            </Pane>
+            <Pane fx:id="pane3" layoutX="695.0" layoutY="123.0" prefHeight="276.0" prefWidth="236.0">
+               <children>
+                  <ImageView fx:id="image3" fitHeight="207.0" fitWidth="209.0" layoutX="13.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="label3" layoutX="2.0" layoutY="208.0" prefHeight="49.0" prefWidth="215.0" text="Label" />
+                  <JFXButton fx:id="AddToCart3" layoutX="184.0" layoutY="167.0" />
+               </children>
+            </Pane>
+            <Pane fx:id="pane4" layoutX="95.0" layoutY="432.0" prefHeight="276.0" prefWidth="236.0">
+               <children>
+                  <ImageView fx:id="image4" fitHeight="207.0" fitWidth="209.0" layoutX="13.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="label4" layoutX="2.0" layoutY="208.0" prefHeight="49.0" prefWidth="215.0" text="Label" />
+                  <JFXButton fx:id="AddToCart4" layoutX="196.0" layoutY="175.0" />
+               </children>
+            </Pane>
+            <Pane fx:id="pane5" layoutX="395.0" layoutY="432.0" prefHeight="276.0" prefWidth="236.0">
+               <children>
+                  <ImageView fx:id="image5" fitHeight="207.0" fitWidth="209.0" layoutX="13.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="label5" layoutX="2.0" layoutY="208.0" prefHeight="49.0" prefWidth="215.0" text="Label" />
+                  <JFXButton fx:id="AddToCart5" layoutX="191.0" layoutY="171.0" />
+               </children>
+            </Pane>
+            <Pane fx:id="pane6" layoutX="695.0" layoutY="423.0" prefHeight="276.0" prefWidth="236.0">
+               <children>
+                  <ImageView fx:id="image6" fitHeight="207.0" fitWidth="209.0" layoutX="13.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="label6" layoutX="2.0" layoutY="208.0" prefHeight="49.0" prefWidth="215.0" text="Label" />
+                  <JFXButton fx:id="AddToCart6" layoutX="196.0" layoutY="189.0" />
+               </children>
+            </Pane>
          </children>
       </AnchorPane>
    </children>

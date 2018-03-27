@@ -34,16 +34,15 @@ public class CommandesService implements ICommandes{
         }
 
 //Object to JSON in String
-String jsonInString="";
-for(Integer i : lc.getLignedeCommande().keySet())
-{
-            try {
-                jsonInString += mapper.writeValueAsString(lc.getLignedeCommande().get(i).toString());
-            } catch (IOException ex) {
-                Logger.getLogger(CommandesService.class.getName()).log(Level.SEVERE, null, ex);
-            }
+//String jsonInString="";
+//for(Integer i : lc.getLignedeCommande().keySet())
+//{
+//            try {
+//                jsonInString += mapper.writeValueAsString(lc.getLignedeCommande().get(i).toString());
+//            } catch (IOException ex) {
+//                Logger.getLogger(CommandesService.class.getName()).log(Level.SEVERE, null, ex);
+//            } }
 
-}
 }
 
     @Override

@@ -203,7 +203,6 @@ public class ShopController implements Initializable {
             Stage currStage = (Stage) rootpane.getScene().getWindow();
             currStage.setScene(newScene);
         } catch (IOException ex) {
-            Logger.getLogger(ShopController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

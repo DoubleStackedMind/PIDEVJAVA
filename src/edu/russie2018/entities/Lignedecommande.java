@@ -5,7 +5,10 @@
  */
 package edu.russie2018.entities;
 
+import com.sun.javafx.collections.ObservableMapWrapper;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 
@@ -16,7 +19,7 @@ import javafx.collections.ObservableMap;
 public class Lignedecommande {
     
     
-  private ObservableMap<Integer,Produits> LignedeCommande ;
+  private Map<Produits,Integer> LignedeCommande = new HashMap<Produits, Integer>() ;
    // private Commandes commande;
   //  private User idUser;
    // private Produits idProduit;
@@ -24,13 +27,20 @@ public class Lignedecommande {
     public Lignedecommande() {
     }
 
-    public ObservableMap<Integer, Produits> getLignedeCommande() {
+    public Lignedecommande(Map<Produits, Integer> LignedeCommande) {
+        this.LignedeCommande = LignedeCommande;
+    }
+
+    public Map<Produits, Integer> getLignedeCommande() {
         return LignedeCommande;
     }
 
-    public void setLignedeCommande(ObservableMap<Integer, Produits> LignedeCommande) {
+    public void setLignedeCommande(Map<Produits, Integer> LignedeCommande) {
         this.LignedeCommande = LignedeCommande;
-    } 
+    }
+
+  
+    
  
     
 }

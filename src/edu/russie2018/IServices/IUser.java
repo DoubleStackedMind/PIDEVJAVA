@@ -15,5 +15,6 @@ public interface IUser {
     
     public boolean VerifyUser(User usr);
     public boolean VerifyIfAdmin(User usr);
+    public int GetUserId(User usr);
     
 }

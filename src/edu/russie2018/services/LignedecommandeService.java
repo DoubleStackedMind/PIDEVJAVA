@@ -9,17 +9,26 @@ import edu.russie2018.IServices.ILignedecommande;
 import edu.russie2018.entities.Lignedecommande;
 import edu.russie2018.entities.Produits;
 import edu.russie2018.utils.DatabaseConnection;
+import java.beans.XMLDecoder;
+import java.beans.XMLEncoder;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.List;
 import java.lang.Integer;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -28,72 +37,114 @@ import javafx.collections.ObservableMap;
 public class LignedecommandeService implements ILignedecommande {
 
     Connection cnx;
-    ObservableMap<Integer, Lignedecommande> lc;
+    Lignedecommande lc = new Lignedecommande();
 
     public LignedecommandeService() {
         cnx = DatabaseConnection.getInstance().getConnection();
     }
 
     @Override
-    public void ajouterLigneDeCommande(Lignedecommande lc, int idProduit, int qt) {
-
-        Produits p = new Produits();
-        Object prod = new Object();
+    public void ajouterLigneDeCommande(Produits p, int qt) {
         try {
-            Statement myStmt = cnx.createStatement();
-            ResultSet myRes = myStmt.executeQuery("SELECT * from produits where id_produit = " + idProduit);
-            prod = (Produits) myRes.getObject(1);
-            ObservableMap<Integer, Produits> myList = lc.getLignedeCommande();
-            if (!myList.containsValue(prod)) {
-                while (myRes.next()) {
-                    p.setIdProduit(myRes.getInt("id_produit"));
-                    p.setNom(new SimpleStringProperty(myRes.getString("nom")));
-                    p.setPrix(myRes.getFloat("prix"));
-                    p.setImage(new SimpleStringProperty(myRes.getString("image")));
-                    myList.put(qt, p);
+
+            File f = new File("C:/Users/samia/Documents/NetBeansProjects/PIDEV/Ligne.xml");
+            if (!f.exists()) {
+                FileOutputStream fos = new FileOutputStream(f);
+                if (lc.getLignedeCommande() != null) {
+                    if (!lc.getLignedeCommande().containsKey(p)) {
+                        lc.getLignedeCommande().put(p, qt);
+                    } else {
+                        lc.getLignedeCommande().put(p, qt + lc.getLignedeCommande().get(p));
+                    }
+                } else {
+                    Map<Produits, Integer> myMap = new HashMap<Produits, Integer>();
+                    myMap.put(p, qt);
+                    lc.getLignedeCommande().putAll(myMap);
                 }
+                try (XMLEncoder encoder = new XMLEncoder(fos)) {
+                    for (Produits x : lc.getLignedeCommande().keySet()) {
+                        x.setQuantite(qt);
+                        encoder.writeObject(x);
+                    }
+                    encoder.close();
+                }
+
+                System.out.println("File Created! ");
             } else {
-               for(Integer i : myList.keySet())
-               {
-                   if(myList.get(i).equals(prod))
-                   {
-                       i += qt;
-                       break;
-                   }
-               }
+                try (FileInputStream fis = new FileInputStream(f)) {
+                    XMLDecoder decoder = new XMLDecoder(fis);
+                    
+                    	try {
+                    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+                    dbf.setValidating(false);
+                    DocumentBuilder db = dbf.newDocumentBuilder();
+                    Document doc = db.parse(new FileInputStream(f));
+                    NodeList entries = doc.getChildNodes();
+
+                    for (int i = 0; i < entries.getLength(); i++) {
+                        
+                        Produits element = (Produits) entries.item(i);
+                        System.out.println(element);
+                        lc.getLignedeCommande().put(element, element.getQuantite());
+                    }
+}catch (Exception ex) {
+}
+
+//                    DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+//                    DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+//                    Document doc = docBuilder.parse(fis);
+//
+//                    NodeList list = doc.getElementsByTagName("staff");
+//                    System.out.println(list.item(0));
+//                    for (int i = 0; i < list.getLength(); i++) {
+//                        Produits prod = (Produits) list.item(i);
+//                        lc.getLignedeCommande().put(prod, prod.getQuantite());
+//
+//                    }
+
+                    if (lc.getLignedeCommande() != null) {
+                        if (!lc.getLignedeCommande().containsKey(p)) {
+                            lc.getLignedeCommande().put(p, qt);
+                        } else {
+                            int x = lc.getLignedeCommande().keySet().stream().filter(e -> e.equals(p)).findFirst().get().getQuantite();
+
+                            lc.getLignedeCommande().put(p, qt + x);
+                        }
+                    }
+                    decoder.close();
+                    //  lc.getLignedeCommande().put(Prod, Prod.getQuantite());
+                    FileOutputStream fos = new FileOutputStream(f);
+                    XMLEncoder encoder = new XMLEncoder(fos);
+                    for (Produits produits : lc.getLignedeCommande().keySet()) {
+                        produits.setQuantite(produits.getQuantite() + qt);
+                        encoder.writeObject(produits);
+                    }
+                    encoder.close();
+                }
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(LignedecommandeService.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
-
-    @Override
-    public void supprimerLigneDecommande(Lignedecommande lc, int idProduit) {
-
-        Object p = new Object();
-        try {
-            Statement myStmt = cnx.createStatement();
-            ResultSet myRes = myStmt.executeQuery("SELECT * from produits where id = " + idProduit);
-            p = /* (User) */ myRes.getObject(1);
-
-            if (lc.getLignedeCommande().containsValue(p)) {
-                lc.getLignedeCommande().remove(p);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(LignedecommandeService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
         }
     }
 
     @Override
-    public void modifierLigneDeCommande(Lignedecommande lc) {
-       
+    public boolean supprimerLigneDecommande(Produits p, int qt
+    ) {
+        if (lc.getLignedeCommande().get(p) >= qt) {
+            lc.getLignedeCommande().put(p, lc.getLignedeCommande().get(p) - qt);
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public ObservableMap<Integer,Lignedecommande> consulterLigneDeCommandes() {
-    
-        return this.lc;
+    public void modifierLigneDeCommande(Produits p
+    ) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ObservableMap<Produits, Integer> consulterLigneDeCommandes() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

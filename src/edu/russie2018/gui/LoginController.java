@@ -12,6 +12,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.prefs.Preferences;
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -72,6 +73,7 @@ public class LoginController implements Initializable {
         usr.setPassword(tfpassword.getText());
         boolean verify = us.VerifyUser(usr);
         boolean verifyAd = us.VerifyIfAdmin(usr);
+        int UserID = us.GetUserId(usr);
         if (verify && !verifyAd) {
             try {
                 JOptionPane.showMessageDialog(null, "привет " + usr.getUsername() + "!");
@@ -82,12 +84,14 @@ public class LoginController implements Initializable {
 
             } catch (IOException ex) {
                 Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            } 
         } else if (verify && verifyAd) {
             try {
              JOptionPane.showMessageDialog(null, "привет " + usr.getUsername() + "!");
                 
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("Shop.fxml"));
+//                Preferences pref = Preferences.userNodeForPackage(User.class);
+//                pref.put("User_id",String.valueOf(UserID));
                 Parent root = loader.load();
                 tfusername.getScene().setRoot(root);
 

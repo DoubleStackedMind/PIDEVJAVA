@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_121" class="java.beans.XMLDecoder">
+ <object class="edu.russie2018.entities.Produits">
+  <void property="categorie">
+   <object class="javafx.beans.property.SimpleStringProperty">
+    <void property="value">
+     <string>Chaussures</string>
+    </void>
+   </object>
+  </void>
+  <void property="composition">
+   <object class="javafx.beans.property.SimpleStringProperty">
+    <void property="value">
+     <string>360 Torsion Tape</string>
+    </void>
+   </object>
+  </void>
+  <void property="couleur">
+   <object class="javafx.beans.property.SimpleStringProperty">
+    <void property="value">
+     <string>Noir / Gris / Bleu / Blanc</string>
+    </void>
+   </object>
+  </void>
+  <void property="description">
+   <object class="javafx.beans.property.SimpleStringProperty">
+    <void property="value">
+     <string>Slalome entre tes adversaires. Fais la différence dans les petits espaces. Va à droite quand ils pensent que tu vas aller à gauche. Accélère quand ils croient que tu vas ralentir. Exprime toute ta technique dans la défense et éblouis le monde de ton talent. Étale ta technique avec la Nemeziz. Dotée d&apos;une tige innovante inspirée des bandages élastiques utilisés dans le sport, cette chaussure de football junior offre un chaussant inédit alliant souplesse et maintien. Sa semelle extérieure Torsionframe garantit des accélérations explosives sur terrain souple.</string>
+    </void>
+   </object>
+  </void>
+  <void property="idProduit">
+   <int>18</int>
+  </void>
+  <void property="image">
+   <object class="javafx.beans.property.SimpleStringProperty">
+    <void property="value">
+     <string>MessiNike.jpg</string>
+    </void>
+   </object>
+  </void>
+  <void property="marque">
+   <object class="javafx.beans.property.SimpleStringProperty">
+    <void property="value">
+     <string>Adidas</string>
+    </void>
+   </object>
+  </void>
+  <void property="nom">
+   <object class="javafx.beans.property.SimpleStringProperty">
+    <void property="value">
+     <string>CHAUSSURE NEMEZIZ MESSI 17.1 TERRAIN SOUPLE</string>
+    </void>
+   </object>
+  </void>
+  <void property="prix">
+   <float>119.5</float>
+  </void>
+  <void property="quantite">
+   <int>20</int>
+  </void>
+ </object>
+ <object class="edu.russie2018.entities.Produits">
+  <void property="categorie">
+   <object class="javafx.beans.property.SimpleStringProperty">
+    <void property="value">
+     <string>Accessoires</string>
+    </void>
+   </object>
+  </void>
+  <void property="composition">
+   <object class="javafx.beans.property.SimpleStringProperty">
+    <void property="value">
+     <string>100% Polyster</string>
+    </void>
+   </object>
+  </void>
+  <void property="couleur">
+   <object class="javafx.beans.property.SimpleStringProperty">
+    <void property="value">
+     <string>Noir</string>
+    </void>
+   </object>
+  </void>
+  <void property="description">
+   <object class="javafx.beans.property.SimpleStringProperty">
+    <void property="value">
+     <string>Le sac à dos de training Nike Legend offre de nombreux espaces de rangement spécifiques pour tout votre équipement. Ses bretelles aérées le rendent encore plus confortable en déplacement.</string>
+    </void>
+   </object>
+  </void>
+  <void property="idProduit">
+   <int>20</int>
+  </void>
+  <void property="image">
+   <object class="javafx.beans.property.SimpleStringProperty">
+    <void property="value">
+     <string>BlackNikeBag.png</string>
+    </void>
+   </object>
+  </void>
+  <void property="marque">
+   <object class="javafx.beans.property.SimpleStringProperty">
+    <void property="value">
+     <string>Nike</string>
+    </void>
+   </object>
+  </void>
+  <void property="nom">
+   <object class="javafx.beans.property.SimpleStringProperty">
+    <void property="value">
+     <string>NIKE BAG  BLACK LEGEND SPORTSWEAR</string>
+    </void>
+   </object>
+  </void>
+  <void property="prix">
+   <float>60.0</float>
+  </void>
+  <void property="quantite">
+   <int>20</int>
+  </void>
+ </object>
+</java>

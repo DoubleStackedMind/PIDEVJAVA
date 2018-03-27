@@ -44,6 +44,21 @@ public class UserService implements IUser {
         }
         return false;
     }
+    
+    public int GetUserId(User usr)
+    {
+        try {
+            PreparedStatement myStmt = cnx.prepareStatement("select id from user where username = ?");
+            myStmt.setString(1, usr.getUsername());
+            ResultSet myRes= myStmt.executeQuery();
+            while(myRes.next())
+            {
+                return myRes.getInt("id");
+            }
+                    } catch (SQLException ex) {
+        }
+        return 0;
+    }
 
     @Override
     public boolean VerifyIfAdmin(User usr) {

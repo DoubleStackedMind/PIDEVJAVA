@@ -5,20 +5,20 @@
  */
 package edu.russie2018.IServices;
 
-import edu.russie2018.entities.Lignedecommande;
 import edu.russie2018.entities.Produits;
-import java.util.List;
-import javafx.collections.ObservableMap;
+import java.util.Set;
 
 /**
  *
  * @author Sami
  */
 public interface ILignedecommande {
-    
-     public void ajouterLigneDeCommande(Produits p, int qt);
-    public boolean supprimerLigneDecommande(Produits p, int qt);
-    public void modifierLigneDeCommande(Produits p);
-    public ObservableMap<Produits,Integer> consulterLigneDeCommandes();
-    
+
+    public void ajouterLigneDeCommande(int Id, Set<Produits> mySet);
+
+    public boolean supprimerLigneDecommande(int Id, int idComm);
+
+//    public void modifierLigneDeCommande();
+//
+//    public ObservableMap<Produits, Integer> consulterLigneDeCommandes();
 }

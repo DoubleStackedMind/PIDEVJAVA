@@ -6,13 +6,15 @@
 package edu.russie2018.services;
 
 import edu.russie2018.IServices.ILignedecommande;
-import edu.russie2018.entities.Lignedecommande;
+import edu.russie2018.entities.Commandes;
 import edu.russie2018.entities.Produits;
 import edu.russie2018.utils.DatabaseConnection;
 import java.sql.Connection;
-import java.lang.Integer;
-import java.net.HttpCookie;
-import javafx.collections.ObservableMap;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Set;
 
 /**
  *
@@ -21,52 +23,36 @@ import javafx.collections.ObservableMap;
 public class LignedecommandeService implements ILignedecommande {
 
     Connection cnx;
-    
-    public static Lignedecommande lc = new Lignedecommande();
 
     public LignedecommandeService() {
         cnx = DatabaseConnection.getInstance().getConnection();
-        
     }
 
     @Override
-    public void ajouterLigneDeCommande(Produits p, int qt) {
-        if (lc.getLignedeCommande().containsKey(p)) {
-            lc.getLignedeCommande().put(p, lc.getLignedeCommande().get(p) + qt);
-        } else {
-            lc.getLignedeCommande().put(p, qt);
-        }
-        System.out.println("Produit ajouté!");
-//        HttpCookie session = new HttpCookie("panier", null);
-//        session = HttpCookie.parse("panier");
-//        System.out.println(session.getValue());
-    }
+    public void ajouterLigneDeCommande(int id, Set<Produits> mySet) {
 
-    @Override
-    public boolean supprimerLigneDecommande(Produits p, int qt) {
-        if(lc.getLignedeCommande().containsKey(p))
-        {
-        if (lc.getLignedeCommande().get(p) >= qt) {
-            lc.getLignedeCommande().put(p, lc.getLignedeCommande().get(p) - qt);
-            if(lc.getLignedeCommande().get(p)<=0)
-            {
-                lc.getLignedeCommande().remove(p);
+        try {
+            for (Produits p : mySet) {
+                CommandesService cs = new CommandesService();
+                Commandes c = cs.consulterCommandes();
+
+                String requete = "INSERT INTO lignedecommande (id_user,idproduit,commande,prix,etat) VALUES(?,?,?,?,?)";
+
+                PreparedStatement pst = cnx.prepareStatement(requete);
+                pst.setInt(1, 2);
+                pst.setInt(2, p.getIdProduit());
+                pst.setInt(3, c.getId());
+                pst.setFloat(4, p.getPrix());
+                pst.setString(5, "En cours");
+                pst.executeUpdate();
             }
-            return true;
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
         }
-        }
-        return false;
-        
-    }
-
-
-    @Override
-    public ObservableMap<Produits, Integer> consulterLigneDeCommandes() {
-    return (ObservableMap) lc.getLignedeCommande();
     }
 
     @Override
-    public void modifierLigneDeCommande(Produits p) {
+    public boolean supprimerLigneDecommande(int Id, int idComm) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -19,6 +19,6 @@ public interface ICommandes {
     public void ajouterCommande(Set<Produits> mySet);
     public void supprimerCommande(Commandes c);
     public void modifierCommande(Commandes c);
-    public List<Commandes> consulterCommandes();
+    public Commandes consulterCommandes();
     
 }

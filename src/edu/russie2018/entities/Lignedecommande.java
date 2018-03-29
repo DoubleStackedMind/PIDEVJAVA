@@ -5,49 +5,108 @@
  */
 package edu.russie2018.entities;
 
-import com.sun.javafx.collections.ObservableMapWrapper;
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import javafx.collections.ObservableList;
-import javafx.collections.ObservableMap;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
 /**
  *
  * @author Sami
  */
-@XmlRootElement(name = "Lignedecommande")
-@XmlAccessorType (XmlAccessType.FIELD)
-public class Lignedecommande implements Serializable{
-    
-    @XmlElement(name = "Ligne")
-  private Map<Produits,Integer> LignedeCommande = new HashMap<Produits, Integer>() ;
-   // private Commandes commande;
-  //  private User idUser;
-   // private Produits idProduit;
+public class Lignedecommande {
+   
+    private int idLigne;
+    private int idUser;
+    private int idCommande;
+    private int idProduit;
+    private float prix;
+    private String etat;
 
     public Lignedecommande() {
     }
 
-    public Lignedecommande(Map<Produits, Integer> LignedeCommande) {
-        this.LignedeCommande = LignedeCommande;
+    public Lignedecommande(int idLigne, int idUser, int idCommande, int idProduit, float prix, String etat) {
+        this.idLigne = idLigne;
+        this.idUser = idUser;
+        this.idCommande = idCommande;
+        this.idProduit = idProduit;
+        this.prix = prix;
+        this.etat = etat;
     }
 
-    public Map<Produits, Integer> getLignedeCommande() {
-        return LignedeCommande;
+    public int getIdLigne() {
+        return idLigne;
     }
 
-    public void setLignedeCommande(Map<Produits, Integer> LignedeCommande) {
-        this.LignedeCommande = LignedeCommande;
+    public void setIdLigne(int idLigne) {
+        this.idLigne = idLigne;
     }
 
-  
+    public int getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
+    }
+
+    public int getIdCommande() {
+        return idCommande;
+    }
+
+    public void setIdCommande(int idCommande) {
+        this.idCommande = idCommande;
+    }
+
+    public int getIdProduit() {
+        return idProduit;
+    }
+
+    public void setIdProduit(int idProduit) {
+        this.idProduit = idProduit;
+    }
+
+    public float getPrix() {
+        return prix;
+    }
+
+    public void setPrix(float prix) {
+        this.prix = prix;
+    }
+
+    public String getEtat() {
+        return etat;
+    }
+
+    public void setEtat(String etat) {
+        this.etat = etat;
+    }
+
+    @Override
+    public String toString() {
+        return "Lignedecommande{" + "idLigne=" + idLigne + ", idUser=" + idUser + ", idCommande=" + idCommande + ", idProduit=" + idProduit + ", prix=" + prix + ", etat=" + etat + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 71 * hash + this.idLigne;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Lignedecommande other = (Lignedecommande) obj;
+        if (this.idLigne != other.idLigne) {
+            return false;
+        }
+        return true;
+    }
     
- 
     
 }

@@ -10,7 +10,7 @@ import com.jfoenix.controls.JFXNodesList;
 import edu.russie2018.entities.Commandes;
 import edu.russie2018.entities.Produits;
 import edu.russie2018.services.CommandesService;
-import edu.russie2018.services.LignedecommandeService;
+import edu.russie2018.services.PanierService;
 import edu.russie2018.services.ProduitsService;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -114,7 +114,7 @@ public class TousLesProduitsController implements Initializable {
     @FXML
     private JFXButton AddToCart6;
 
-    LignedecommandeService lignedeCommande = new LignedecommandeService();
+    PanierService lignedeCommande = new PanierService();
 
     TextField pageNumber = new TextField();
     @FXML
@@ -122,7 +122,7 @@ public class TousLesProduitsController implements Initializable {
     @FXML
     private JFXButton ConsulterPanier;
 
-    Map<Produits, Integer> myMap = LignedecommandeService.lc.getLignedeCommande();
+    Map<Produits, Integer> myMap = PanierService.lc.getLignedeCommande();
     @FXML
     private AnchorPane PanierAnchor;
     @FXML
@@ -201,7 +201,7 @@ public class TousLesProduitsController implements Initializable {
 
     public void DisplayAllProducts(List<Produits> myList, int CurrentPage) {
 
-        LignedecommandeService lc = new LignedecommandeService();
+        PanierService lc = new PanierService();
         try {
 
             if (myList.size() >= CurrentPage) {

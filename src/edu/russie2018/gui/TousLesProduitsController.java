@@ -6,15 +6,22 @@
 package edu.russie2018.gui;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXNodesList;
+import edu.russie2018.entities.Commandes;
 import edu.russie2018.entities.Produits;
+import edu.russie2018.services.CommandesService;
 import edu.russie2018.services.LignedecommandeService;
 import edu.russie2018.services.ProduitsService;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import static java.lang.Math.round;
 import java.net.URL;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -37,6 +44,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.Duration;
+import org.codehaus.jackson.map.ObjectMapper;
 
 /**
  * FXML Controller class
@@ -47,7 +55,6 @@ public class TousLesProduitsController implements Initializable {
 
     @FXML
     private Pane rootpane;
-
     @FXML
     private AnchorPane AnchorPane;
     @FXML
@@ -56,13 +63,6 @@ public class TousLesProduitsController implements Initializable {
     private JFXButton maximizeButton;
     @FXML
     private JFXButton closeButton;
-//    @FXML
-//    private JFXListView<Label> ListView;
-//
-//    Label ProductName = new Label();
-//
-//    ImageView ProductImage = new ImageView();
-
     @FXML
     private Pane pane1;
     @FXML
@@ -119,12 +119,37 @@ public class TousLesProduitsController implements Initializable {
     TextField pageNumber = new TextField();
     @FXML
     private Label PanierNUM;
+    @FXML
+    private JFXButton ConsulterPanier;
+
+    Map<Produits, Integer> myMap = LignedecommandeService.lc.getLignedeCommande();
+    @FXML
+    private AnchorPane PanierAnchor;
+    @FXML
+    private Pane PaneTag1;
+    @FXML
+    private ImageView ImageTag;
+    @FXML
+    private Label NameTag;
+    @FXML
+    private Label PriceTag;
+    @FXML
+    private JFXNodesList ns;
+    @FXML
+    private JFXButton ValiderPanier;
+    @FXML
+    private JFXButton DisplayCommandes;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
+       
+        ns.addAnimatedNode(ConsulterPanier);
+        ns.addAnimatedNode(PanierAnchor);
+
         rootpane.setOpacity(0);
         makeFadeIn();
 
@@ -201,7 +226,7 @@ public class TousLesProduitsController implements Initializable {
                 AddToCart2.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-                        lc.ajouterLigneDeCommande(myList.get(CurrentPage+1), 1);
+                        lc.ajouterLigneDeCommande(myList.get(CurrentPage + 1), 1);
                         int value = Integer.parseInt(PanierNUM.getText());
                         value++;
                         PanierNUM.setText(String.valueOf(value));
@@ -346,4 +371,42 @@ public class TousLesProduitsController implements Initializable {
             primaryStage.setY(-12);
         }
     }
-}
+
+    @FXML
+    private void AfficherPanier(ActionEvent event) {
+         
+        for (Produits p : myMap.keySet()) {
+            try {
+                ImageTag.setImage(new Image(new FileInputStream("C:/wamp64/www/PIDEV/web/imagesShop/" + p.getImage().get())));
+                NameTag.setText(p.getNom().get());
+                PriceTag.setText(String.valueOf(p.getPrix()));
+            } catch (FileNotFoundException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+    }
+
+    @FXML
+    private void ValiderPanier(ActionEvent event) {
+        myMap.keySet().stream().forEach(e -> e.setQuantite(myMap.get(e)));
+        CommandesService cs = new CommandesService();
+        cs.ajouterCommande(myMap.keySet());
+    }
+
+    @FXML
+    private void DisplayComm(ActionEvent event) {
+//        CommandesService cs = new CommandesService();
+//        List<Commandes> myList = cs.consulterCommandes();
+//        ObjectMapper mapper = new ObjectMapper();
+//        for(Commandes c : myList)
+//        {
+//            try {
+//                Commandes com = mapper.readValue(c.getCommandes(), Commandes.class);
+//                System.out.println(com);
+//            } catch (IOException ex) {
+//                Logger.getLogger(TousLesProduitsController.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+        }
+    }
+

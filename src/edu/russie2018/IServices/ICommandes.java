@@ -6,8 +6,9 @@
 package edu.russie2018.IServices;
 
 import edu.russie2018.entities.Commandes;
-import edu.russie2018.entities.Lignedecommande;
+import edu.russie2018.entities.Produits;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -15,7 +16,7 @@ import java.util.List;
  */
 public interface ICommandes {
     
-    public void ajouterCommande(Commandes c,Lignedecommande lc);
+    public void ajouterCommande(Set<Produits> mySet);
     public void supprimerCommande(Commandes c);
     public void modifierCommande(Commandes c);
     public List<Commandes> consulterCommandes();

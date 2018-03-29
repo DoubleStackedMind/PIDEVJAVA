@@ -12,11 +12,9 @@ import java.util.Objects;
  * @author Sami
  */
 public class Commandes {
-    
+
     private int id;
-    private double prix;
-    private String commandes;
-    //private User idUser;
+    private User idUser;
 
     public int getId() {
         return id;
@@ -26,21 +24,15 @@ public class Commandes {
         this.id = id;
     }
 
-    public double getPrix() {
-        return prix;
+    public User getIdUser() {
+        return idUser;
     }
 
-    public void setPrix(double prix) {
-        this.prix = prix;
+    public void setIdUser(User idUser) {
+        this.idUser = idUser;
     }
-
-    public String getCommandes() {
-        return commandes;
-    }
-
-    public void setCommandes(String commandes) {
-        this.commandes = commandes;
-    }
+    
+    
 
     @Override
     public int hashCode() {
@@ -67,6 +59,4 @@ public class Commandes {
         return true;
     }
 
- 
-    
 }

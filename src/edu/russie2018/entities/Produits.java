@@ -6,27 +6,73 @@
 package edu.russie2018.entities;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Sami
  */
+@XmlRootElement(name = "produits")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Produits extends RecursiveTreeObject<Produits> implements Serializable {
+
+     private static final long serialVersionUID = 1;
     
-    private int idProduit;
-    private StringProperty nom;
-    private float prix;
-    private StringProperty categorie;
-    private StringProperty couleur;
-    private StringProperty description;
-    private StringProperty marque;
-    private StringProperty composition;
-    private int quantite;
-    private StringProperty image;
+    private  int idProduit;
+    private  StringProperty nom;
+    private  float prix;
+    private  StringProperty categorie;
+    private  StringProperty couleur;
+    private  StringProperty description;
+    private  StringProperty marque;
+    private  StringProperty composition;
+    private  int quantite;
+    private  StringProperty image;
 
     public Produits() {
+    }
+
+    private void writeObject(ObjectOutputStream out)
+            throws IOException {
+
+        out.defaultWriteObject();   // always call this first
+
+        out.writeObject(idProduit);
+        out.writeObject(nom.get());
+        out.writeObject(prix);
+        out.writeObject(categorie.get());
+        out.writeObject(couleur.get());
+        out.writeObject(description.get());
+        out.writeObject(marque.get());
+        out.writeObject(composition.get());
+        out.writeObject(quantite);
+        out.writeObject(image.get());
+    }
+    
+       private void readObject(ObjectInputStream in)
+    throws IOException,
+           ClassNotFoundException {
+
+        in.defaultReadObject();    // always call this first
+
+        idProduit =  in.readInt();
+        nom = new SimpleStringProperty((String) in.readObject());
+        prix = in.readFloat();
+        categorie = new SimpleStringProperty((String) in.readObject());
+        couleur = new SimpleStringProperty((String) in.readObject());
+        description = new SimpleStringProperty((String) in.readObject());
+        marque = new SimpleStringProperty((String) in.readObject());
+        composition = new SimpleStringProperty((String) in.readObject());
+        quantite = in.readInt();
+        image = new SimpleStringProperty((String) in.readObject());
     }
 
     public Produits(StringProperty nom, float prix, StringProperty categorie, StringProperty couleur, StringProperty description, StringProperty marque, StringProperty composition, int quantite, StringProperty image) {
@@ -40,8 +86,6 @@ public class Produits extends RecursiveTreeObject<Produits> implements Serializa
         this.quantite = quantite;
         this.image = image;
     }
-    
-    
 
     public int getIdProduit() {
         return idProduit;
@@ -128,6 +172,7 @@ public class Produits extends RecursiveTreeObject<Produits> implements Serializa
         return "Produits{" + "idProduit=" + idProduit + ", nom=" + nom + ", prix=" + prix + ", categorie=" + categorie + ", couleur=" + couleur + ", description=" + description + ", marque=" + marque + ", composition=" + composition + ", quantite=" + quantite + ", image=" + image + '}';
     }
 
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -152,6 +197,5 @@ public class Produits extends RecursiveTreeObject<Produits> implements Serializa
         }
         return true;
     }
-    
-    
+
 }

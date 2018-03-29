@@ -33,15 +33,15 @@ public class ProduitsService implements IProduits {
             String requete = "INSERT INTO produits (nom,prix,categorie,quantite,image,couleur,description,marque,composition) VALUES(?,?,?,?,?,?,?,?,?)";
 
             PreparedStatement pst = cnx.prepareStatement(requete);
-            pst.setString(1, p.getNom().toString());
+            pst.setString(1, p.getNom().get());
             pst.setFloat(2, p.getPrix());
-            pst.setString(3, p.getCategorie().toString());
+            pst.setString(3, p.getCategorie().get());
             pst.setInt(4, p.getQuantite());
-            pst.setString(5, p.getImage().toString());
-            pst.setString(6, p.getCouleur().toString());
-            pst.setString(7, p.getDescription().toString());
-            pst.setString(8, p.getMarque().toString());
-            pst.setString(9, p.getComposition().toString());
+            pst.setString(5, p.getImage().get());
+            pst.setString(6, p.getCouleur().get());
+            pst.setString(7, p.getDescription().get());
+            pst.setString(8, p.getMarque().get());
+            pst.setString(9, p.getComposition().get());
 
             pst.executeUpdate();
         } catch (SQLException ex) {

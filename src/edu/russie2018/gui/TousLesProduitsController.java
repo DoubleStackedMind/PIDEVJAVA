@@ -139,6 +139,18 @@ public class TousLesProduitsController implements Initializable {
     private JFXButton ValiderPanier;
     @FXML
     private JFXButton DisplayCommandes;
+    @FXML
+    private JFXButton Tous;
+    @FXML
+    private JFXButton Chaussures;
+    @FXML
+    private JFXButton Accessoires;
+    @FXML
+    private JFXButton Shop;
+    @FXML
+    private JFXNodesList Node;
+    @FXML
+    private JFXButton Maillots;
 
     /**
      * Initializes the controller class.
@@ -146,7 +158,13 @@ public class TousLesProduitsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-       
+      AddToCart1.getStylesheets().add(getClass().getResource("touslesproduits.css").toExternalForm());
+       Node.addAnimatedNode(Shop);
+        Node.addAnimatedNode(Tous);
+        Node.addAnimatedNode(Maillots);
+        Node.addAnimatedNode(Chaussures);
+        Node.addAnimatedNode(Accessoires);
+        Node.setSpacing(5);
         ns.addAnimatedNode(ConsulterPanier);
         ns.addAnimatedNode(PanierAnchor);
 
@@ -205,7 +223,7 @@ public class TousLesProduitsController implements Initializable {
         try {
 
             if (myList.size() >= CurrentPage) {
-                Image img1 = new Image(new FileInputStream("C:/wamp64/www/PIDEV/web/imagesShop/" + myList.get(CurrentPage).getImage().getValue()), 520, 300, false, false);
+                Image img1 = new Image(new FileInputStream("C:/wamp64/www/PIDEV/web/imagesShop/" + myList.get(CurrentPage).getImage().getValue()), 688, 688, false, false);
                 AddToCart1.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
@@ -222,7 +240,7 @@ public class TousLesProduitsController implements Initializable {
                 label1.setText("");
             }
             if (myList.size() > CurrentPage + 1) {
-                Image img2 = new Image(new FileInputStream("C:/wamp64/www/PIDEV/web/imagesShop/" + myList.get(CurrentPage + 1).getImage().getValue()), 520, 300, false, false);
+                Image img2 = new Image(new FileInputStream("C:/wamp64/www/PIDEV/web/imagesShop/" + myList.get(CurrentPage + 1).getImage().getValue()), 688, 688, false, false);
                 AddToCart2.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
@@ -240,7 +258,7 @@ public class TousLesProduitsController implements Initializable {
             }
 
             if (myList.size() > CurrentPage + 2) {
-                Image img3 = new Image(new FileInputStream("C:/wamp64/www/PIDEV/web/imagesShop/" + myList.get(CurrentPage + 2).getImage().getValue()), 520, 300, false, false);
+                Image img3 = new Image(new FileInputStream("C:/wamp64/www/PIDEV/web/imagesShop/" + myList.get(CurrentPage + 2).getImage().getValue()), 688, 688, false, false);
                 AddToCart3.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
@@ -255,7 +273,7 @@ public class TousLesProduitsController implements Initializable {
                 image3.setImage(null);
             }
             if (myList.size() > CurrentPage + 3) {
-                Image img4 = new Image(new FileInputStream("C:/wamp64/www/PIDEV/web/imagesShop/" + myList.get(CurrentPage + 3).getImage().getValue()), 520, 300, false, false);
+                Image img4 = new Image(new FileInputStream("C:/wamp64/www/PIDEV/web/imagesShop/" + myList.get(CurrentPage + 3).getImage().getValue()), 688, 688, false, false);
                 AddToCart4.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
@@ -270,7 +288,7 @@ public class TousLesProduitsController implements Initializable {
             }
 
             if (myList.size() > CurrentPage + 4) {
-                Image img5 = new Image(new FileInputStream("C:/wamp64/www/PIDEV/web/imagesShop/" + myList.get(CurrentPage + 4).getImage().getValue()), 520, 300, false, false);
+                Image img5 = new Image(new FileInputStream("C:/wamp64/www/PIDEV/web/imagesShop/" + myList.get(CurrentPage + 4).getImage().getValue()), 688, 688, false, false);
                 AddToCart5.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
@@ -285,7 +303,7 @@ public class TousLesProduitsController implements Initializable {
             }
 
             if (myList.size() > CurrentPage + 5) {
-                Image img6 = new Image(new FileInputStream("C:/wamp64/www/PIDEV/web/imagesShop/" + myList.get(CurrentPage + 5).getImage().getValue()), 520, 300, false, false);
+                Image img6 = new Image(new FileInputStream("C:/wamp64/www/PIDEV/web/imagesShop/" + myList.get(CurrentPage + 5).getImage().getValue()), 688, 688, false, false);
                 AddToCart6.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {

@@ -7,11 +7,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <Pane fx:id="rootpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.russie2018.gui.TousLesProduitsController">
    <children>
-      <AnchorPane prefHeight="799.0" prefWidth="1023.0" />
+      <AnchorPane prefHeight="799.0" prefWidth="1023.0" style="-fx-background-color: White;" />
       <AnchorPane fx:id="AnchorPane" prefHeight="800.0" prefWidth="1024.0" style="-fx-background-image: url('file:C:/Users/samia/Documents/NetBeansProjects/PIDEV/Images/mac-bar.png');">
          <children>
             <JFXButton fx:id="closeButton" layoutX="22.0" layoutY="11.0" onAction="#closeWindow" style="-fx-background-color: transparent; -fx-background-image: url('file:C:/Users/samia/Documents/NetBeansProjects/PIDEV/Images/close.png'); -fx-background-repeat: no-repeat; -fx-background-position: 90%;" text=" " />
@@ -20,41 +21,61 @@
             <Pane fx:id="pane1" layoutX="95.0" layoutY="123.0" prefHeight="276.0" prefWidth="236.0">
                <children>
                   <ImageView fx:id="image1" fitHeight="207.0" fitWidth="209.0" layoutX="13.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label fx:id="label1" layoutX="2.0" layoutY="208.0" prefHeight="49.0" prefWidth="215.0" text="Label" />
+                  <Label fx:id="label1" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="5.0" layoutX="2.0" layoutY="208.0" prefHeight="70.0" prefWidth="236.0" text="Label" textAlignment="CENTER">
+                     <font>
+                        <Font name="Dusha V5 Regular" size="14.0" />
+                     </font>
+                  </Label>
                </children>
             </Pane>
             <Pane fx:id="pane2" layoutX="395.0" layoutY="123.0" prefHeight="276.0" prefWidth="236.0">
                <children>
                   <ImageView fx:id="image2" fitHeight="207.0" fitWidth="209.0" layoutX="13.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label fx:id="label2" layoutX="2.0" layoutY="208.0" prefHeight="49.0" prefWidth="215.0" text="Label" />
+                  <Label fx:id="label2" alignment="CENTER" layoutX="2.0" layoutY="208.0" prefHeight="49.0" prefWidth="215.0" text="Label">
+                     <font>
+                        <Font name="Dusha V5 Regular" size="14.0" />
+                     </font>
+                  </Label>
                </children>
             </Pane>
             <Pane fx:id="pane3" layoutX="695.0" layoutY="123.0" prefHeight="276.0" prefWidth="236.0">
                <children>
                   <ImageView fx:id="image3" fitHeight="207.0" fitWidth="209.0" layoutX="13.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label fx:id="label3" layoutX="2.0" layoutY="208.0" prefHeight="49.0" prefWidth="215.0" text="Label" />
-                  <JFXButton fx:id="AddToCart3" layoutX="184.0" layoutY="167.0" text="ADD TO CART" />
+                  <Label fx:id="label3" alignment="CENTER" layoutX="2.0" layoutY="208.0" prefHeight="49.0" prefWidth="215.0" text="Label">
+                     <font>
+                        <Font name="Dusha V5 Regular" size="14.0" />
+                     </font>
+                  </Label>
                </children>
             </Pane>
-            <Pane fx:id="pane4" layoutX="95.0" layoutY="432.0" prefHeight="276.0" prefWidth="236.0">
+            <Pane fx:id="pane4" layoutX="95.0" layoutY="432.0" prefHeight="276.0" prefWidth="236.0" style="-fx-background-color: rgba(255,255,255,0.8);">
                <children>
                   <ImageView fx:id="image4" fitHeight="207.0" fitWidth="209.0" layoutX="13.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label fx:id="label4" layoutX="2.0" layoutY="208.0" prefHeight="49.0" prefWidth="215.0" text="Label" />
-                  <JFXButton fx:id="AddToCart4" layoutX="196.0" layoutY="175.0" text="ADD TO CART" />
+                  <Label fx:id="label4" alignment="CENTER" layoutX="2.0" layoutY="208.0" prefHeight="49.0" prefWidth="215.0" text="Label">
+                     <font>
+                        <Font name="Dusha V5 Regular" size="14.0" />
+                     </font>
+                  </Label>
                </children>
             </Pane>
             <Pane fx:id="pane5" layoutX="395.0" layoutY="432.0" prefHeight="276.0" prefWidth="236.0">
                <children>
                   <ImageView fx:id="image5" fitHeight="207.0" fitWidth="209.0" layoutX="13.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label fx:id="label5" layoutX="2.0" layoutY="208.0" prefHeight="49.0" prefWidth="215.0" text="Label" />
-                  <JFXButton fx:id="AddToCart5" layoutX="191.0" layoutY="171.0" text="ADD TO CART" />
+                  <Label fx:id="label5" alignment="CENTER" layoutX="2.0" layoutY="208.0" prefHeight="49.0" prefWidth="215.0" text="Label">
+                     <font>
+                        <Font name="Dusha V5 Regular" size="14.0" />
+                     </font>
+                  </Label>
                </children>
             </Pane>
             <Pane fx:id="pane6" layoutX="695.0" layoutY="423.0" prefHeight="276.0" prefWidth="236.0">
                <children>
                   <ImageView fx:id="image6" fitHeight="207.0" fitWidth="209.0" layoutX="13.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label fx:id="label6" layoutX="2.0" layoutY="208.0" prefHeight="49.0" prefWidth="215.0" text="Label" />
-                  <JFXButton fx:id="AddToCart6" layoutX="196.0" layoutY="189.0" text="ADD TO CART" />
+                  <Label fx:id="label6" alignment="CENTER" layoutX="2.0" layoutY="208.0" prefHeight="49.0" prefWidth="215.0" text="Label">
+                     <font>
+                        <Font name="Dusha V5 Regular" size="14.0" />
+                     </font>
+                  </Label>
                </children>
             </Pane>
             <Pane layoutX="922.0" layoutY="41.0" prefHeight="70.0" prefWidth="91.0">
@@ -63,42 +84,102 @@
                   <Label fx:id="PanierNUM" layoutX="49.0" layoutY="13.0" text="0" textFill="WHITE" />
                </children>
             </Pane>
-            <AnchorPane fx:id="PanierAnchor" layoutX="433.0" layoutY="93.0" prefHeight="216.0" prefWidth="575.0" style="-fx-background-color: rgba(0,0,0,0.7);">
-               <children>
-                  <Pane fx:id="PaneTag1" prefHeight="129.0" prefWidth="316.0">
-                     <children>
-                        <ImageView fx:id="ImageTag" fitHeight="130.0" fitWidth="133.0" pickOnBounds="true" preserveRatio="true" />
-                        <Label fx:id="NameTag" layoutX="138.0" layoutY="2.0" prefHeight="84.0" prefWidth="177.0" text="Label" textFill="WHITE">
-                           <font>
-                              <Font name="Futura-CondensedBoldOblique" size="24.0" />
-                           </font></Label>
-                        <Label fx:id="PriceTag" layoutX="143.0" layoutY="80.0" prefHeight="42.0" prefWidth="171.0" text="Label" textFill="WHITE">
-                           <font>
-                              <Font name="Futura-CondensedBoldOblique" size="14.0" />
-                           </font></Label>
-                     </children>
-                  </Pane>
-                  <JFXButton fx:id="ValiderPanier" buttonType="RAISED" layoutX="268.0" layoutY="173.0" onAction="#ValiderPanier" style="-fx-background-color: white;" text="Valider">
+            <JFXButton fx:id="Shop" contentDisplay="RIGHT" layoutX="308.0" layoutY="58.0" text="SHOP">
+               <font>
+                  <Font name="Futura-CondensedBoldOblique" size="18.0" />
+               </font>
+               <graphic>
+                  <Label text="">
                      <font>
-                        <Font name="System Bold" size="13.0" />
+                        <Font name="FontAwesome" size="20.0" />
                      </font>
-                  </JFXButton>
-                  <JFXButton fx:id="DisplayCommandes" layoutX="184.0" layoutY="172.0" onAction="#DisplayComm" text="Afficher" textFill="WHITE">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </JFXButton>
-               </children>
-            </AnchorPane>
+                  </Label>
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="Accessoires" layoutX="82.0" layoutY="5.0" style="-fx-background-color: rgba(0,0,0,0.7);" text="ACCESSOIRES" textFill="WHITE">
+               <font>
+                  <Font name="Futura-CondensedBoldOblique" size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="Maillots" layoutX="109.0" layoutY="46.0" prefHeight="36.0" prefWidth="113.0" style="-fx-background-color: rgba(0,0,0,0.7);" text="Maillots" textFill="WHITE">
+               <font>
+                  <Font name="Futura-CondensedBoldOblique" size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="Chaussures" layoutX="26.0" layoutY="93.0" prefHeight="36.0" prefWidth="113.0" style="-fx-background-color: rgba(0,0,0,0.7);" text="CHAUSSURES" textFill="WHITE">
+               <font>
+                  <Font name="Futura-CondensedBoldOblique" size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="Tous" layoutX="22.0" layoutY="46.0" prefHeight="36.0" prefWidth="113.0" style="-fx-background-color: rgba(0,0,0,0.7);" text="TOUS" textFill="WHITE">
+               <font>
+                  <Font name="Futura-CondensedBoldOblique" size="18.0" />
+               </font>
+            </JFXButton>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="3.0" layoutX="220.0" layoutY="98.0" stroke="BLACK" strokeType="INSIDE" width="596.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="3.0" layoutX="222.0" layoutY="57.0" stroke="BLACK" strokeType="INSIDE" width="596.0" />
          </children>
       </AnchorPane>
-      <JFXButton fx:id="AddToCart1" buttonType="RAISED" layoutX="156.0" layoutY="300.0" style="-fx-background-color: chartreuse;" text="ADD TO CART" />
-      <JFXButton fx:id="AddToCart2" buttonType="RAISED" layoutX="463.0" layoutY="300.0" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: chartreuse;" text="ADD TO CART" />
+      <JFXButton fx:id="AddToCart2" buttonType="RAISED" layoutX="575.0" layoutY="300.0" prefHeight="42.0" prefWidth="92.0" style="-fx-background-color: rgba(0,0,0,0.3);" text="ADD TO CART" textFill="WHITE">
+         <font>
+            <Font name="Dusha V5 Regular" size="12.0" />
+         </font></JFXButton>
       <JFXButton fx:id="ConsulterPanier" layoutX="925.0" layoutY="40.0" onAction="#AfficherPanier" prefHeight="56.0" prefWidth="60.0" text="">
          <font>
             <Font name="FontAwesome" size="28.0" />
          </font>
       </JFXButton>
       <JFXNodesList fx:id="ns" layoutX="925.0" layoutY="44.0" prefHeight="15.0" prefWidth="5.0" />
+      <JFXNodesList fx:id="Node" layoutX="308.0" layoutY="58.0" prefHeight="13.0" prefWidth="47.0" />
+      <AnchorPane fx:id="PanierAnchor" layoutX="1014.0" layoutY="59.0" prefHeight="216.0" prefWidth="575.0" style="-fx-background-color: rgba(0,0,0,0.7);">
+         <children>
+            <Pane fx:id="PaneTag1" prefHeight="129.0" prefWidth="316.0">
+               <children>
+                  <ImageView fx:id="ImageTag" fitHeight="130.0" fitWidth="133.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="NameTag" layoutX="138.0" layoutY="2.0" prefHeight="84.0" prefWidth="177.0" text="Label" textFill="WHITE">
+                     <font>
+                        <Font name="Futura-CondensedBoldOblique" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="PriceTag" layoutX="143.0" layoutY="80.0" prefHeight="42.0" prefWidth="171.0" text="Label" textFill="WHITE">
+                     <font>
+                        <Font name="Futura-CondensedBoldOblique" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <JFXButton fx:id="ValiderPanier" buttonType="RAISED" layoutX="268.0" layoutY="173.0" onAction="#ValiderPanier" style="-fx-background-color: white;" text="Valider">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="DisplayCommandes" layoutX="184.0" layoutY="172.0" onAction="#DisplayComm" text="Afficher" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+      <JFXButton fx:id="AddToCart1" buttonType="RAISED" layoutX="275.0" layoutY="300.0" prefHeight="42.0" prefWidth="92.0" style="-fx-background-color: rgba(0,0,0,0.3);" text="ADD TO CART" textFill="WHITE">
+         <font>
+            <Font name="Dusha V5 Regular" size="12.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="AddToCart3" buttonType="RAISED" layoutX="874.0" layoutY="300.0" prefHeight="42.0" prefWidth="92.0" style="-fx-background-color: rgba(0,0,0,0.3);" text="ADD TO CART" textFill="WHITE" />
+      <JFXButton fx:id="AddToCart4" buttonType="RAISED" layoutX="275.0" layoutY="600.0" prefHeight="42.0" prefWidth="92.0" style="-fx-background-color: rgba(0,0,0,0.3);" text="ADD TO CART" textFill="WHITE">
+         <font>
+            <Font name="Dusha V5 Regular" size="12.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="AddToCart5" buttonType="RAISED" layoutX="575.0" layoutY="600.0" prefHeight="42.0" prefWidth="92.0" style="-fx-background-color: rgba(0,0,0,0.3);" text="ADD TO CART">
+         <font>
+            <Font name="Dusha V5 Regular" size="12.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="AddToCart6" layoutX="875.0" layoutY="600.0" prefHeight="42.0" prefWidth="92.0" style="-fx-background-color: rgba(0,0,0,0.3);" text="ADD TO CART">
+         <font>
+            <Font name="Dusha V5 Regular" size="12.0" />
+         </font>
+      </JFXButton>
    </children>
 </Pane>

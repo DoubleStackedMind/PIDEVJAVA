@@ -199,7 +199,7 @@ public class TousLesProduitsController implements Initializable {
                 if (Integer.parseInt(newValue) == 3) {
                     DisplayAllProducts(ps.consulterProduits(), 18);
                 }
-                if (Integer.parseInt(newValue) == 2) {
+                if (Integer.parseInt(newValue) == 4) {
                     DisplayAllProducts(ps.consulterProduits(), 24);
                 }
 
@@ -220,9 +220,11 @@ public class TousLesProduitsController implements Initializable {
     public void DisplayAllProducts(List<Produits> myList, int CurrentPage) {
 
         PanierService lc = new PanierService();
-        try {
-
-            if (myList.size() >= CurrentPage) {
+        for(int i=CurrentPage ; i< myList.size() ; i++) {
+            
+            try {
+                
+             if (myList.get(i) != null ) {
                 Image img1 = new Image(new FileInputStream("C:/wamp64/www/PIDEV/web/imagesShop/" + myList.get(CurrentPage).getImage().getValue()), 688, 688, false, false);
                 AddToCart1.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
@@ -239,7 +241,7 @@ public class TousLesProduitsController implements Initializable {
                 image1.setImage(null);
                 label1.setText("");
             }
-            if (myList.size() > CurrentPage + 1) {
+            if (myList.get(i) != null) {
                 Image img2 = new Image(new FileInputStream("C:/wamp64/www/PIDEV/web/imagesShop/" + myList.get(CurrentPage + 1).getImage().getValue()), 688, 688, false, false);
                 AddToCart2.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
@@ -257,7 +259,7 @@ public class TousLesProduitsController implements Initializable {
                 label2.setText("");
             }
 
-            if (myList.size() > CurrentPage + 2) {
+            if (myList.get(i) != null) {
                 Image img3 = new Image(new FileInputStream("C:/wamp64/www/PIDEV/web/imagesShop/" + myList.get(CurrentPage + 2).getImage().getValue()), 688, 688, false, false);
                 AddToCart3.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
@@ -272,7 +274,7 @@ public class TousLesProduitsController implements Initializable {
                 label3.setText("");
                 image3.setImage(null);
             }
-            if (myList.size() > CurrentPage + 3) {
+            if (myList.get(i) != null) {
                 Image img4 = new Image(new FileInputStream("C:/wamp64/www/PIDEV/web/imagesShop/" + myList.get(CurrentPage + 3).getImage().getValue()), 688, 688, false, false);
                 AddToCart4.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
@@ -287,7 +289,7 @@ public class TousLesProduitsController implements Initializable {
                 label4.setText("");
             }
 
-            if (myList.size() > CurrentPage + 4) {
+            if (myList.get(i) != null) {
                 Image img5 = new Image(new FileInputStream("C:/wamp64/www/PIDEV/web/imagesShop/" + myList.get(CurrentPage + 4).getImage().getValue()), 688, 688, false, false);
                 AddToCart5.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
@@ -302,7 +304,7 @@ public class TousLesProduitsController implements Initializable {
                 label5.setText("");
             }
 
-            if (myList.size() > CurrentPage + 5) {
+            if (myList.get(i) != null) {
                 Image img6 = new Image(new FileInputStream("C:/wamp64/www/PIDEV/web/imagesShop/" + myList.get(CurrentPage + 5).getImage().getValue()), 688, 688, false, false);
                 AddToCart6.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
@@ -320,6 +322,108 @@ public class TousLesProduitsController implements Initializable {
         } catch (FileNotFoundException ex) {
 
         }
+            
+        }
+//        try {
+//
+//            if (myList.size() >= CurrentPage) {
+//                Image img1 = new Image(new FileInputStream("C:/wamp64/www/PIDEV/web/imagesShop/" + myList.get(CurrentPage).getImage().getValue()), 688, 688, false, false);
+//                AddToCart1.setOnAction(new EventHandler<ActionEvent>() {
+//                    @Override
+//                    public void handle(ActionEvent event) {
+//                        lc.ajouterLigneDeCommande(myList.get(CurrentPage), 1);
+//                        int value = Integer.parseInt(PanierNUM.getText());
+//                        value++;
+//                        PanierNUM.setText(String.valueOf(value));
+//                    }
+//                });
+//                image1.setImage(img1);
+//                label1.setText(myList.get(CurrentPage).getNom().getValue());
+//            } else {
+//                image1.setImage(null);
+//                label1.setText("");
+//            }
+//            if (myList.size() > CurrentPage + 1) {
+//                Image img2 = new Image(new FileInputStream("C:/wamp64/www/PIDEV/web/imagesShop/" + myList.get(CurrentPage + 1).getImage().getValue()), 688, 688, false, false);
+//                AddToCart2.setOnAction(new EventHandler<ActionEvent>() {
+//                    @Override
+//                    public void handle(ActionEvent event) {
+//                        lc.ajouterLigneDeCommande(myList.get(CurrentPage + 1), 1);
+//                        int value = Integer.parseInt(PanierNUM.getText());
+//                        value++;
+//                        PanierNUM.setText(String.valueOf(value));
+//                    }
+//                });
+//                image2.setImage(img2);
+//                label2.setText(myList.get(CurrentPage + 1).getNom().getValue());
+//            } else {
+//                image2.setImage(null);
+//                label2.setText("");
+//            }
+//
+//            if (myList.size() > CurrentPage + 2) {
+//                Image img3 = new Image(new FileInputStream("C:/wamp64/www/PIDEV/web/imagesShop/" + myList.get(CurrentPage + 2).getImage().getValue()), 688, 688, false, false);
+//                AddToCart3.setOnAction(new EventHandler<ActionEvent>() {
+//                    @Override
+//                    public void handle(ActionEvent event) {
+//
+//                    }
+//                });
+//                image3.setImage(img3);
+//                label3.setText(myList.get(CurrentPage + 2).getNom().getValue());
+//
+//            } else {
+//                label3.setText("");
+//                image3.setImage(null);
+//            }
+//            if (myList.size() > CurrentPage + 3) {
+//                Image img4 = new Image(new FileInputStream("C:/wamp64/www/PIDEV/web/imagesShop/" + myList.get(CurrentPage + 3).getImage().getValue()), 688, 688, false, false);
+//                AddToCart4.setOnAction(new EventHandler<ActionEvent>() {
+//                    @Override
+//                    public void handle(ActionEvent event) {
+//
+//                    }
+//                });
+//                image4.setImage(img4);
+//                label4.setText(myList.get(CurrentPage + 3).getNom().getValue());
+//            } else {
+//                image4.setImage(null);
+//                label4.setText("");
+//            }
+//
+//            if (myList.size() > CurrentPage + 4) {
+//                Image img5 = new Image(new FileInputStream("C:/wamp64/www/PIDEV/web/imagesShop/" + myList.get(CurrentPage + 4).getImage().getValue()), 688, 688, false, false);
+//                AddToCart5.setOnAction(new EventHandler<ActionEvent>() {
+//                    @Override
+//                    public void handle(ActionEvent event) {
+//
+//                    }
+//                });
+//                image5.setImage(img5);
+//                label5.setText(myList.get(CurrentPage + 4).getNom().getValue());
+//            } else {
+//                image5.setImage(null);
+//                label5.setText("");
+//            }
+//
+//            if (myList.size() > CurrentPage + 5) {
+//                Image img6 = new Image(new FileInputStream("C:/wamp64/www/PIDEV/web/imagesShop/" + myList.get(CurrentPage + 5).getImage().getValue()), 688, 688, false, false);
+//                AddToCart6.setOnAction(new EventHandler<ActionEvent>() {
+//                    @Override
+//                    public void handle(ActionEvent event) {
+//
+//                    }
+//                });
+//                image6.setImage(img6);
+//                label6.setText(myList.get(CurrentPage + 5).getNom().getValue());
+//            } else {
+//                image6.setImage(null);
+//                label6.setText("");
+//            }
+//
+//        } catch (FileNotFoundException ex) {
+//
+//        }
 
     }
 

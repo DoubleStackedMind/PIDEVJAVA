@@ -84,7 +84,7 @@
                   <Label fx:id="PanierNUM" layoutX="49.0" layoutY="13.0" text="0" textFill="WHITE" />
                </children>
             </Pane>
-            <JFXButton fx:id="Shop" contentDisplay="RIGHT" layoutX="308.0" layoutY="58.0" text="SHOP">
+            <JFXButton fx:id="Shop" contentDisplay="RIGHT" layoutX="350.0" layoutY="58.0" text="SHOP">
                <font>
                   <Font name="Futura-CondensedBoldOblique" size="18.0" />
                </font>
@@ -118,6 +118,16 @@
             </JFXButton>
             <Rectangle arcHeight="5.0" arcWidth="5.0" height="3.0" layoutX="220.0" layoutY="98.0" stroke="BLACK" strokeType="INSIDE" width="596.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" height="3.0" layoutX="222.0" layoutY="57.0" stroke="BLACK" strokeType="INSIDE" width="596.0" />
+            <JFXButton fx:id="Shop1" contentDisplay="RIGHT" layoutX="450.0" layoutY="58.0" text="PROMOTIONS">
+               <font>
+                  <Font name="Futura-CondensedBoldOblique" size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="Shop11" contentDisplay="RIGHT" layoutX="600.0" layoutY="58.0" text="TICKETS">
+               <font>
+                  <Font name="Futura-CondensedBoldOblique" size="18.0" />
+               </font>
+            </JFXButton>
          </children>
       </AnchorPane>
       <JFXButton fx:id="AddToCart2" buttonType="RAISED" layoutX="575.0" layoutY="300.0" prefHeight="42.0" prefWidth="92.0" style="-fx-background-color: rgba(0,0,0,0.3);" text="ADD TO CART" textFill="WHITE">

@@ -86,7 +86,7 @@ public class ShopController implements Initializable {
 //            cardno.setText(String.valueOf(value));
 //            badge1.setText(String.valueOf(value));
 //        });
-        slideshow();
+      slideshow();
 
         nodeList.addAnimatedNode(Shop);
         nodeList.addAnimatedNode(Tous);

@@ -17,18 +17,29 @@ public class Tickets {
     private int idStade;
     private int idMatch;
     private int idUser;
-
+    private String adresse;
+    private String nom;
+    private String prenom;
+    private long Telephone;
+    
+    
     public Tickets() {
     }
 
-    public Tickets(int id, String etat, double prix, int idStade, int idMatch, int idUser) {
+    public Tickets(int id, String etat, double prix, int idStade, int idMatch, int idUser, String adresse, String nom, String prenom, long Telephone) {
         this.id = id;
         this.etat = etat;
         this.prix = prix;
         this.idStade = idStade;
         this.idMatch = idMatch;
         this.idUser = idUser;
+        this.adresse = adresse;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.Telephone = Telephone;
     }
+
+   
 
     public int getId() {
         return id;
@@ -78,6 +89,40 @@ public class Tickets {
         this.idUser = idUser;
     }
 
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    public long getTelephone() {
+        return Telephone;
+    }
+
+    public void setTelephone(long Telephone) {
+        this.Telephone = Telephone;
+    }
+
+    
+    
     @Override
     public String toString() {
         return "Tickets{" + "id=" + id + ", etat=" + etat + ", prix=" + prix + ", idStade=" + idStade + ", idMatch=" + idMatch + ", idUser=" + idUser + '}';

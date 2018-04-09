@@ -169,7 +169,7 @@ public class Produits extends RecursiveTreeObject<Produits> implements Serializa
 
     @Override
     public String toString() {
-        return "Produits{" + "idProduit=" + idProduit + ", nom=" + nom + ", prix=" + prix + ", categorie=" + categorie + ", couleur=" + couleur + ", description=" + description + ", marque=" + marque + ", composition=" + composition + ", quantite=" + quantite + ", image=" + image + '}';
+        return "Produits{" + "idProduit=" + idProduit + ", nom=" + nom.toString() + ", prix=" + prix + ", categorie=" + categorie + ", couleur=" + couleur + ", description=" + description + ", marque=" + marque + ", composition=" + composition + ", quantite=" + quantite + ", image=" + image + '}';
     }
 
 

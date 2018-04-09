@@ -30,6 +30,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
@@ -39,7 +41,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeTableCell;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableColumn.CellEditEvent;
 import javafx.scene.effect.GaussianBlur;
@@ -101,7 +102,7 @@ public class CrudProduitsController implements Initializable {
         String colour = "#" + Integer.toHexString(picker.getValue().hashCode());
         Label label5 = new Label("Description :");
         TextArea text5 = new TextArea();
-        ComboBox marque = new ComboBox(FXCollections.observableArrayList("Nike", "Adidas"));
+        ComboBox marque = new ComboBox(FXCollections.observableArrayList("Nike", "Adidas", "Puma", "Umbro", "New Balance", "Hummel", "Erreà", "Uhlsport"));
         marque.setPromptText("Choisissez une marque");
         Label label6 = new Label("Compoisition");
         TextField text6 = new TextField();
@@ -128,7 +129,9 @@ public class CrudProduitsController implements Initializable {
         grid.add(label6, 1, 9);
         grid.add(text6, 2, 9);
         dialog.getDialogPane().setContent(grid);
+
         ButtonType Ajouter = new ButtonType("Ajouter", ButtonBar.ButtonData.OK_DONE);
+
         dialog.getDialogPane().getButtonTypes().add(Ajouter);
 
         dialog.setResultConverter(new Callback<ButtonType, Produits>() {
@@ -190,7 +193,7 @@ public class CrudProduitsController implements Initializable {
             File newDes = new File("C:/wamp64/www/PIDEV/web/imagesShop/" + selectedFile.getName());
             selectedFile.renameTo(newDes);
         }
-        return "C:/wamp64/www/PIDEV/web/imagesShop/" + selectedFile.getName();
+        return selectedFile.getName();
     }
 
     @FXML
@@ -554,7 +557,7 @@ public class CrudProduitsController implements Initializable {
                         Produits p = treeview.getSelectionModel().getSelectedItem().getValue();
                         ps.supprimerProduit(p);
                         diag.close();
-                         Button cancelButton = (Button)confirmation.getDialogPane().lookupButton(ButtonType.CLOSE);
+                        Button cancelButton = (Button) confirmation.getDialogPane().lookupButton(ButtonType.CLOSE);
                         cancelButton.fire();
                         supprimerProduits(event);
                     }
@@ -562,9 +565,7 @@ public class CrudProduitsController implements Initializable {
                     return null;
                 }
             });
-            
-            
-            
+
             confirmation.showAndWait();
         });
 

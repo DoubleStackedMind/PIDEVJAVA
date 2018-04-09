@@ -10,14 +10,11 @@ import com.jfoenix.controls.JFXNodesList;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
 import javafx.animation.ParallelTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
-import javafx.beans.property.DoubleProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -71,6 +68,8 @@ public class ShopController implements Initializable {
     @FXML
     private ImageView BackgroundSlide1;
 
+    String scene;
+
     /**
      * Initializes the controller class.
      */
@@ -86,7 +85,7 @@ public class ShopController implements Initializable {
 //            cardno.setText(String.valueOf(value));
 //            badge1.setText(String.valueOf(value));
 //        });
-      slideshow();
+        slideshow();
 
         nodeList.addAnimatedNode(Shop);
         nodeList.addAnimatedNode(Tous);
@@ -98,7 +97,29 @@ public class ShopController implements Initializable {
         Tous.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                VoirTous(event);
+                scene = "Tous";
+                VoirTous(event, scene);
+            }
+        });
+        Maillots.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                scene = "Maillots";
+                VoirTous(event, scene);
+            }
+        });
+        Chaussures.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                scene = "Chaussures";
+                VoirTous(event, scene);
+            }
+        });
+        Accessoires.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                scene = "Accessoires";
+                VoirTous(event, scene);
             }
         });
 
@@ -114,94 +135,122 @@ public class ShopController implements Initializable {
         new Thread() {
             @Override
             public void run() {
-                TranslateTransition transition = new TranslateTransition();
-                transition.setDuration(Duration.seconds(5));
-                transition.setNode(backslide1);
-                transition.setToX(-1024);
-                transition.setAutoReverse(true);
-                transition.setDelay(Duration.millis(3000));
-                transition.setCycleCount(transition.INDEFINITE);
+                try {
+                    TranslateTransition transition = new TranslateTransition();
+                    transition.setDuration(Duration.seconds(5));
+                    transition.setNode(backslide1);
+                    transition.setToX(-1024);
+                    transition.setAutoReverse(true);
+                    transition.setDelay(Duration.millis(3000));
+                    transition.setCycleCount(transition.INDEFINITE);
 
-                TranslateTransition transition2 = new TranslateTransition();
-                transition2.setDuration(Duration.seconds(5));
-                transition2.setNode(Backslide2);
-                transition2.setToX(-1024);
-                transition2.setAutoReverse(true);
-                transition2.setDelay(Duration.millis(3000));
-                transition2.setCycleCount(transition.INDEFINITE);
+                    TranslateTransition transition2 = new TranslateTransition();
+                    transition2.setDuration(Duration.seconds(5));
+                    transition2.setNode(Backslide2);
+                    transition2.setToX(-1024);
+                    transition2.setAutoReverse(true);
+                    transition2.setDelay(Duration.millis(3000));
+                    transition2.setCycleCount(transition.INDEFINITE);
 
-                TranslateTransition transition3 = new TranslateTransition();
-                transition3.setDuration(Duration.seconds(5));
-                transition3.setNode(BackgroundSlide1);
-                transition3.setToX(-1024);
-                transition3.setDelay(Duration.millis(3000));
-                transition3.setCycleCount(transition.INDEFINITE);
+                    TranslateTransition transition3 = new TranslateTransition();
+                    transition3.setDuration(Duration.seconds(5));
+                    transition3.setNode(BackgroundSlide1);
+                    transition3.setToX(-1024);
+                    transition3.setDelay(Duration.millis(3000));
+                    transition3.setCycleCount(transition.INDEFINITE);
 
-                TranslateTransition transition4 = new TranslateTransition();
-                transition4.setDuration(Duration.seconds(10));
-                transition4.setNode(Backgroundslide2);
-                transition4.setToX(-1024);
-                transition4.setAutoReverse(true);
-                transition4.setDelay(Duration.millis(3000));
-                transition4.setCycleCount(transition.INDEFINITE);
+                    TranslateTransition transition4 = new TranslateTransition();
+                    transition4.setDuration(Duration.seconds(10));
+                    transition4.setNode(Backgroundslide2);
+                    transition4.setToX(-1024);
+                    transition4.setAutoReverse(true);
+                    transition4.setDelay(Duration.millis(3000));
+                    transition4.setCycleCount(transition.INDEFINITE);
 
-                ParallelTransition p = new ParallelTransition();
-                ParallelTransition p1 = new ParallelTransition();
-                ParallelTransition p2 = new ParallelTransition();
+                    ParallelTransition p = new ParallelTransition();
+                    ParallelTransition p1 = new ParallelTransition();
+                    ParallelTransition p2 = new ParallelTransition();
 
-                p1.getChildren().add(transition3);
-                p2.getChildren().add(transition4);
-                p.getChildren().add(transition);
-                p.getChildren().add(transition2);
-                p.play();
-                p2.play();
-                p1.play();
+                    p1.getChildren().add(transition3);
+                    p2.getChildren().add(transition4);
+                    p.getChildren().add(transition);
+                    p.getChildren().add(transition2);
+                    p.play();
+                    p2.play();
+                    p1.play();
 
-                while (true) {
-                    if (-1023 > BackgroundSlide1.translateXProperty().getValue()) {
-                        if (p.getStatus() == Animation.Status.RUNNING) {
-                            p.pause();
+                    while (true) {
+                        if (-1023 > BackgroundSlide1.translateXProperty().getValue()) {
+                            if (p.getStatus() == Animation.Status.RUNNING) {
+                                p.pause();
+                            }
                         }
-                    }
 
-                    if (-1023 > Backgroundslide2.translateXProperty().getValue()) {
-                        if (p.getStatus() == Animation.Status.PAUSED) {
-                            p.play();
+                        if (-1023 > Backgroundslide2.translateXProperty().getValue()) {
+                            if (p.getStatus() == Animation.Status.PAUSED) {
+                                p.play();
+                            }
                         }
+
                     }
+                } catch (Exception e) {
 
                 }
-
             }
-
         }.start();
     }
 
-    private void VoirTous(ActionEvent event) {
-        makeFadeOut();
+    private void VoirTous(ActionEvent event, String scene) {
+        makeFadeOut(scene);
     }
 
-    private void makeFadeOut() {
+    private void makeFadeOut(String scene) {
         FadeTransition fadeOut = new FadeTransition();
         fadeOut.setDuration(Duration.millis(1000));
         fadeOut.setNode(rootpane);
         fadeOut.setFromValue(1);
         fadeOut.setToValue(0);
         fadeOut.setOnFinished((ActionEvent event) -> {
-            LoadNextScene();
+            LoadNextScene(scene);
         });
         fadeOut.play();
     }
 
-    private void LoadNextScene() {
+    private void LoadNextScene(String sample) {
 
         try {
-            Parent SecondView;
-            SecondView = (Pane) FXMLLoader.load(getClass().getResource("TousLesProduits.fxml"));
+            if (sample.compareTo("Tous") == 0) {
+                Parent SecondView;
+                SecondView = (Pane) FXMLLoader.load(getClass().getResource("TousLesProduits.fxml"));
 
-            Scene newScene = new Scene(SecondView);
-            Stage currStage = (Stage) rootpane.getScene().getWindow();
-            currStage.setScene(newScene);
+                Scene newScene = new Scene(SecondView);
+                Stage currStage = (Stage) rootpane.getScene().getWindow();
+                currStage.setScene(newScene);
+            }
+            if (sample.compareTo("Maillots") == 0) {
+                Parent SecondView;
+                SecondView = (Pane) FXMLLoader.load(getClass().getResource("AfficherMaillots.fxml"));
+
+                Scene newScene = new Scene(SecondView);
+                Stage currStage = (Stage) rootpane.getScene().getWindow();
+                currStage.setScene(newScene);
+            }
+            if (sample.compareTo("Chaussures") == 0) {
+                Parent SecondView;
+                SecondView = (Pane) FXMLLoader.load(getClass().getResource("AfficherChaussures.fxml"));
+
+                Scene newScene = new Scene(SecondView);
+                Stage currStage = (Stage) rootpane.getScene().getWindow();
+                currStage.setScene(newScene);
+            }
+            if (sample.compareTo("Accessoires") == 0) {
+                Parent SecondView;
+                SecondView = (Pane) FXMLLoader.load(getClass().getResource("AfficherAccessoires.fxml"));
+
+                Scene newScene = new Scene(SecondView);
+                Stage currStage = (Stage) rootpane.getScene().getWindow();
+                currStage.setScene(newScene);
+            }
         } catch (IOException ex) {
         }
 

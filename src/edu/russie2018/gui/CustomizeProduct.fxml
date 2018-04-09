@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXColorPicker?>
+<?import java.net.URL?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+
+<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1024.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.russie2018.gui.CustomizeProductController">
+    <stylesheets>
+        <URL value="@reservertickets.css" />
+    </stylesheets>
+   <children>
+      <ImageView fx:id="img1" fitHeight="524.0" fitWidth="587.0" layoutX="208.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="file:/C:/Users/samia/Desktop/Mexico2.png" />
+         </image>
+      </ImageView>
+      <Rectangle fx:id="rect" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="524.0" layoutX="208.0" layoutY="85.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="587.0" />
+      <ImageView fx:id="img11" fitHeight="524.0" fitWidth="587.0" layoutX="208.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="file:/C:/Users/samia/Desktop/Mexicologo.png" />
+         </image>
+      </ImageView>
+      <JFXColorPicker fx:id="Colors" layoutX="33.0" layoutY="50.0" prefHeight="40.0" prefWidth="130.0" />
+   </children>
+</AnchorPane>

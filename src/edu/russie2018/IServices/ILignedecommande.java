@@ -5,7 +5,10 @@
  */
 package edu.russie2018.IServices;
 
+import edu.russie2018.entities.Lignedecommande;
 import edu.russie2018.entities.Produits;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -16,9 +19,10 @@ public interface ILignedecommande {
 
     public void ajouterLigneDeCommande(int Id, Set<Produits> mySet);
 
-    public boolean supprimerLigneDecommande(int Id, int idComm);
+    public boolean supprimerLigneDecommande(int id);
 
 //    public void modifierLigneDeCommande();
 //
-//    public ObservableMap<Produits, Integer> consulterLigneDeCommandes();
+    public Map<Integer,List<Produits>> ConsulterLigneDeCommandes();
+    
 }

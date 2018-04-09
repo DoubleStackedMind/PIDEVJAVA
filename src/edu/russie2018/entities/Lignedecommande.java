@@ -17,17 +17,21 @@ public class Lignedecommande {
     private int idProduit;
     private float prix;
     private String etat;
+    private int quantite;
+    
+    private String nomP;
 
     public Lignedecommande() {
     }
 
-    public Lignedecommande(int idLigne, int idUser, int idCommande, int idProduit, float prix, String etat) {
+    public Lignedecommande(int idLigne, int idUser, int idCommande, int idProduit, float prix, String etat, int quantite) {
         this.idLigne = idLigne;
         this.idUser = idUser;
         this.idCommande = idCommande;
         this.idProduit = idProduit;
         this.prix = prix;
         this.etat = etat;
+        this.quantite=quantite;
     }
 
     public int getIdLigne() {
@@ -78,10 +82,30 @@ public class Lignedecommande {
         this.etat = etat;
     }
 
+    public int getQuantite() {
+        return quantite;
+    }
+
+    public void setQuantite(int quantite) {
+        this.quantite = quantite;
+    }
+
+    public String getNomP() {
+        return nomP;
+    }
+
+    public void setNomP(String nomP) {
+        this.nomP = nomP;
+    }
+    
+    
+
     @Override
     public String toString() {
-        return "Lignedecommande{" + "idLigne=" + idLigne + ", idUser=" + idUser + ", idCommande=" + idCommande + ", idProduit=" + idProduit + ", prix=" + prix + ", etat=" + etat + '}';
+        return "Lignedecommande{" + "idLigne=" + idLigne + ", idUser=" + idUser + ", idCommande=" + idCommande + ", idProduit=" + idProduit + ", prix=" + prix + ", etat=" + etat + ", quantite=" + quantite + '}';
     }
+
+    
 
     @Override
     public int hashCode() {

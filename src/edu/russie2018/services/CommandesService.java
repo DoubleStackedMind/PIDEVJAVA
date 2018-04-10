@@ -23,7 +23,6 @@ import java.util.Set;
 public class CommandesService implements ICommandes {
 
     Connection cnx;
-
     public CommandesService() {
         cnx = DatabaseConnection.getInstance().getConnection();
     }
@@ -32,9 +31,10 @@ public class CommandesService implements ICommandes {
     public void ajouterCommande(Set<Produits> mySet) {
         try {
             String requete = "INSERT INTO commandes (id_user) VALUES(?)";
-
+            ServiceUser us = new ServiceUser();
+            int id = us.currentUser.getId();
             PreparedStatement pst = cnx.prepareStatement(requete);
-            pst.setInt(1, 2);
+            pst.setInt(1, id);
             pst.executeUpdate();
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
@@ -59,7 +59,9 @@ public class CommandesService implements ICommandes {
         try {
             Commandes c = new Commandes();
             Statement myStmt = cnx.createStatement();
-            ResultSet myRes = myStmt.executeQuery("SELECT * from commandes where id_user=2 order by id DESC");
+            ServiceUser usr = new ServiceUser();
+            int id = usr.currentUser.getId();
+            ResultSet myRes = myStmt.executeQuery("SELECT * from commandes where id_user="+id+" order by id DESC");
             while (myRes.next()) {
                 c.setId(myRes.getInt("id"));
                 break;

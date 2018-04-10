@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="510.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.russie2018.gui.CreateAccountController">
+   <children>
+      <VBox layoutX="21.0" layoutY="49.0" prefHeight="337.0" prefWidth="468.0">
+         <children>
+            <JFXTextField fx:id="TFName" prefHeight="43.0" prefWidth="468.0" promptText="Name" unFocusColor="#1976d2" />
+            <JFXTextField fx:id="TFFamilyName" prefHeight="46.0" prefWidth="468.0" promptText="Family Name" unFocusColor="#1976d2" />
+            <JFXTextField fx:id="TFEmail" prefHeight="44.0" prefWidth="468.0" promptText="Email" unFocusColor="#1976d2" />
+            <JFXPasswordField fx:id="TFPassword" prefHeight="46.0" prefWidth="468.0" promptText="Password" unFocusColor="#1976d2" />
+            <JFXPasswordField fx:id="TFPasswordConfirmation" prefHeight="43.0" prefWidth="468.0" promptText="Password confirmation" unFocusColor="#1976d2" />
+            <JFXComboBox fx:id="CBEquipeFavo" editable="true" labelFloat="true" prefHeight="43.0" prefWidth="468.0" promptText="Favorite Team" unFocusColor="#1976d2" />
+            <HBox prefHeight="64.0" prefWidth="468.0">
+               <children>
+                  <JFXButton fx:id="Save" prefHeight="65.0" prefWidth="231.0" ripplerFill="#3719ff" stylesheets="@createaccount.css" text="Save" />
+                  <JFXButton fx:id="Cancel" prefHeight="84.0" prefWidth="240.0" stylesheets="@createaccount.css" text="Cancel" textAlignment="CENTER" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Label layoutX="198.0" layoutY="25.0" text="Add a new account" textAlignment="CENTER" />
+   </children>
+</AnchorPane>

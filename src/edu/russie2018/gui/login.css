@@ -3,7 +3,7 @@
  */
 
 .mainFxmlClass {
-    -fx-background-image: url('file:C:/Users/samia/Documents/NetBeansProjects/PIDEV/Images/mac-bar.png');
+    -fx-background-image: url('file:C:/Users/samia/Documents/NetBeansProjects/PIDEV/Images/mac-bar.png'); 
 }
 
 .text-field {

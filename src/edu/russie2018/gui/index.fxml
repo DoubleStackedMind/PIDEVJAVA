@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="anchorPane" fx:id="anchorPane" prefHeight="600.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.russia.views.indexController">
+   <children>
+      <JFXHamburger id="hamburger" fx:id="hamburger" layoutX="506.0" layoutY="14.0" />
+      <JFXDrawer id="drawer" fx:id="drawer" defaultDrawerSize="200.0" prefHeight="600.0" prefWidth="161.0" />
+   </children>
+</AnchorPane>

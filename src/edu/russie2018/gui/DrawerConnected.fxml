@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="150.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.russia.views.DrawerConnectedController">
+   <children>
+      <JFXButton fx:id="exit" accessibleText="exit" depthTest="DISABLE" layoutX="2.0" layoutY="570.0" prefHeight="32.0" prefWidth="150.0" style="-fx-font-size:14px;-fx-background-color:WHITE;" text="Exit" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="568.0" />
+      <JFXButton fx:id="profile" accessibleText="se_connecter" layoutY="140.0" prefHeight="30.0" prefWidth="150.0" style="-fx-font-size:14px;-fx-background-color:WHITE;" text="Profile" AnchorPane.bottomAnchor="430.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <ImageView fx:id="UserImage" fitHeight="140.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
+      <JFXButton fx:id="disconnect" accessibleText="disconnect" layoutY="538.0" prefHeight="30.0" prefWidth="150.0" style="-fx-font-size:14px;-fx-background-color:WHITE;" text="Deconnecter" />
+      <Label fx:id="nom" accessibleText="nom" layoutX="-1.0" layoutY="108.0" prefHeight="32.0" prefWidth="150.0" />
+   </children>
+</AnchorPane>

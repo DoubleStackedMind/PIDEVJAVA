@@ -74,22 +74,31 @@ public class LignedecommandeService implements ILignedecommande {
     }
 
     @Override
-    public Map<Integer, List<Produits>> ConsulterLigneDeCommandes() {
-        Map<Integer, List<Produits>> myMap = new HashMap<>();
-        List<Produits> myList = new ArrayList<>();
+    public Map<Integer, List<Lignedecommande>> ConsulterLigneDeCommandes() {
+        Map<Integer, List<Lignedecommande>> myMap = new HashMap<>();
+       
+        List<Lignedecommande> myList = new ArrayList<>();
+       
         ProduitsService ps = new ProduitsService();
-        try {
-            Statement myStmt = cnx.createStatement();
-            ResultSet myRes = myStmt.executeQuery("SELECT lignedecommande.commande, produits.nom, lignedecommande.quantite, lignedecommande.prix FROM `lignedecommande`JOIN produits ON lignedecommande.idproduit = produits.id_produit GROUP BY `idLigne`");
-            while (myRes.next()) {
-                Produits p = ps.findProduitsByName(myRes.getString("nom"));
-                p.setNom(p.getNom());
-                p.setQuantite(myRes.getInt("quantite"));
-                p.setPrix(myRes.getFloat("prix"));
-                myList.add(p);
-                myMap.put(myRes.getInt("commande"), myList);
 
+        try {
+            Statement myStmt1 = cnx.createStatement();
+            ResultSet myRes1 = myStmt1.executeQuery("SELECT commande FROM lignedecommande ");
+            while (myRes1.next()) {
+                myMap.put(myRes1.getInt("commande"), null);
             }
+            Statement myStmt = cnx.createStatement();
+            ResultSet myRes = myStmt.executeQuery("SELECT lignedecommande.commande,lignedecommande.etat, lignedecommande.idproduit, produits.nom, lignedecommande.quantite, lignedecommande.prix FROM `lignedecommande`JOIN produits ON lignedecommande.idproduit = produits.id_produit GROUP BY `idLigne`");
+            while (myRes.next()) {
+                Lignedecommande lc = new Lignedecommande();
+                lc.setIdCommande(myRes.getInt("commande"));
+                lc.setIdProduit(myRes.getInt("idproduit"));
+                lc.setQuantite(myRes.getInt("quantite"));
+                lc.setNomP(myRes.getString("nom"));
+                lc.setEtat(myRes.getString("etat"));
+             //  myMap.put(lc.getIdCommande(), myMap.get(lc.getIdCommande()).add(lc));
+            }
+
             return myMap;
         } catch (SQLException e) {
             e.printStackTrace();

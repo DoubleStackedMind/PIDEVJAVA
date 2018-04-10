@@ -6,9 +6,11 @@
 package edu.russie2018.gui;
 
 import edu.russie2018.entities.User;
-import edu.russie2018.services.UserService;
+import edu.russie2018.services.ServiceAdmin;
+import edu.russie2018.services.ServiceUser;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -67,37 +69,42 @@ public class LoginController implements Initializable {
 
     @FXML
     public void Authentification(ActionEvent event) {
-        UserService us = new UserService();
-        User usr = new User();
-        usr.setUsername(tfusername.getText());
-        usr.setPassword(tfpassword.getText());
-        boolean verify = us.VerifyUser(usr);
-        boolean verifyAd = us.VerifyIfAdmin(usr);
-        int UserID = us.GetUserId(usr);
-        if (verify && !verifyAd) {
-            try {
-                JOptionPane.showMessageDialog(null, "привет " + usr.getUsername() + "!");
-                
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("Home.fxml"));
-                Parent root = loader.load();
-                tfusername.getScene().setRoot(root);
-
-            } catch (IOException ex) {
-                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-            } 
-        } else if (verify && verifyAd) {
-            try {
-             JOptionPane.showMessageDialog(null, "привет " + usr.getUsername() + "!");
-                
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("Shop.fxml"));
+        try {
+            ServiceUser us = new ServiceUser();
+            User usr = new User();
+            usr.setUser_name(tfusername.getText());
+            usr.setPassword(tfpassword.getText());
+            
+            boolean verify = us.Autentifier(usr.getUser_name(), usr.getPassword());
+            boolean verifyAd = false;//us.VerifyIfAdmin(usr);
+            int UserID = us.currentUser.getId();
+            if (verify) {
+                try {
+                    JOptionPane.showMessageDialog(null, "привет " + usr.getUser_name() + "!");
+                    
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("Shop.fxml"));
+                    Parent root = loader.load();
+                    tfusername.getScene().setRoot(root);
+                    
+                } catch (IOException ex) {
+                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                try {
+                    JOptionPane.showMessageDialog(null, "привет " + usr.getUser_name()+ "!");
+                    
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("Home.fxml"));
 //                Preferences pref = Preferences.userNodeForPackage(User.class);
 //                pref.put("User_id",String.valueOf(UserID));
-                Parent root = loader.load();
-                tfusername.getScene().setRoot(root);
+Parent root = loader.load();
+tfusername.getScene().setRoot(root);
 
-            } catch (IOException ex) {
-                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

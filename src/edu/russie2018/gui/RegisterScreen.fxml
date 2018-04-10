@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.collections.*?>
+
+
+<AnchorPane id="AnchorPane" fx:id="anchorpane" prefHeight="267.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.russia.views.DrowerController">
+   <children>
+      <JFXButton fx:id="inscrire" accessibleText="inscrire" layoutX="142.0" layoutY="257.0" prefHeight="25.0" prefWidth="121.0" text="s'inscrire" />
+      <JFXButton fx:id="cancel" layoutX="285.0" layoutY="257.0" prefHeight="25.0" prefWidth="121.0" text="cancel" textAlignment="CENTER" />
+      <Label layoutX="58.0" layoutY="60.0" text="Nom :" />
+      <Label layoutX="51.0" layoutY="106.0" text="Prenom :" />
+      <Label layoutX="57.0" layoutY="147.0" text="Email :" />
+      <Label layoutX="57.0" layoutY="177.0" text="Password :" />
+      <ChoiceBox fx:id="role" layoutX="136.0" layoutY="212.0" prefWidth="150.0" >
+                <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="Admin" />
+          <String fx:value="Utilisateur" />
+        </FXCollections>
+      </items>
+      </ChoiceBox>
+      
+      
+      <Label layoutX="64.0" layoutY="216.0" text="je suis  :" />
+      <Label layoutX="167.0" layoutY="14.0" text="*********\\Welcom to the family //******" />
+      <JFXPasswordField fx:id="password" layoutX="136.0" layoutY="170.0" maxWidth="150.0" minWidth="150.0" prefHeight="31.0" prefWidth="150.0" />
+      <JFXTextField fx:id="nom" layoutX="136.0" layoutY="53.0" maxWidth="150.0" minWidth="150.0" prefHeight="31.0" prefWidth="150.0" />
+      <JFXTextField fx:id="prenom" layoutX="136.0" layoutY="99.0" maxWidth="150.0" minWidth="150.0" prefHeight="31.0" prefWidth="150.0" />
+      <JFXTextField fx:id="email" layoutX="136.0" layoutY="132.0" maxWidth="150.0" minWidth="150.0" prefHeight="31.0" prefWidth="150.0" />
+   </children>
+</AnchorPane>

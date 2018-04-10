@@ -5,18 +5,18 @@
  */
 package edu.russie2018.IServices;
 
-import edu.russie2018.entities.User;
+import edu.russie2018.entities.Admin;
 import java.util.List;
 
 /**
  *
  * @author Jawhar
  */
-public interface IUser {
-    
-    public void ajouterUser(User U);
-    public void supprimerUser(User U);
-    public void modifierUser(User U);
-    public List<User> consulterUser();
+public interface IAdmin {
+ 
+    public void ajouterAdmin(Admin A);
+    public void supprimerAdmin(Admin A);
+    public void modifierAdmin(Admin A);
+    public List<Admin> consulterAdmin();
     
 }

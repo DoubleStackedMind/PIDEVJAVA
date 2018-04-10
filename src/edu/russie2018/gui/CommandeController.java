@@ -5,20 +5,28 @@
  */
 package edu.russie2018.gui;
 
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
+import com.stripe.Stripe;
+import com.stripe.exception.APIConnectionException;
+import com.stripe.exception.APIException;
+import com.stripe.exception.AuthenticationException;
+import com.stripe.exception.CardException;
+import com.stripe.exception.InvalidRequestException;
+import com.stripe.model.Charge;
+import com.stripe.net.RequestOptions;
 import edu.russie2018.entities.Lignedecommande;
 import edu.russie2018.entities.Produits;
 import edu.russie2018.services.LignedecommandeService;
 import edu.russie2018.services.ProduitsService;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.stream.Stream;
-import javafx.beans.property.SimpleStringProperty;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -26,7 +34,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -35,8 +42,6 @@ import javafx.scene.effect.GaussianBlur;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Font;
-import javafx.scene.text.TextAlignment;
 import javafx.util.Callback;
 
 /**
@@ -67,8 +72,10 @@ public class CommandeController implements Initializable {
     private float prix;
     @FXML
     private TextField PrixTotal;
-    
-    private int i=0;
+
+    private int i = 0;
+    @FXML
+    private Button Pay;
 
     /**
      * Initializes the controller class.
@@ -94,36 +101,54 @@ public class CommandeController implements Initializable {
 
     public void displayCommandes() {
         LignedecommandeService lcs = new LignedecommandeService();
-        Map<Integer, List<Produits>> myMap = new HashMap<>();
+        Map<Integer, List<Lignedecommande>> myMap = new HashMap<>();
         myMap.putAll(lcs.ConsulterLigneDeCommandes());
-     
-        
-      
-        myMap.values().stream().reduce((a,b) -> { a.addAll(b) ; return a; }).get().stream().forEach(e -> {
-//        for (List<Produits> l : myMap.values()) {
 
-//          Label lb = new Label("Commande : " + i);
-//            Labels.getItems().add(lb); 
-     
-//            l.forEach( pro -> {
-                Label lbl = new Label(e.getNom().get());
-                Label plbl = new Label(String.valueOf(e.getPrix()));
-                plbl.setFont(Font.font("Futura Condensed Oblique"));
-                lbl.setFont(Font.font("Futura Condensed Oblique"));
-                plbl.setTextAlignment(TextAlignment.CENTER);
-                plbl.setId("Pricelabel");
-                lbl.setGraphic(plbl);
-                lbl.setContentDisplay(ContentDisplay.RIGHT);
-                lbl.setGraphicTextGap(Labels.getWidth() + 200);
+        myMap.entrySet().stream().forEach(e -> System.out.println(e));
 
-                Labels.getItems().add(lbl);
-                prix = prix + (e.getPrix() * e.getQuantite());
-            
-            i++;
-            PrixTotal.setText(String.valueOf(prix));
-        
-        });
-        System.out.println(myMap);
+//        for(Map.Entry m : myMap.entrySet()) {
+//            for(Produits e : m.getValue()) {
+//            Label lbl = new Label(e.get());
+//                Label plbl = new Label(String.valueOf(e.getPrix()));
+//                plbl.setFont(Font.font("Futura Condensed Oblique"));
+//                lbl.setFont(Font.font("Futura Condensed Oblique"));
+//                plbl.setTextAlignment(TextAlignment.CENTER);
+//                plbl.setId("Pricelabel");
+//                lbl.setGraphic(plbl);
+//                lbl.setContentDisplay(ContentDisplay.RIGHT);
+//                lbl.setGraphicTextGap(Labels.getWidth() + 200);
+//
+//                Labels.getItems().add(lbl);
+//                prix = prix + (e.getPrix() * e.getQuantite());
+//            
+//            i++;
+//            PrixTotal.setText(String.valueOf(prix));
+//        }
+//        }
+//        myMap.values().stream().reduce((a,b) -> { a.addAll(b) ; return a; }).get().stream().forEach(e -> {
+////        for (List<Produits> l : myMap.values()) {
+//
+////          Label lb = new Label("Commande : " + i);
+////            Labels.getItems().add(lb); 
+//     
+////            l.forEach( pro -> {
+//                Label lbl = new Label(e.getNom().get());
+//                Label plbl = new Label(String.valueOf(e.getPrix()));
+//                plbl.setFont(Font.font("Futura Condensed Oblique"));
+//                lbl.setFont(Font.font("Futura Condensed Oblique"));
+//                plbl.setTextAlignment(TextAlignment.CENTER);
+//                plbl.setId("Pricelabel");
+//                lbl.setGraphic(plbl);
+//                lbl.setContentDisplay(ContentDisplay.RIGHT);
+//                lbl.setGraphicTextGap(Labels.getWidth() + 200);
+//
+//                Labels.getItems().add(lbl);
+//                prix = prix + (e.getPrix() * e.getQuantite());
+//            
+//            i++;
+//            PrixTotal.setText(String.valueOf(prix));
+//        
+//        });
     }
 
     public void MouseAction() {
@@ -181,5 +206,42 @@ public class CommandeController implements Initializable {
 
     @FXML
     private void ModifierItem(ActionEvent event) {
+    }
+
+    @FXML
+    public void CreatePayment(ActionEvent event) {
+        try {
+            Stripe.apiKey = "sk_test_lQaCLxOqSJhbeLGE3G5OPEVO";
+
+    
+            Map<String, Object> chargeParams = new HashMap<>();
+            chargeParams.put("amount", 100);
+            chargeParams.put("currency","cad");
+            chargeParams.put("description","test@esprit.tn");
+            chargeParams.put("source", "tok_mastercard");
+
+            RequestOptions rs = RequestOptions.builder().setIdempotencyKey("cus_AZERTY123").build();
+
+            Charge.create(chargeParams, rs);
+//
+//// Token is created using Checkout or Elements!
+//// Get the payment token ID submitted by the form:
+//Map<String, Object> customerParams = new HashMap<String, Object>();
+//customerParams.put("description", "Customer for emma.thompson@example.com");
+//customerParams.put("source", "tok_amex");
+//// ^ obtained with Stripe.js
+//Customer.create(customerParams);
+//
+//            Map<String, Object> params = new HashMap<>();
+//            params.put("amount", 999);
+//            params.put("currency", "usd");
+//            params.put("description", "Example charge");
+//            params.put("source", ServiceUser.currentUser.getEmail());
+//            params.put("capture", false);
+//            Charge charge = Charge.create(params);
+        } catch (APIException | CardException | APIConnectionException | InvalidRequestException | AuthenticationException ex) {
+            Logger.getLogger(CommandeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 }

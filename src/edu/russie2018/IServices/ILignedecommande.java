@@ -23,6 +23,6 @@ public interface ILignedecommande {
 
 //    public void modifierLigneDeCommande();
 //
-    public Map<Integer,List<Produits>> ConsulterLigneDeCommandes();
+    public Map<Integer,List<Lignedecommande>> ConsulterLigneDeCommandes();
     
 }

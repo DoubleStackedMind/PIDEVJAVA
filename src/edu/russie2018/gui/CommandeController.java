@@ -5,7 +5,6 @@
  */
 package edu.russie2018.gui;
 
-
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import com.stripe.Stripe;
@@ -21,19 +20,24 @@ import edu.russie2018.entities.Produits;
 import edu.russie2018.services.LignedecommandeService;
 import edu.russie2018.services.ProduitsService;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -42,6 +46,11 @@ import javafx.scene.effect.GaussianBlur;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 /**
@@ -76,6 +85,12 @@ public class CommandeController implements Initializable {
     private int i = 0;
     @FXML
     private Button Pay;
+    @FXML
+    private JFXButton close;
+    @FXML
+    private JFXButton minimize;
+    @FXML
+    private JFXButton maximize;
 
     /**
      * Initializes the controller class.
@@ -86,11 +101,13 @@ public class CommandeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-
+        Pay.getStylesheets().add(getClass().getResource("commande.css").toExternalForm());
         Popup.setVisible(false);
         Labels.setExpanded(true);
         Labels.depthProperty().set(1);
         Labels.getStylesheets().add(getClass().getResource("commande.css").toExternalForm());
+        Labels.setStyle("-fx-background-color: transparent;");
+        sp.getStylesheets().add(getClass().getResource("commande.css").toExternalForm());
         Labels.setPrefSize(600, 600);
         sp.setContent(Labels);
         sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -102,37 +119,43 @@ public class CommandeController implements Initializable {
     public void displayCommandes() {
         LignedecommandeService lcs = new LignedecommandeService();
         Map<Integer, List<Lignedecommande>> myMap = new HashMap<>();
+        if(lcs.ConsulterLigneDeCommandes().isEmpty()) {
+            Label label = new Label("Pas de commande trouvé ..");
+            Labels.getItems().add(label);
+        }
         myMap.putAll(lcs.ConsulterLigneDeCommandes());
 
-        myMap.entrySet().stream().forEach(e -> System.out.println(e));
+        for (Integer x : myMap.keySet()) {
+            Label lb = new Label("Commande : " + i);
+            Labels.getItems().add(lb);
+            for (Lignedecommande e : myMap.get(x)) {
+                ProduitsService ps = new ProduitsService();
+                Produits p = new Produits();
+                p = ps.getProduitsById(e.getIdProduit());
+                Label lbl = new Label(String.valueOf(p.getNom().get()));
+                Label plbl = new Label(String.valueOf(e.getPrix()));
+                plbl.setFont(Font.font("Futura Condensed Oblique"));
+                lbl.setFont(Font.font("Futura Condensed Oblique"));
+                lbl.setPrefWidth(300);
+                plbl.setId("Pricelabel");
+                lbl.setGraphic(plbl);
+                lbl.setContentDisplay(ContentDisplay.RIGHT);
+                lbl.setGraphicTextGap(Labels.getWidth() + 150);
+                Labels.getItems().add(lbl);
+                prix = prix + (e.getPrix() * e.getQuantite());
 
-//        for(Map.Entry m : myMap.entrySet()) {
-//            for(Produits e : m.getValue()) {
-//            Label lbl = new Label(e.get());
-//                Label plbl = new Label(String.valueOf(e.getPrix()));
-//                plbl.setFont(Font.font("Futura Condensed Oblique"));
-//                lbl.setFont(Font.font("Futura Condensed Oblique"));
-//                plbl.setTextAlignment(TextAlignment.CENTER);
-//                plbl.setId("Pricelabel");
-//                lbl.setGraphic(plbl);
-//                lbl.setContentDisplay(ContentDisplay.RIGHT);
-//                lbl.setGraphicTextGap(Labels.getWidth() + 200);
-//
-//                Labels.getItems().add(lbl);
-//                prix = prix + (e.getPrix() * e.getQuantite());
-//            
-//            i++;
-//            PrixTotal.setText(String.valueOf(prix));
-//        }
-//        }
+                PrixTotal.setText(String.valueOf(prix));
+            }
+            i++;
+        }
 //        myMap.values().stream().reduce((a,b) -> { a.addAll(b) ; return a; }).get().stream().forEach(e -> {
-////        for (List<Produits> l : myMap.values()) {
+// 
 //
-////          Label lb = new Label("Commande : " + i);
-////            Labels.getItems().add(lb); 
-//     
-////            l.forEach( pro -> {
-//                Label lbl = new Label(e.getNom().get());
+//          Label lb = new Label("Commande : " + i);
+//            Labels.getItems().add(lb); 
+//ProduitsService ps = new ProduitsService();
+//
+//                Label lbl = new Label(String.valueOf(e.getIdProduit()));
 //                Label plbl = new Label(String.valueOf(e.getPrix()));
 //                plbl.setFont(Font.font("Futura Condensed Oblique"));
 //                lbl.setFont(Font.font("Futura Condensed Oblique"));
@@ -149,6 +172,19 @@ public class CommandeController implements Initializable {
 //            PrixTotal.setText(String.valueOf(prix));
 //        
 //        });
+    }
+
+    protected String getSaltString() {
+        String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        StringBuilder salt = new StringBuilder();
+        Random rnd = new Random();
+        while (salt.length() < 18) { // length of the random string.
+            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+            salt.append(SALTCHARS.charAt(index));
+        }
+        String saltStr = salt.toString();
+        return saltStr;
+
     }
 
     public void MouseAction() {
@@ -211,16 +247,19 @@ public class CommandeController implements Initializable {
     @FXML
     public void CreatePayment(ActionEvent event) {
         try {
+
+            DecimalFormat df = new DecimalFormat("##.##");
+
             Stripe.apiKey = "sk_test_lQaCLxOqSJhbeLGE3G5OPEVO";
 
-    
+            //
             Map<String, Object> chargeParams = new HashMap<>();
-            chargeParams.put("amount", 100);
-            chargeParams.put("currency","cad");
-            chargeParams.put("description","test@esprit.tn");
+            chargeParams.put("amount", Integer.parseInt(String.valueOf(df.format(Integer.parseInt(PrixTotal.getText())))));
+            chargeParams.put("currency", "cad");
+            chargeParams.put("description", "test@esprit.tn");
             chargeParams.put("source", "tok_mastercard");
 
-            RequestOptions rs = RequestOptions.builder().setIdempotencyKey("cus_AZERTY123").build();
+            RequestOptions rs = RequestOptions.builder().setIdempotencyKey("cus_" + getSaltString()).build();
 
             Charge.create(chargeParams, rs);
 //
@@ -243,5 +282,35 @@ public class CommandeController implements Initializable {
             Logger.getLogger(CommandeController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    @FXML
+    private void closeWindow(ActionEvent event) {
+        Platform.exit();
+    }
+
+    @FXML
+    private void minimizeWindow(ActionEvent event) {
+        Stage w = (Stage) minimize.getScene().getWindow();
+        w.setIconified(true);
+    }
+
+    @FXML
+    private void maximizeWindow(ActionEvent event) {
+        Screen screen = Screen.getPrimary();
+        Rectangle2D bounds = screen.getVisualBounds();
+        Stage primaryStage = (Stage) maximize.getScene().getWindow();
+        // System.out.println(primaryStage.getHeight()+" "+primaryStage.getWidth()+" "+primaryStage.getX()+" "+primaryStage.getY());
+        if (primaryStage.getHeight() != bounds.getHeight()) {
+            primaryStage.setX(bounds.getMinX());
+            primaryStage.setY(bounds.getMinY());
+            primaryStage.setWidth(bounds.getWidth());
+            primaryStage.setHeight(bounds.getHeight());
+        } else {
+            primaryStage.setHeight(803);
+            primaryStage.setWidth(1025);
+            primaryStage.setX(171);
+            primaryStage.setY(-12);
+        }
     }
 }

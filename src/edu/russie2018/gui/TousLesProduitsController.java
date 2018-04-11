@@ -155,12 +155,6 @@ public class TousLesProduitsController implements Initializable {
     @FXML
     private JFXButton Maillots;
     @FXML
-    private JFXButton Shop1;
-    @FXML
-    private JFXButton Shop11;
-    @FXML
-    private ScrollPane ScrollP;
-    @FXML
     private JFXButton Details1;
     @FXML
     private AnchorPane Details;
@@ -222,6 +216,10 @@ public class TousLesProduitsController implements Initializable {
     private ScrollPane ScrollPanier;
     @FXML
     private JFXListView<Label> ListPanier;
+    @FXML
+    private JFXButton Commandes;
+    @FXML
+    private JFXButton Tick;
 
     /**
      * Initializes the controller class.
@@ -230,7 +228,7 @@ public class TousLesProduitsController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         AffPanier.setVisible(false);
-    
+
         CustomizePane.setVisible(false);
 
         Tous.setOnAction(new EventHandler<ActionEvent>() {
@@ -307,7 +305,7 @@ public class TousLesProduitsController implements Initializable {
         Node.addAnimatedNode(Chaussures);
         Node.addAnimatedNode(Accessoires);
         Node.setSpacing(5);
- 
+
         rootpane.setOpacity(0);
         makeFadeIn();
 
@@ -423,7 +421,7 @@ public class TousLesProduitsController implements Initializable {
                                                 Notifications notifs = Notifications.create()
                                                         .title("Qunatite invalide")
                                                         .text("La quantite que vous avez ajouter n'est pas disponible!")
-                                                        .graphic(new ImageView("file:C:/Users/samia/Documents/NetBeansProjects/PIDEV/Images/Tick.png"))
+                                                        .graphic(new ImageView("file:C:/Users/samia/Documents/NetBeansProjects/PIDEV/Images/TickErr.png"))
                                                         .hideAfter(Duration.seconds(5))
                                                         .position(Pos.BOTTOM_RIGHT);
 
@@ -474,10 +472,46 @@ public class TousLesProduitsController implements Initializable {
                         AddToCart2.setOnAction(new EventHandler<ActionEvent>() {
                             @Override
                             public void handle(ActionEvent event) {
-                                lc.ajouterLigneDeCommande(myList.get(CurrentPage + 1), 1);
-                                int value = Integer.parseInt(PanierNUM.getText());
-                                value++;
-                                PanierNUM.setText(String.valueOf(value));
+                               Dialog dialog = new Dialog();
+                                TextField tf = new TextField();
+                                tf.setPromptText("Quantite");
+                                GridPane grid = new GridPane();
+                                grid.add(tf, 2, 2);
+                                ButtonType Ok = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+                                dialog.getDialogPane().getButtonTypes().add(Ok);
+                                dialog.getDialogPane().setContent(grid);
+                                dialog.setResultConverter(new Callback() {
+                                    @Override
+                                    public Object call(Object param) {
+                                        if (param == Ok) {
+                                            ProduitsService ps = new ProduitsService();
+                                            if (ps.Update_CheckQuantity(myList.get(CurrentPage+1), Integer.parseInt(tf.getText()))) {
+                                                lc.ajouterLigneDeCommande(myList.get(CurrentPage+1), Integer.parseInt(tf.getText()));
+                                                int value = Integer.parseInt(PanierNUM.getText());
+                                                value++;
+                                                PanNUM = value;
+                                                PanierNUM.setText(String.valueOf(value));
+                                            } else {
+                                                Notifications notifs = Notifications.create()
+                                                        .title("Qunatite invalide")
+                                                        .text("La quantite que vous avez ajouter n'est pas disponible!")
+                                                        .graphic(new ImageView("file:C:/Users/samia/Documents/NetBeansProjects/PIDEV/Images/TickErr.png"))
+                                                        .hideAfter(Duration.seconds(5))
+                                                        .position(Pos.BOTTOM_RIGHT);
+
+                                                notifs.darkStyle();
+                                                Platform.runLater(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        notifs.show();
+                                                    }
+                                                });
+                                            }
+                                        }
+                                        return null;
+                                    }
+                                });
+                                dialog.showAndWait();
                             }
                         });
                         image2.setImage(img2);
@@ -511,11 +545,46 @@ public class TousLesProduitsController implements Initializable {
                         AddToCart3.setOnAction(new EventHandler<ActionEvent>() {
                             @Override
                             public void handle(ActionEvent event) {
-                                lc.ajouterLigneDeCommande(myList.get(CurrentPage + 2), 1);
-                                int value = Integer.parseInt(PanierNUM.getText());
-                                value++;
-                                PanNUM = value;
-                                PanierNUM.setText(String.valueOf(value));
+                                Dialog dialog = new Dialog();
+                                TextField tf = new TextField();
+                                tf.setPromptText("Quantite");
+                                GridPane grid = new GridPane();
+                                grid.add(tf, 2, 2);
+                                ButtonType Ok = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+                                dialog.getDialogPane().getButtonTypes().add(Ok);
+                                dialog.getDialogPane().setContent(grid);
+                                dialog.setResultConverter(new Callback() {
+                                    @Override
+                                    public Object call(Object param) {
+                                        if (param == Ok) {
+                                            ProduitsService ps = new ProduitsService();
+                                            if (ps.Update_CheckQuantity(myList.get(CurrentPage+2), Integer.parseInt(tf.getText()))) {
+                                                lc.ajouterLigneDeCommande(myList.get(CurrentPage+2), Integer.parseInt(tf.getText()));
+                                                int value = Integer.parseInt(PanierNUM.getText());
+                                                value++;
+                                                PanNUM = value;
+                                                PanierNUM.setText(String.valueOf(value));
+                                            } else {
+                                                Notifications notifs = Notifications.create()
+                                                        .title("Qunatite invalide")
+                                                        .text("La quantite que vous avez ajouter n'est pas disponible!")
+                                                        .graphic(new ImageView("file:C:/Users/samia/Documents/NetBeansProjects/PIDEV/Images/TickErr.png"))
+                                                        .hideAfter(Duration.seconds(5))
+                                                        .position(Pos.BOTTOM_RIGHT);
+
+                                                notifs.darkStyle();
+                                                Platform.runLater(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        notifs.show();
+                                                    }
+                                                });
+                                            }
+                                        }
+                                        return null;
+                                    }
+                                });
+                                dialog.showAndWait();
 
                             }
                         });
@@ -550,11 +619,46 @@ public class TousLesProduitsController implements Initializable {
                         AddToCart4.setOnAction(new EventHandler<ActionEvent>() {
                             @Override
                             public void handle(ActionEvent event) {
-                                lc.ajouterLigneDeCommande(myList.get(CurrentPage + 3), 1);
-                                int value = Integer.parseInt(PanierNUM.getText());
-                                value++;
-                                PanNUM = value;
-                                PanierNUM.setText(String.valueOf(value));
+                              Dialog dialog = new Dialog();
+                                TextField tf = new TextField();
+                                tf.setPromptText("Quantite");
+                                GridPane grid = new GridPane();
+                                grid.add(tf, 2, 2);
+                                ButtonType Ok = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+                                dialog.getDialogPane().getButtonTypes().add(Ok);
+                                dialog.getDialogPane().setContent(grid);
+                                dialog.setResultConverter(new Callback() {
+                                    @Override
+                                    public Object call(Object param) {
+                                        if (param == Ok) {
+                                            ProduitsService ps = new ProduitsService();
+                                            if (ps.Update_CheckQuantity(myList.get(CurrentPage+3), Integer.parseInt(tf.getText()))) {
+                                                lc.ajouterLigneDeCommande(myList.get(CurrentPage+3), Integer.parseInt(tf.getText()));
+                                                int value = Integer.parseInt(PanierNUM.getText());
+                                                value++;
+                                                PanNUM = value;
+                                                PanierNUM.setText(String.valueOf(value));
+                                            } else {
+                                                Notifications notifs = Notifications.create()
+                                                        .title("Qunatite invalide")
+                                                        .text("La quantite que vous avez ajouter n'est pas disponible!")
+                                                        .graphic(new ImageView("file:C:/Users/samia/Documents/NetBeansProjects/PIDEV/Images/TickErr.png"))
+                                                        .hideAfter(Duration.seconds(5))
+                                                        .position(Pos.BOTTOM_RIGHT);
+
+                                                notifs.darkStyle();
+                                                Platform.runLater(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        notifs.show();
+                                                    }
+                                                });
+                                            }
+                                        }
+                                        return null;
+                                    }
+                                });
+                                dialog.showAndWait();
                             }
                         });
                         image4.setImage(img4);
@@ -592,11 +696,46 @@ public class TousLesProduitsController implements Initializable {
                         AddToCart5.setOnAction(new EventHandler<ActionEvent>() {
                             @Override
                             public void handle(ActionEvent event) {
-                                lc.ajouterLigneDeCommande(myList.get(CurrentPage + 4), 1);
-                                int value = Integer.parseInt(PanierNUM.getText());
-                                value++;
-                                PanNUM = value;
-                                PanierNUM.setText(String.valueOf(value));
+                               Dialog dialog = new Dialog();
+                                TextField tf = new TextField();
+                                tf.setPromptText("Quantite");
+                                GridPane grid = new GridPane();
+                                grid.add(tf, 2, 2);
+                                ButtonType Ok = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+                                dialog.getDialogPane().getButtonTypes().add(Ok);
+                                dialog.getDialogPane().setContent(grid);
+                                dialog.setResultConverter(new Callback() {
+                                    @Override
+                                    public Object call(Object param) {
+                                        if (param == Ok) {
+                                            ProduitsService ps = new ProduitsService();
+                                            if (ps.Update_CheckQuantity(myList.get(CurrentPage+4), Integer.parseInt(tf.getText()))) {
+                                                lc.ajouterLigneDeCommande(myList.get(CurrentPage+4), Integer.parseInt(tf.getText()));
+                                                int value = Integer.parseInt(PanierNUM.getText());
+                                                value++;
+                                                PanNUM = value;
+                                                PanierNUM.setText(String.valueOf(value));
+                                            } else {
+                                                Notifications notifs = Notifications.create()
+                                                        .title("Qunatite invalide")
+                                                        .text("La quantite que vous avez ajouter n'est pas disponible!")
+                                                        .graphic(new ImageView("file:C:/Users/samia/Documents/NetBeansProjects/PIDEV/Images/TickErr.png"))
+                                                        .hideAfter(Duration.seconds(5))
+                                                        .position(Pos.BOTTOM_RIGHT);
+
+                                                notifs.darkStyle();
+                                                Platform.runLater(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        notifs.show();
+                                                    }
+                                                });
+                                            }
+                                        }
+                                        return null;
+                                    }
+                                });
+                                dialog.showAndWait();
 
                             }
                         });
@@ -631,11 +770,46 @@ public class TousLesProduitsController implements Initializable {
                         AddToCart6.setOnAction(new EventHandler<ActionEvent>() {
                             @Override
                             public void handle(ActionEvent event) {
-                                lc.ajouterLigneDeCommande(myList.get(CurrentPage + 5), 1);
-                                int value = Integer.parseInt(PanierNUM.getText());
-                                value++;
-                                PanNUM = value;
-                                PanierNUM.setText(String.valueOf(value));
+                              Dialog dialog = new Dialog();
+                                TextField tf = new TextField();
+                                tf.setPromptText("Quantite");
+                                GridPane grid = new GridPane();
+                                grid.add(tf, 2, 2);
+                                ButtonType Ok = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+                                dialog.getDialogPane().getButtonTypes().add(Ok);
+                                dialog.getDialogPane().setContent(grid);
+                                dialog.setResultConverter(new Callback() {
+                                    @Override
+                                    public Object call(Object param) {
+                                        if (param == Ok) {
+                                            ProduitsService ps = new ProduitsService();
+                                            if (ps.Update_CheckQuantity(myList.get(CurrentPage+5), Integer.parseInt(tf.getText()))) {
+                                                lc.ajouterLigneDeCommande(myList.get(CurrentPage+5), Integer.parseInt(tf.getText()));
+                                                int value = Integer.parseInt(PanierNUM.getText());
+                                                value++;
+                                                PanNUM = value;
+                                                PanierNUM.setText(String.valueOf(value));
+                                            } else {
+                                                Notifications notifs = Notifications.create()
+                                                        .title("Qunatite invalide")
+                                                        .text("La quantite que vous avez ajouter n'est pas disponible!")
+                                                        .graphic(new ImageView("file:C:/Users/samia/Documents/NetBeansProjects/PIDEV/Images/TickErr.png"))
+                                                        .hideAfter(Duration.seconds(5))
+                                                        .position(Pos.BOTTOM_RIGHT);
+
+                                                notifs.darkStyle();
+                                                Platform.runLater(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        notifs.show();
+                                                    }
+                                                });
+                                            }
+                                        }
+                                        return null;
+                                    }
+                                });
+                                dialog.showAndWait();
                             }
                         });
                         image6.setImage(img6);
@@ -646,7 +820,7 @@ public class TousLesProduitsController implements Initializable {
                             public void handle(ActionEvent event) {
                                 color = myList.get(CurrentPage + 5).getCouleur().get().toUpperCase().contains("BLANC") || myList.get(CurrentPage + 5).getCouleur().get().toUpperCase().contains("#FFFFFF");
                                 imageName = img6;
-                                imageURL = myList.get(CurrentPage + 2).getImage().getValue();
+                                imageURL = myList.get(CurrentPage + 5).getImage().getValue();
                                 ImageD.setImage(img6);
                                 Label desc = new Label(myList.get(CurrentPage + 5).getDescription().get());
                                 Label mrq = new Label(myList.get(CurrentPage + 5).getMarque().get());
@@ -705,6 +879,25 @@ public class TousLesProduitsController implements Initializable {
     @FXML
     private void AfficherPanier(ActionEvent event) {
 
+        if (myMap.isEmpty()) {
+
+            Notifications notifs = Notifications.create()
+                    .title("Panier")
+                    .text("Votre Panier est vide!")
+                    .graphic(new ImageView("file:C:/Users/samia/Documents/NetBeansProjects/PIDEV/Images/TickErr.png"))
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.BOTTOM_RIGHT);
+
+            notifs.darkStyle();
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    notifs.show();
+                }
+            });
+
+        }
+        else {
         AffPanier.setVisible(true);
         AnchorPane.setVisible(false);
         for (Produits p : myMap.keySet()) {
@@ -715,30 +908,40 @@ public class TousLesProduitsController implements Initializable {
                 ImageTag.setImage(new Image(new FileInputStream("C:/wamp64/www/PIDEV/web/imagesShop/" + p.getImage().get())));
                 ImageTag.setFitHeight(50);
                 ImageTag.setFitWidth(50);
-                NameTag.setText(p.getNom().get()+" "+String.valueOf(p.getPrix()));
+                NameTag.setText(p.getNom().get() + " " + String.valueOf(p.getPrix()));
                 NameTag.setGraphic(ImageTag);
                 NameTag.setGraphicTextGap(20);
-               
+
                 AffPanier.setStyle("-fx-background-color: transparent");
                 ListPanier.setStyle("-fx-background-color: transparent");
                 ListPanier.getItems().add(NameTag);
-                
-               
+
             } catch (FileNotFoundException ex) {
                 ex.printStackTrace();
             }
-            
+
+        }
         }
 
     }
 
     @FXML
     private void ValiderPanier(ActionEvent event) {
-        myMap.keySet().stream().forEach(e -> e.setQuantite(myMap.get(e)));
-        CommandesService cs = new CommandesService();
-        cs.ajouterCommande(myMap.keySet());
+        try {
+            myMap.keySet().stream().forEach(e -> e.setQuantite(myMap.get(e)));
+            CommandesService cs = new CommandesService();
+            cs.ajouterCommande(myMap.keySet());
+            myMap.clear();
+            Parent SecondView;
+            SecondView = (Pane) FXMLLoader.load(getClass().getResource("Commande.fxml"));
+            
+            Scene newScene = new Scene(SecondView);
+            Stage currStage = (Stage) rootpane.getScene().getWindow();
+            currStage.setScene(newScene);
+        } catch (IOException ex) {
+            Logger.getLogger(TousLesProduitsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-
 
     @FXML
     private void closeDetails(ActionEvent event) {
@@ -806,5 +1009,37 @@ public class TousLesProduitsController implements Initializable {
     private void CloseCustmoizePane(ActionEvent event) {
         CustomizePane.setVisible(false);
 
+    }
+
+    @FXML
+    private void ShowCommandes(ActionEvent event) {
+         try {
+            Parent SecondView;
+            SecondView = (Pane) FXMLLoader.load(getClass().getResource("Commande.fxml"));
+            Scene newScene = new Scene(SecondView);
+            Stage currStage = (Stage) rootpane.getScene().getWindow();
+            currStage.setScene(newScene);
+        } catch (IOException ex) {
+            Logger.getLogger(ShopController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void showTickets(ActionEvent event) {
+         try {
+            Parent SecondView;
+            SecondView = (Pane) FXMLLoader.load(getClass().getResource("ReserverTickets.fxml"));
+            Scene newScene = new Scene(SecondView);
+            Stage currStage = (Stage) rootpane.getScene().getWindow();
+            currStage.setScene(newScene);
+        } catch (IOException ex) {
+            Logger.getLogger(ShopController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void closePanier(ActionEvent event) {
+        AffPanier.setVisible(false);
+        AnchorPane.setVisible(true);
     }
 }

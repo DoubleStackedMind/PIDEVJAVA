@@ -709,8 +709,6 @@ public class TousLesProduitsController implements Initializable {
         AnchorPane.setVisible(false);
         for (Produits p : myMap.keySet()) {
             try {
-                
-
                 ImageView ImageTag = new ImageView();
                 Label NameTag = new Label();
 

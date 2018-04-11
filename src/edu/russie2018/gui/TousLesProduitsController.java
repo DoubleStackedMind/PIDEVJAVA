@@ -7,6 +7,7 @@ package edu.russie2018.gui;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXColorPicker;
+import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXNodesList;
 import edu.russie2018.entities.Produits;
 import edu.russie2018.services.CommandesService;
@@ -49,6 +50,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
@@ -135,22 +137,11 @@ public class TousLesProduitsController implements Initializable {
     private JFXButton ConsulterPanier;
 
     public static Map<Produits, Integer> myMap = PanierService.lc.getLignedeCommande();
-    @FXML
     private AnchorPane PanierAnchor;
-    @FXML
-    private Pane PaneTag1;
-    @FXML
-    private ImageView ImageTag;
-    @FXML
-    private Label NameTag;
-    @FXML
-    private Label PriceTag;
-    @FXML
+
     private JFXNodesList ns;
     @FXML
     private JFXButton ValiderPanier;
-    @FXML
-    private JFXButton DisplayCommandes;
     @FXML
     private JFXButton Tous;
     @FXML
@@ -225,6 +216,12 @@ public class TousLesProduitsController implements Initializable {
     public Boolean color;
 
     public int qt;
+    @FXML
+    private AnchorPane AffPanier;
+    @FXML
+    private ScrollPane ScrollPanier;
+    @FXML
+    private JFXListView<Label> ListPanier;
 
     /**
      * Initializes the controller class.
@@ -232,6 +229,8 @@ public class TousLesProduitsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+        AffPanier.setVisible(false);
+    
         CustomizePane.setVisible(false);
 
         Tous.setOnAction(new EventHandler<ActionEvent>() {
@@ -308,13 +307,7 @@ public class TousLesProduitsController implements Initializable {
         Node.addAnimatedNode(Chaussures);
         Node.addAnimatedNode(Accessoires);
         Node.setSpacing(5);
-        ns.addAnimatedNode(ConsulterPanier);
-        ScrollP.setContent(PanierAnchor);
-        ScrollP.setPrefSize(1000, 200);
-        ScrollP.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-        ScrollP.setFitToHeight(true);
-        ns.addAnimatedNode(ScrollP);
-
+ 
         rootpane.setOpacity(0);
         makeFadeIn();
 
@@ -712,14 +705,31 @@ public class TousLesProduitsController implements Initializable {
     @FXML
     private void AfficherPanier(ActionEvent event) {
 
+        AffPanier.setVisible(true);
+        AnchorPane.setVisible(false);
         for (Produits p : myMap.keySet()) {
             try {
+                
+
+                ImageView ImageTag = new ImageView();
+                Label NameTag = new Label();
+
                 ImageTag.setImage(new Image(new FileInputStream("C:/wamp64/www/PIDEV/web/imagesShop/" + p.getImage().get())));
-                NameTag.setText(p.getNom().get());
-                PriceTag.setText(String.valueOf(p.getPrix()));
+                ImageTag.setFitHeight(50);
+                ImageTag.setFitWidth(50);
+                NameTag.setText(p.getNom().get()+" "+String.valueOf(p.getPrix()));
+                NameTag.setGraphic(ImageTag);
+                NameTag.setGraphicTextGap(20);
+               
+                AffPanier.setStyle("-fx-background-color: transparent");
+                ListPanier.setStyle("-fx-background-color: transparent");
+                ListPanier.getItems().add(NameTag);
+                
+               
             } catch (FileNotFoundException ex) {
                 ex.printStackTrace();
             }
+            
         }
 
     }
@@ -731,20 +741,6 @@ public class TousLesProduitsController implements Initializable {
         cs.ajouterCommande(myMap.keySet());
     }
 
-    @FXML
-    private void DisplayComm(ActionEvent event) {
-//        CommandesService cs = new CommandesService();
-//        List<Commandes> myList = cs.consulterCommandes();
-//        ObjectMapper mapper = new ObjectMapper();
-//        for(Commandes c : myList)
-//        {
-//            try {
-//                Commandes com = mapper.readValue(c.getCommandes(), Commandes.class);
-//                System.out.println(com);
-//            } catch (IOException ex) {
-//                Logger.getLogger(TousLesProduitsController.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-    }
 
     @FXML
     private void closeDetails(ActionEvent event) {

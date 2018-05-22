@@ -15,6 +15,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.application.Platform;
+import javafx.geometry.Pos;
+import javafx.scene.image.ImageView;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 /**
  *
@@ -44,6 +49,20 @@ public class TicketsService implements ITickets {
             pst.setLong(8, t.getTelephone());
 
             pst.executeUpdate();
+            Notifications notifs = Notifications.create()
+                    .title("Ticket Réservé")
+                    .text("Ticket a été réservé avec succes!")
+                    .graphic(new ImageView("file:C:/Users/samia/Documents/NetBeansProjects/PIDEV/Images/Tick.png"))
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.BOTTOM_RIGHT);
+
+            notifs.darkStyle();
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    notifs.show();
+                }
+            });
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
@@ -62,16 +81,16 @@ public class TicketsService implements ITickets {
 
     @Override
     public void modifierTicket(Tickets t) {
-        
+
     }
 
     @Override
     public List<Tickets> consulterTickets() {
         try {
             List<Tickets> myList = new ArrayList<>();
-Statement myStmt = cnx.createStatement();
+            Statement myStmt = cnx.createStatement();
             ResultSet myRes = myStmt.executeQuery("SELECT * FROM ticket");
-            while(myRes.next()) {
+            while (myRes.next()) {
                 Tickets t = new Tickets();
                 t.setIdMatch(myRes.getInt("id_match"));
                 t.setIdStade(myRes.getInt("id_stade"));

@@ -5,7 +5,9 @@
 .mainFxmlClass {
 
 }
-
+.scroll-pane > .viewport {
+   -fx-background-color: transparent;
+}
 .jfx-list-cell:selected {
     -fx-background-color: #3d8c91;
 }
@@ -41,6 +43,11 @@
     -fx-background-insets: 0 ;
 }
 
-
+.button {
+    -fx-background-color: transparent;
+}
+.button:hover {
+    -fx-background-color: #1bd79c;
+}
 
 

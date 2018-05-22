@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXColorPicker;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXNodesList;
+import edu.russie2018.entities.Lignedecommande;
 import edu.russie2018.entities.Produits;
 import edu.russie2018.services.CommandesService;
 import edu.russie2018.services.PanierService;
@@ -18,6 +19,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import static java.lang.Math.round;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -221,6 +223,7 @@ public class TousLesProduitsController implements Initializable {
     @FXML
     private JFXButton Tick;
 
+    public static Map<Produits,Integer> myM = new HashMap<>();
     /**
      * Initializes the controller class.
      */
@@ -353,6 +356,8 @@ public class TousLesProduitsController implements Initializable {
         fadeOut.setFromValue(0);
         fadeOut.setToValue(1);
         fadeOut.play();
+        if(!myMap.isEmpty())
+        myM.putAll(myMap);
     }
 
     public void DisplayAllProducts(List<Produits> myList, int CurrentPage) {

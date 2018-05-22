@@ -1,0 +1,26 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+
+}
+
+.button{
+    -fx-background-radius: 15;
+    -fx-background-color: transparent;
+    -fx-border-radius: 35;
+    -fx-border-color: #018ffd;
+    
+}
+.button:hover {
+    -fx-background-color:  #018ffd;
+      -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-background-radius: 3px, 3px, 2px, 1px;
+    -fx-padding: 0.333333em 0.666667em 0.333333em 0.666667em; /* 4 8 4 8 */
+    -fx-text-fill: white;
+    -fx-alignment: CENTER;
+    -fx-content-display: LEFT;
+    -fx-background-radius: 35;
+    -fx-border-radius: 35;
+}

@@ -7,6 +7,7 @@ package edu.russie2018.gui;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
+import com.jfoenix.controls.JFXNodesList;
 import com.stripe.Stripe;
 import com.stripe.exception.APIConnectionException;
 import com.stripe.exception.APIException;
@@ -19,6 +20,7 @@ import edu.russie2018.entities.Lignedecommande;
 import edu.russie2018.entities.Produits;
 import edu.russie2018.services.LignedecommandeService;
 import edu.russie2018.services.ProduitsService;
+import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.HashMap;
@@ -32,8 +34,11 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
@@ -46,6 +51,7 @@ import javafx.scene.effect.GaussianBlur;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
@@ -63,6 +69,7 @@ public class CommandeController implements Initializable {
     @FXML
     private ScrollPane sp;
 
+    public static float prixt;
     JFXListView<Label> Labels = new JFXListView<>();
     JFXListView<Label> PriceLabels = new JFXListView<>();
     @FXML
@@ -91,6 +98,18 @@ public class CommandeController implements Initializable {
     private JFXButton minimize;
     @FXML
     private JFXButton maximize;
+    @FXML
+    private JFXButton Commandes;
+    @FXML
+    private JFXButton Tick;
+    @FXML
+    private JFXButton Tous;
+    @FXML
+    private JFXButton Maillots;
+    @FXML
+    private JFXButton Accessoires;
+    @FXML
+    private JFXNodesList node;
 
     /**
      * Initializes the controller class.
@@ -106,7 +125,7 @@ public class CommandeController implements Initializable {
         Labels.setExpanded(true);
         Labels.depthProperty().set(1);
         Labels.getStylesheets().add(getClass().getResource("commande.css").toExternalForm());
-        Labels.setStyle("-fx-background-color: transparent;");
+      //  Labels.setStyle("-fx-background-color: transparent;");
         sp.getStylesheets().add(getClass().getResource("commande.css").toExternalForm());
         Labels.setPrefSize(600, 600);
         sp.setContent(Labels);
@@ -114,12 +133,16 @@ public class CommandeController implements Initializable {
         sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         displayCommandes();
         MouseAction();
+        node.addAnimatedNode(Shop);
+        node.addAnimatedNode(Tous);
+        node.addAnimatedNode(Maillots);
+        node.addAnimatedNode(Accessoires);
     }
 
     public void displayCommandes() {
         LignedecommandeService lcs = new LignedecommandeService();
         Map<Integer, List<Lignedecommande>> myMap = new HashMap<>();
-        if(lcs.ConsulterLigneDeCommandes().isEmpty()) {
+        if (lcs.ConsulterLigneDeCommandes().isEmpty()) {
             Label label = new Label("Pas de commande trouvé ..");
             Labels.getItems().add(label);
         }
@@ -247,21 +270,28 @@ public class CommandeController implements Initializable {
     @FXML
     public void CreatePayment(ActionEvent event) {
         try {
+            prixt = Float.valueOf(PrixTotal.getText());
 
-            DecimalFormat df = new DecimalFormat("##.##");
+            Parent SecondView;
+            SecondView = (Pane) FXMLLoader.load(getClass().getResource("Payment.fxml"));
 
-            Stripe.apiKey = "sk_test_lQaCLxOqSJhbeLGE3G5OPEVO";
-
-            //
-            Map<String, Object> chargeParams = new HashMap<>();
-            chargeParams.put("amount", Integer.parseInt(String.valueOf(df.format(Integer.parseInt(PrixTotal.getText())))));
-            chargeParams.put("currency", "cad");
-            chargeParams.put("description", "test@esprit.tn");
-            chargeParams.put("source", "tok_mastercard");
-
-            RequestOptions rs = RequestOptions.builder().setIdempotencyKey("cus_" + getSaltString()).build();
-
-            Charge.create(chargeParams, rs);
+            Scene newScene = new Scene(SecondView);
+            Stage currStage = (Stage) Commandes.getScene().getWindow();
+            currStage.setScene(newScene);
+//            DecimalFormat df = new DecimalFormat("##.##");
+//
+//            Stripe.apiKey = "sk_test_lQaCLxOqSJhbeLGE3G5OPEVO";
+//
+//            //
+//            Map<String, Object> chargeParams = new HashMap<>();
+//            chargeParams.put("amount", Integer.parseInt(String.valueOf(df.format(Integer.parseInt(PrixTotal.getText())))));
+//            chargeParams.put("currency", "cad");
+//            chargeParams.put("description", "test@esprit.tn");
+//            chargeParams.put("source", "tok_mastercard");
+//
+//            RequestOptions rs = RequestOptions.builder().setIdempotencyKey("cus_" + getSaltString()).build();
+//
+//            Charge.create(chargeParams, rs);
 //
 //// Token is created using Checkout or Elements!
 //// Get the payment token ID submitted by the form:
@@ -278,7 +308,9 @@ public class CommandeController implements Initializable {
 //            params.put("source", ServiceUser.currentUser.getEmail());
 //            params.put("capture", false);
 //            Charge charge = Charge.create(params);
-        } catch (APIException | CardException | APIConnectionException | InvalidRequestException | AuthenticationException ex) {
+     //   } catch (APIException | CardException | APIConnectionException | InvalidRequestException | AuthenticationException ex) {
+       //     Logger.getLogger(CommandeController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
             Logger.getLogger(CommandeController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -311,6 +343,71 @@ public class CommandeController implements Initializable {
             primaryStage.setWidth(1025);
             primaryStage.setX(171);
             primaryStage.setY(-12);
+        }
+    }
+
+    @FXML
+    private void showCommandes(ActionEvent event) {
+        try {
+            Parent SecondView;
+            SecondView = (Pane) FXMLLoader.load(getClass().getResource("Commande.fxml"));
+            Scene newScene = new Scene(SecondView);
+            Stage currStage = (Stage) Commandes.getScene().getWindow();
+            currStage.setScene(newScene);
+        } catch (IOException ex) {
+            Logger.getLogger(ShopController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void showTickets(ActionEvent event) {
+        try {
+            Parent SecondView;
+            SecondView = (Pane) FXMLLoader.load(getClass().getResource("ReserverTickets.fxml"));
+            Scene newScene = new Scene(SecondView);
+            Stage currStage = (Stage) Tick.getScene().getWindow();
+            currStage.setScene(newScene);
+        } catch (IOException ex) {
+            Logger.getLogger(ShopController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void showAll(ActionEvent event) {
+        try {
+            Parent SecondView;
+            SecondView = (Pane) FXMLLoader.load(getClass().getResource("TousLesProduits.fxml"));
+            Scene newScene = new Scene(SecondView);
+            Stage currStage = (Stage) Tous.getScene().getWindow();
+            currStage.setScene(newScene);
+        } catch (IOException ex) {
+            Logger.getLogger(ShopController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void showMaillots(ActionEvent event) {
+        try {
+            Parent SecondView;
+            SecondView = (Pane) FXMLLoader.load(getClass().getResource("AfficherMaillots.fxml"));
+            Scene newScene = new Scene(SecondView);
+            Stage currStage = (Stage) Maillots.getScene().getWindow();
+            currStage.setScene(newScene);
+        } catch (IOException ex) {
+            Logger.getLogger(ShopController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void showAccessoires(ActionEvent event) {
+        try {
+            Parent SecondView;
+            SecondView = (Pane) FXMLLoader.load(getClass().getResource("AfficherAccessoires.fxml"));
+            Scene newScene = new Scene(SecondView);
+            Stage currStage = (Stage) Accessoires.getScene().getWindow();
+            currStage.setScene(newScene);
+        } catch (IOException ex) {
+            Logger.getLogger(ShopController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

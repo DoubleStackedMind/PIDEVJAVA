@@ -15,21 +15,21 @@
    <children>
       <ImageView fx:id="Backgroundslide2" fitHeight="800.0" fitWidth="1024.0" layoutX="1034.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="file:/C:/Users/samia/Desktop/pic2.png" />
+            <Image url="file:/C:/Users/samia/Documents/NetBeansProjects/PIDEV/Images/pic2.png" />
          </image>
       </ImageView>
       <ImageView fx:id="BackgroundSlide1" fitHeight="800.0" fitWidth="1024.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="file:/C:/Users/samia/Desktop/pic1.png" />
+            <Image url="file:/C:/Users/samia/Documents/NetBeansProjects/PIDEV/Images/pic1.png" />
          </image>
       </ImageView>
       <ImageView fx:id="backslide1" fitHeight="800.0" fitWidth="1024.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="file:/C:/Users/samia/Desktop/pic1.png" />
+            <Image url="file:/C:/Users/samia/Documents/NetBeansProjects/PIDEV/Images/pic1.png" />
          </image></ImageView>
       <ImageView fx:id="Backslide2" fitHeight="800.0" fitWidth="1024.0" layoutX="1024.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="file:/C:/Users/samia/Desktop/pic2.png" />
+            <Image url="file:/C:/Users/samia/Documents/NetBeansProjects/PIDEV/Images/pic2.png" />
          </image></ImageView>
       <AnchorPane fx:id="AnchorPane" prefHeight="800.0" prefWidth="1024.0" style="-fx-background-image: url('file:C:/Users/samia/Documents/NetBeansProjects/PIDEV/Images/mac-bar.png');">
          <children>
@@ -56,12 +56,12 @@
                   </Label>
                </children>
             </Pane>
-            <JFXButton layoutX="450.0" layoutY="70.0" text="PROMOTIONS" textFill="WHITE">
+            <JFXButton fx:id="Commandes" layoutX="450.0" layoutY="70.0" onAction="#ShowCommandes" text="COMMANDES" textFill="WHITE">
                <font>
                   <Font name="Futura-CondensedBoldOblique" size="18.0" />
                </font>
             </JFXButton>
-            <JFXButton layoutX="600.0" layoutY="70.0" text="TICKETS" textFill="WHITE">
+            <JFXButton fx:id="Tick" layoutX="600.0" layoutY="70.0" onAction="#showTickets" text="TICKETS" textFill="WHITE">
                <font>
                   <Font name="Futura-CondensedBoldOblique" size="18.0" />
                </font>

@@ -10,9 +10,12 @@ import edu.russie2018.entities.Matches;
 import edu.russie2018.entities.Tickets;
 import edu.russie2018.services.EquipesService;
 import edu.russie2018.services.MatchesService;
+import edu.russie2018.services.ServiceUser;
+import edu.russie2018.services.TicketsService;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -75,6 +78,22 @@ public class ReserverTicketsController implements Initializable {
                 Label nameEq1 = new Label(myStrings.get(0));
                 Label nameEq2 = new Label(myStrings.get(1));
                 JFXButton VSB = new JFXButton("Réserver");
+                VSB.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+
+                        Tickets t = new Tickets();
+                        t.setIdMatch(m.getId_match());
+                        t.setIdStade(m.getId_stade());
+                        ServiceUser us = new ServiceUser();
+                        t.setNom(us.currentUser.getFirst_name());
+                        t.setPrix(40);
+                        t.setPrenom(us.currentUser.getLast_name());
+                        t.setEtat("Réservé");
+                        TicketsService ts = new TicketsService();
+                        ts.ajouterTicket(t);
+                    }
+                });
                 VSB.setStyle("-fx-background-image: url('file:C:/Users/samia/Documents/NetBeansProjects/PIDEV/Images/Needy.png') "
                         + "-fx-background-color: transparent; "
                         + "-fx-background-repeat: no-repeat; "
@@ -84,8 +103,7 @@ public class ReserverTicketsController implements Initializable {
                 VSB.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-                   
-                        
+
                     }
                 });
                 nameEq1.setLayoutX(300);
@@ -100,11 +118,9 @@ public class ReserverTicketsController implements Initializable {
                 rootpane.getChildren().addAll(Eq1, Eq2, VSBAR, nameEq1, nameEq2, VSB);
                 BV.getChildren().add(rootpane);
             } catch (FileNotFoundException ex) {
-                System.out.println("404 - File not found!");  
+                System.out.println("404 - File not found!");
             }
         }
-        
-       
 
         AnchorPane.getChildren().add(BV);
     }

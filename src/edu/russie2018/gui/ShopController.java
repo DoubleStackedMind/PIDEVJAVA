@@ -10,6 +10,8 @@ import com.jfoenix.controls.JFXNodesList;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
 import javafx.animation.ParallelTransition;
@@ -69,6 +71,10 @@ public class ShopController implements Initializable {
     private ImageView BackgroundSlide1;
 
     String scene;
+    @FXML
+    private JFXButton Commandes;
+    @FXML
+    private JFXButton Tick;
 
     /**
      * Initializes the controller class.
@@ -282,6 +288,32 @@ public class ShopController implements Initializable {
 
     @FXML
     private void maximizeWindow(ActionEvent event) {
+    }
+
+    @FXML
+    private void ShowCommandes(ActionEvent event) {
+        try {
+            Parent SecondView;
+            SecondView = (Pane) FXMLLoader.load(getClass().getResource("Commande.fxml"));
+            Scene newScene = new Scene(SecondView);
+            Stage currStage = (Stage) rootpane.getScene().getWindow();
+            currStage.setScene(newScene);
+        } catch (IOException ex) {
+            Logger.getLogger(ShopController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void showTickets(ActionEvent event) {
+         try {
+            Parent SecondView;
+            SecondView = (Pane) FXMLLoader.load(getClass().getResource("ReserverTickets.fxml"));
+            Scene newScene = new Scene(SecondView);
+            Stage currStage = (Stage) rootpane.getScene().getWindow();
+            currStage.setScene(newScene);
+        } catch (IOException ex) {
+            Logger.getLogger(ShopController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

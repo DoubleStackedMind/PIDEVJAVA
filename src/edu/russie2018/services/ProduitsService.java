@@ -11,8 +11,13 @@ import edu.russie2018.utils.DatabaseConnection;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.geometry.Pos;
+import javafx.scene.image.ImageView;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 /**
  *
@@ -44,6 +49,20 @@ public class ProduitsService implements IProduits {
             pst.setString(9, p.getComposition().get());
 
             pst.executeUpdate();
+             Notifications notifs = Notifications.create()
+                            .title("Produit ajouté")
+                            .text("Le produit a été ajouter avec succées!")
+                            .graphic(new ImageView("file:C:/Users/samia/Documents/NetBeansProjects/PIDEV/Images/Tick.png"))
+                            .hideAfter(Duration.seconds(5))
+                            .position(Pos.BOTTOM_RIGHT);
+
+                    notifs.darkStyle();
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            notifs.show();
+                        }
+                    });
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
@@ -82,6 +101,20 @@ public class ProduitsService implements IProduits {
             pst = cnx.prepareStatement(ch3);
             pst.executeUpdate();
             System.out.println("Produits modifié avec succées");
+            Notifications notifs = Notifications.create()
+                            .title("Produit ajouté")
+                            .text("Le produit a été ajouter avec succées!")
+                            .graphic(new ImageView("file:C:/Users/samia/Documents/NetBeansProjects/PIDEV/Images/Tick.png"))
+                            .hideAfter(Duration.seconds(5))
+                            .position(Pos.BOTTOM_RIGHT);
+
+                    notifs.darkStyle();
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            notifs.show();
+                        }
+                    });
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
@@ -185,6 +218,24 @@ public class ProduitsService implements IProduits {
             return true;
         }
         return false;
+    }
+    
+    public Produits getProduitsById(int id){
+          try {
+              Produits p = new Produits();
+            PreparedStatement myStmt = cnx.prepareStatement("SELECT * from produits where id_produit=?");
+            myStmt.setInt(1, id);
+            ResultSet myRes = myStmt.executeQuery();
+            while (myRes.next()) {
+                p.setIdProduit(myRes.getInt("id_produit"));
+                p.setNom(new SimpleStringProperty(myRes.getString("nom")));
+                return p;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

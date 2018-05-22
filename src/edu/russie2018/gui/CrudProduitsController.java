@@ -30,8 +30,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
@@ -78,6 +76,14 @@ public class CrudProduitsController implements Initializable {
 
     @FXML
     private void ajouterProduit(ActionEvent event) {
+        
+       
+//            Stage primaryStage = new Stage();
+//            Parent root = FXMLLoader.load(getClass().getResource("AjouterProduits.fxml"));
+//            Scene scene = new Scene(root);
+//            primaryStage.setTitle("Welcome to Russia 2018");
+//            primaryStage.setScene(scene);  
+           
         GaussianBlur effect = new GaussianBlur();
         Ajouter.getScene().getRoot().setEffect(effect);
         Dialog<Produits> dialog = new Dialog();
@@ -169,6 +175,7 @@ public class CrudProduitsController implements Initializable {
         if (!dialog.isShowing()) {
             this.Ajouter.getScene().getRoot().setEffect(null);
         }
+       
     }
 
     private String setNewPhotoButton(ActionEvent event) {
@@ -359,10 +366,13 @@ public class CrudProduitsController implements Initializable {
                     new TextFieldEditorBuilder());
         });
         prixProd.setOnEditCommit((CellEditEvent<Produits, String> t) -> {
+            int id = t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().getIdProduit();
+            String newValue = t.getNewValue();
             t.getTreeTableView()
                     .getTreeItem(t.getTreeTablePosition()
                             .getRow())
                     .getValue().setPrix(Float.parseFloat(t.getNewValue()));
+            ps.modifierProduit(id, "prix", newValue);
         });
 
         QteProd.setCellFactory((TreeTableColumn<Produits, String> param) -> {
@@ -370,10 +380,13 @@ public class CrudProduitsController implements Initializable {
                     new TextFieldEditorBuilder());
         });
         QteProd.setOnEditCommit((CellEditEvent<Produits, String> t) -> {
+            int id = t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().getIdProduit();
+            String newValue = t.getNewValue();
             t.getTreeTableView()
                     .getTreeItem(t.getTreeTablePosition()
                             .getRow())
                     .getValue().setQuantite(Integer.parseInt(t.getNewValue()));
+            ps.modifierProduit(id, "quantite", newValue);
         });
 
         MarqueProd.setCellFactory((TreeTableColumn<Produits, String> param) -> {
@@ -381,10 +394,13 @@ public class CrudProduitsController implements Initializable {
                     new TextFieldEditorBuilder());
         });
         MarqueProd.setOnEditCommit((CellEditEvent<Produits, String> t) -> {
+            int id = t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().getIdProduit();
+            String newValue = t.getNewValue();
             t.getTreeTableView()
                     .getTreeItem(t.getTreeTablePosition()
                             .getRow())
                     .getValue().getMarque().set(t.getNewValue());
+            ps.modifierProduit(id, "marque", newValue);
         });
 
         CatgProd.setCellFactory((TreeTableColumn<Produits, String> param) -> {
@@ -392,10 +408,13 @@ public class CrudProduitsController implements Initializable {
                     new TextFieldEditorBuilder());
         });
         CatgProd.setOnEditCommit((CellEditEvent<Produits, String> t) -> {
+            int id = t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().getIdProduit();
+            String newValue = t.getNewValue();
             t.getTreeTableView()
                     .getTreeItem(t.getTreeTablePosition()
                             .getRow())
                     .getValue().getCategorie().set(t.getNewValue());
+            ps.modifierProduit(id, "categorie", newValue);
         });
 
         List<Produits> myLst;

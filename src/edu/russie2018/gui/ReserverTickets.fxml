@@ -3,8 +3,11 @@
 <?import java.net.URL?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" fx:id="AnchorPane" prefHeight="800.0" prefWidth="1024.0" style="-fx-background-image: url('file:C:/Users/samia/Documents/NetBeansProjects/PIDEV/Images/BlueBackground.png');" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.russie2018.gui.ReserverTicketsController">
+<AnchorPane id="AnchorPane" fx:id="AnchorPane" prefHeight="800.0" prefWidth="1024.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.russie2018.gui.ReserverTicketsController">
     <stylesheets>
         <URL value="@reservertickets.css" />
     </stylesheets>
+   <children>
+      <AnchorPane prefHeight="804.0" prefWidth="1024.0" style="-fx-background-image: url('file:C:/Users/samia/Documents/NetBeansProjects/PIDEV/Images/BlueBackground.png');" />
+   </children>
 </AnchorPane>

@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXNodesList?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
@@ -12,26 +15,32 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.russie2018.gui.CommandeController">
    <children>
-      <AnchorPane prefHeight="800.0" prefWidth="1024.0" style="-fx-background-color: white;">
+      <ImageView fitHeight="1027.0" fitWidth="1233.0" layoutY="-50.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="file:/C:/Users/samia/Documents/NetBeansProjects/PIDEV/Images/Unlimited.gif" />
+         </image>
+      </ImageView>
+      <AnchorPane prefHeight="800.0" prefWidth="1024.0" style="-fx-background-image: url('file:C:/Users/samia/Documents/NetBeansProjects/PIDEV/Images/mac-bar.png');" />
+      <AnchorPane prefHeight="800.0" prefWidth="1024.0" style="-fx-background-color: tra,nsparent;">
          <children>
-            <JFXButton fx:id="Shop" layoutX="320.0" layoutY="33.0" text="SHOP">
+            <JFXButton fx:id="Shop" layoutX="323.0" layoutY="55.0" text="SHOP">
                <font>
                   <Font name="Futura-CondensedBoldOblique" size="18.0" />
                </font>
             </JFXButton>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" height="1.0" layoutX="201.0" layoutY="25.0" stroke="BLACK" strokeType="INSIDE" width="571.0" />
-            <JFXButton layoutX="428.0" layoutY="33.0" text="PROMOTIONS">
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="1.0" layoutX="204.0" layoutY="47.0" stroke="BLACK" strokeType="INSIDE" width="571.0" />
+            <JFXButton fx:id="Commandes" layoutX="431.0" layoutY="55.0" onAction="#showCommandes" text="COMMANDES">
                <font>
                   <Font name="Futura-CondensedBoldOblique" size="18.0" />
                </font>
             </JFXButton>
-            <JFXButton layoutX="585.0" layoutY="33.0" text="TICKETS">
+            <JFXButton fx:id="Tick" layoutX="588.0" layoutY="55.0" onAction="#showTickets" text="TICKETS">
                <font>
                   <Font name="Futura-CondensedBoldOblique" size="18.0" />
                </font>
             </JFXButton>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" height="1.0" layoutX="200.0" layoutY="69.0" stroke="BLACK" strokeType="INSIDE" width="570.0" />
-            <ScrollPane fx:id="sp" layoutX="189.0" layoutY="151.0" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: white;" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="1.0" layoutX="203.0" layoutY="91.0" stroke="BLACK" strokeType="INSIDE" width="570.0" />
+            <ScrollPane fx:id="sp" layoutX="189.0" layoutY="151.0" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: transparent;" />
             <AnchorPane fx:id="Popup" layoutX="904.0" layoutY="93.0" prefHeight="37.0" prefWidth="39.0" style="-fx-background-color: rgba(0,0,0,0.7);">
                <children>
                   <JFXButton fx:id="Supprimer" onAction="#SupprimerItem" style="-fx-background-color: rgba(0,0,0,0.5);" text=" Supprimer" textFill="WHITE">
@@ -56,8 +65,30 @@
                   <Font name="Futura Bold" size="14.0" />
                </font>
             </TextField>
-            <Button fx:id="Pay" layoutX="828.0" layoutY="308.0" mnemonicParsing="false" onAction="#CreatePayment" text="5ales" />
+            <Button fx:id="Pay" layoutX="860.0" layoutY="738.0" mnemonicParsing="false" onAction="#CreatePayment" prefHeight="33.0" prefWidth="84.0" text="Valider">
+               <font>
+                  <Font name="Dusha V5 Regular" size="18.0" />
+               </font></Button>
+            <JFXButton fx:id="Tous" layoutX="95.0" layoutY="65.0" onAction="#showAll" text="TOUS">
+               <font>
+                  <Font name="Futura-CondensedBoldOblique" size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="Maillots" layoutX="64.0" layoutY="101.0" onAction="#showMaillots" text="MAILLOTS">
+               <font>
+                  <Font name="Futura-CondensedBoldOblique" size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="Accessoires" layoutX="72.0" layoutY="151.0" onAction="#showAccessoires" text="ACCESSOIRES">
+               <font>
+                  <Font name="Futura-CondensedBoldOblique" size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXNodesList fx:id="node" layoutX="323.0" layoutY="55.0" />
          </children>
       </AnchorPane>
+      <JFXButton fx:id="close" layoutX="22.0" layoutY="11.0" onAction="#closeWindow" prefHeight="22.0" prefWidth="19.0" style="-fx-background-image: url('file:C:/Users/samia/Documents/NetBeansProjects/PIDEV/Images/close.png'); -fx-background-repeat: no-repeat; -fx-background-position: 90%; -fx-background-color: transparent;" text=" " />
+      <JFXButton fx:id="minimize" layoutX="42.0" layoutY="11.0" onAction="#minimizeWindow" prefHeight="22.0" prefWidth="19.0" style="-fx-background-image: url('file:C:/Users/samia/Documents/NetBeansProjects/PIDEV/Images/minimize.png'); -fx-background-repeat: no-repeat; -fx-background-position: 90%; -fx-background-color: transparent;" text=" " />
+      <JFXButton fx:id="maximize" layoutX="62.0" layoutY="11.0" onAction="#maximizeWindow" prefHeight="22.0" prefWidth="19.0" style="-fx-background-image: url('file:C:/Users/samia/Documents/NetBeansProjects/PIDEV/Images/maximize.png'); -fx-background-repeat: no-repeat; -fx-background-position: 90%; -fx-background-color: transparent;" text=" " />
    </children>
 </Pane>

@@ -24,7 +24,7 @@ public class LoginWindow extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("Commande.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("Payment.fxml"));
             Scene scene = new Scene(root);
             primaryStage.setTitle("Welcome to Russia 2018");
             primaryStage.setScene(scene);

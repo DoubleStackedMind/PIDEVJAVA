@@ -20,6 +20,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -655,6 +657,58 @@ public class AfficherMaillotsController implements Initializable {
         } catch (IOException ex) {
         }
 
+    }
+
+    @FXML
+    private void showAccessoires(ActionEvent event) {
+         try {
+            Parent SecondView;
+            SecondView = (Pane) FXMLLoader.load(getClass().getResource("AfficherAccessoires.fxml"));
+            Scene newScene = new Scene(SecondView);
+            Stage currStage = (Stage) Tous.getScene().getWindow();
+            currStage.setScene(newScene);
+        } catch (IOException ex) {
+            Logger.getLogger(ShopController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void showMaillots(ActionEvent event) {
+         try {
+            Parent SecondView;
+            SecondView = (Pane) FXMLLoader.load(getClass().getResource("AfficherMaillots.fxml"));
+            Scene newScene = new Scene(SecondView);
+            Stage currStage = (Stage) Tous.getScene().getWindow();
+            currStage.setScene(newScene);
+        } catch (IOException ex) {
+            Logger.getLogger(ShopController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void showChaussures(ActionEvent event) {
+         try {
+            Parent SecondView;
+            SecondView = (Pane) FXMLLoader.load(getClass().getResource("AfficherChaussures.fxml"));
+            Scene newScene = new Scene(SecondView);
+            Stage currStage = (Stage) Tous.getScene().getWindow();
+            currStage.setScene(newScene);
+        } catch (IOException ex) {
+            Logger.getLogger(ShopController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void showAll(ActionEvent event) {
+         try {
+            Parent SecondView;
+            SecondView = (Pane) FXMLLoader.load(getClass().getResource("TousLesProduits.fxml"));
+            Scene newScene = new Scene(SecondView);
+            Stage currStage = (Stage) Tous.getScene().getWindow();
+            currStage.setScene(newScene);
+        } catch (IOException ex) {
+            Logger.getLogger(ShopController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

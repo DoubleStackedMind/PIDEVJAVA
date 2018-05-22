@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXColorPicker?>
+<?import com.jfoenix.controls.JFXListView?>
 <?import com.jfoenix.controls.JFXNodesList?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -127,60 +128,18 @@
                   <Font name="Futura-CondensedBoldOblique" size="18.0" />
                </font>
             </JFXButton>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="3.0" layoutX="220.0" layoutY="98.0" stroke="WHITE" strokeType="INSIDE" width="596.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="3.0" layoutX="222.0" layoutY="57.0" stroke="WHITE" strokeType="INSIDE" width="596.0" />
-            <JFXButton fx:id="Shop1" contentDisplay="RIGHT" layoutX="450.0" layoutY="58.0" text="PROMOTIONS" textFill="WHITE">
-               <font>
-                  <Font name="Futura-CondensedBoldOblique" size="18.0" />
-               </font>
-            </JFXButton>
-            <JFXButton fx:id="Shop11" contentDisplay="RIGHT" layoutX="600.0" layoutY="58.0" text="TICKETS" textFill="WHITE">
-               <font>
-                  <Font name="Futura-CondensedBoldOblique" size="18.0" />
-               </font>
-            </JFXButton>
          </children>
       </AnchorPane>
       <JFXButton fx:id="AddToCart2" buttonType="RAISED" layoutX="575.0" layoutY="300.0" prefHeight="42.0" prefWidth="92.0" style="-fx-background-color: rgba(0,0,0,0.7);" text="ADD TO CART" textFill="WHITE">
          <font>
             <Font name="Dusha V5 Regular" size="12.0" />
          </font></JFXButton>
-      <JFXButton fx:id="ConsulterPanier" layoutX="925.0" layoutY="40.0" onAction="#AfficherPanier" prefHeight="56.0" prefWidth="60.0" text="">
+      <JFXButton fx:id="ConsulterPanier" layoutX="925.0" layoutY="40.0" onAction="#AfficherPanier" prefHeight="56.0" prefWidth="60.0" text="" textFill="WHITE">
          <font>
             <Font name="FontAwesome" size="28.0" />
          </font>
       </JFXButton>
-      <JFXNodesList fx:id="ns" layoutX="925.0" layoutY="44.0" prefHeight="15.0" prefWidth="5.0" />
       <JFXNodesList fx:id="Node" layoutX="308.0" layoutY="58.0" prefHeight="13.0" prefWidth="47.0" />
-      <AnchorPane fx:id="PanierAnchor" layoutX="1014.0" layoutY="59.0" prefHeight="157.0" prefWidth="575.0" style="-fx-background-color: rgba(0,0,0,0.7);">
-         <children>
-            <Pane fx:id="PaneTag1" prefHeight="129.0" prefWidth="316.0">
-               <children>
-                  <ImageView fx:id="ImageTag" fitHeight="130.0" fitWidth="133.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label fx:id="NameTag" layoutX="138.0" layoutY="2.0" prefHeight="84.0" prefWidth="177.0" text="Label" textFill="WHITE">
-                     <font>
-                        <Font name="Futura-CondensedBoldOblique" size="24.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="PriceTag" layoutX="143.0" layoutY="80.0" prefHeight="42.0" prefWidth="171.0" text="Label" textFill="WHITE">
-                     <font>
-                        <Font name="Futura-CondensedBoldOblique" size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-            <JFXButton fx:id="ValiderPanier" buttonType="RAISED" layoutX="494.0" layoutY="18.0" onAction="#ValiderPanier" style="-fx-background-color: white;" text="Valider">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </JFXButton>
-            <JFXButton fx:id="DisplayCommandes" layoutX="480.0" layoutY="68.0" onAction="#DisplayComm" text="Afficher" textFill="WHITE">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </JFXButton>
-         </children>
-      </AnchorPane>
       <JFXButton fx:id="AddToCart1" buttonType="RAISED" layoutX="275.0" layoutY="300.0" prefHeight="42.0" prefWidth="92.0" style="-fx-background-color: rgba(0,0,0,0.7);" text="ADD TO CART" textFill="WHITE">
          <font>
             <Font name="Dusha V5 Regular" size="12.0" />
@@ -202,11 +161,6 @@
             <Font name="Dusha V5 Regular" size="12.0" />
          </font>
       </JFXButton>
-      <ScrollPane fx:id="ScrollP" layoutX="265.0" layoutY="75.0" prefHeight="322.0" prefWidth="676.0">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
-        </content>
-      </ScrollPane>
       <JFXButton fx:id="Details1" buttonType="RAISED" layoutX="182.0" layoutY="300.0" prefHeight="42.0" prefWidth="92.0" style="-fx-background-color: rgba(0,0,0,0.7);" text="DETAILS" textFill="WHITE">
          <font>
             <Font name="Dusha V5 Regular" size="12.0" />
@@ -251,7 +205,7 @@
             <Font name="Dusha V5 Regular" size="12.0" />
          </font>
       </JFXButton>
-      <AnchorPane fx:id="Details" layoutX="50.0" layoutY="50.0" prefHeight="677.0" prefWidth="960.0" style="-fx-background-color: white;">
+      <AnchorPane fx:id="Details" layoutX="50.0" layoutY="114.0" prefHeight="613.0" prefWidth="960.0" style="-fx-background-color: white;">
          <children>
             <ImageView fx:id="ImageD" fitHeight="370.0" fitWidth="356.0" layoutX="20.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true" />
             <Label layoutX="20.0" layoutY="20.0" text="Détails du produit:">
@@ -261,18 +215,13 @@
             </Label>
             <TabPane fx:id="TabPane" layoutX="400.0" layoutY="130.0" prefHeight="413.0" prefWidth="530.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
-                <Tab text="Test1">
+                <Tab text="Details du produits">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="493.0" prefWidth="534.0">
                            <children>
                               <VBox fx:id="VB" prefHeight="384.0" prefWidth="533.0" />
                            </children>
                         </AnchorPane>
-                  </content>
-                </Tab>
-                <Tab text="Test2">
-                  <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                   </content>
                 </Tab>
               </tabs>
@@ -289,7 +238,7 @@
             </JFXButton>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="CustomizePane" layoutX="20.0" layoutY="50.0" prefHeight="705.0" prefWidth="988.0" style="-fx-background-color: white;">
+      <AnchorPane fx:id="CustomizePane" layoutX="20.0" layoutY="114.0" prefHeight="641.0" prefWidth="988.0" style="-fx-background-color: white;">
          <children>
             <JFXColorPicker fx:id="ColorsPicker" layoutX="452.0" layoutY="165.0" />
             <ImageView fx:id="WillChange" fitHeight="433.0" fitWidth="416.0" layoutX="27.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true" />
@@ -303,5 +252,40 @@
             </JFXButton>
          </children>
       </AnchorPane>
+      <AnchorPane fx:id="AffPanier" layoutX="22.0" layoutY="111.0" prefHeight="651.0" prefWidth="990.0" style="-fx-background-color: transparent;">
+         <children>
+            <ScrollPane fx:id="ScrollPanier" layoutX="50.0" prefHeight="704.0" prefWidth="872.0" style="-fx-background-color: transparent;">
+              <content>
+                <AnchorPane layoutX="100.0" minHeight="0.0" minWidth="0.0" prefHeight="696.0" prefWidth="870.0" style="-fx-background-color: transparent;">
+                     <children>
+                        <JFXListView fx:id="ListPanier" layoutX="183.0" layoutY="2.0" prefHeight="698.0" prefWidth="520.0" style="-fx-background-color: transparent;" />
+                        <JFXButton fx:id="ValiderPanier" buttonType="RAISED" layoutX="763.0" layoutY="634.0" onAction="#ValiderPanier" style="-fx-background-color: white;" text="Valider">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton fx:id="closeDetails" layoutX="813.0" layoutY="21.0" onAction="#closePanier" text="">
+                           <font>
+                              <Font name="FontAwesome" size="21.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
+         </children>
+      </AnchorPane>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="3.0" layoutX="222.0" layoutY="57.0" stroke="WHITE" strokeType="INSIDE" width="596.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="3.0" layoutX="222.0" layoutY="98.0" stroke="WHITE" strokeType="INSIDE" width="596.0" />
+      <JFXButton fx:id="Commandes" contentDisplay="RIGHT" layoutX="450.0" layoutY="56.0" onAction="#ShowCommandes" text="COMMANDES" textFill="WHITE">
+         <font>
+            <Font name="Futura-CondensedBoldOblique" size="18.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="Tick" contentDisplay="RIGHT" layoutX="600.0" layoutY="58.0" onAction="#showTickets" text="TICKETS" textFill="WHITE">
+         <font>
+            <Font name="Futura-CondensedBoldOblique" size="18.0" />
+         </font>
+      </JFXButton>
    </children>
 </Pane>

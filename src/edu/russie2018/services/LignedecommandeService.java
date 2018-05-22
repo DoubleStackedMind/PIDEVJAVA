@@ -13,6 +13,7 @@ import edu.russie2018.utils.DatabaseConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -76,28 +77,38 @@ public class LignedecommandeService implements ILignedecommande {
     @Override
     public Map<Integer, List<Lignedecommande>> ConsulterLigneDeCommandes() {
         Map<Integer, List<Lignedecommande>> myMap = new HashMap<>();
-       
-        List<Lignedecommande> myList = new ArrayList<>();
-       
+
+        List<Integer> myList = new ArrayList<>();
+        List<Lignedecommande> myList2 = new ArrayList<>();
+
         ProduitsService ps = new ProduitsService();
 
         try {
             Statement myStmt1 = cnx.createStatement();
             ResultSet myRes1 = myStmt1.executeQuery("SELECT commande FROM lignedecommande ");
             while (myRes1.next()) {
-                myMap.put(myRes1.getInt("commande"), null);
+                myList.add(myRes1.getInt("commande"));
             }
             Statement myStmt = cnx.createStatement();
-            ResultSet myRes = myStmt.executeQuery("SELECT lignedecommande.commande,lignedecommande.etat, lignedecommande.idproduit, produits.nom, lignedecommande.quantite, lignedecommande.prix FROM `lignedecommande`JOIN produits ON lignedecommande.idproduit = produits.id_produit GROUP BY `idLigne`");
+            ResultSet myRes = myStmt.executeQuery("SELECT * from lignedecommande");
             while (myRes.next()) {
                 Lignedecommande lc = new Lignedecommande();
                 lc.setIdCommande(myRes.getInt("commande"));
                 lc.setIdProduit(myRes.getInt("idproduit"));
                 lc.setQuantite(myRes.getInt("quantite"));
-                lc.setNomP(myRes.getString("nom"));
+                lc.setPrix(myRes.getFloat("prix"));
                 lc.setEtat(myRes.getString("etat"));
-             //  myMap.put(lc.getIdCommande(), myMap.get(lc.getIdCommande()).add(lc));
+                myList2.add(lc);
+                //  myMap.put(lc.getIdCommande(), myMap.get(lc.getIdCommande()).add(lc));
             }
+            myList.forEach(e -> {
+                List<Lignedecommande> myL = new ArrayList<>();
+                myMap.put(e, myL);
+            });
+            myList2.forEach(e -> {
+                myMap.get(e.getIdCommande()).add(e);
+            });
+              
 
             return myMap;
         } catch (SQLException e) {

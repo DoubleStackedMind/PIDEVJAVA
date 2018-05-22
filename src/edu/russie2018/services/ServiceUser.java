@@ -7,6 +7,7 @@
 package edu.russie2018.services;
 
 import edu.russie2018.entities.*;
+import edu.russie2018.utils.BCrypt;
 import edu.russie2018.utils.DatabaseConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -77,7 +79,7 @@ public class ServiceUser {
     }
     public Boolean Autentifier(String u,String p) throws SQLException
     {
-        String req = "SELECT * FROM `user` WHERE username =\'"+u+"\' and password=\'"+p+"\'";
+        String req = "SELECT * FROM `user` WHERE username =\'"+u+"\'";
         System.out.println(req);
         
         
@@ -124,9 +126,9 @@ public class ServiceUser {
                           
                             System.out.println(currentUser.toString());
                             return true;
+                            }
+                          
                         }
-            }
-            
                 
         } catch (SQLException ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);

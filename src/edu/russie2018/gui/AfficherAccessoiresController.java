@@ -13,11 +13,14 @@ import edu.russie2018.services.PanierService;
 import edu.russie2018.services.ProduitsService;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import static java.lang.Math.round;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -25,9 +28,12 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.ScrollPane;
@@ -50,7 +56,7 @@ import javafx.util.Duration;
  */
 public class AfficherAccessoiresController implements Initializable {
 
-  @FXML
+    @FXML
     private Pane rootpane;
     @FXML
     private AnchorPane AnchorPane;
@@ -277,7 +283,7 @@ public class AfficherAccessoiresController implements Initializable {
         AddToCart4.setVisible(false);
         AddToCart5.setVisible(false);
         AddToCart6.setVisible(false);
-        
+
         Details1.setVisible(false);
         Details2.setVisible(false);
         Details3.setVisible(false);
@@ -342,10 +348,10 @@ public class AfficherAccessoiresController implements Initializable {
                             @Override
                             public void handle(ActionEvent event) {
                                 ImageD.setImage(img2);
-                                Label desc = new Label(myList.get(CurrentPage+1).getDescription().get());
-                                Label mrq = new Label(myList.get(CurrentPage+1).getMarque().get());
+                                Label desc = new Label(myList.get(CurrentPage + 1).getDescription().get());
+                                Label mrq = new Label(myList.get(CurrentPage + 1).getMarque().get());
                                 desc.setWrapText(true);
-                                Label prixTag = new Label(String.valueOf(myList.get(CurrentPage+1).getPrix()) + " ‎₽");
+                                Label prixTag = new Label(String.valueOf(myList.get(CurrentPage + 1).getPrix()) + " ‎₽");
                                 VB.setSpacing(5);
                                 VB.getChildren().addAll(label, desc, marque, mrq, Prix, prixTag);
                                 Details.setVisible(true);
@@ -359,7 +365,7 @@ public class AfficherAccessoiresController implements Initializable {
                     if (myList.get(i) != null) {
                         Details3.setVisible(true);
                         AddToCart3.setVisible(true);
-                         Image img3 = new Image(new FileInputStream("C:/wamp64/www/PIDEV/web/imagesShop/" + myList.get(CurrentPage + 2).getImage().getValue()), 688, 688, false, false);
+                        Image img3 = new Image(new FileInputStream("C:/wamp64/www/PIDEV/web/imagesShop/" + myList.get(CurrentPage + 2).getImage().getValue()), 688, 688, false, false);
                         AddToCart3.setOnAction(new EventHandler<ActionEvent>() {
                             @Override
                             public void handle(ActionEvent event) {
@@ -372,10 +378,10 @@ public class AfficherAccessoiresController implements Initializable {
                             @Override
                             public void handle(ActionEvent event) {
                                 ImageD.setImage(img3);
-                                Label desc = new Label(myList.get(CurrentPage+2).getDescription().get());
-                                Label mrq = new Label(myList.get(CurrentPage+2).getMarque().get());
+                                Label desc = new Label(myList.get(CurrentPage + 2).getDescription().get());
+                                Label mrq = new Label(myList.get(CurrentPage + 2).getMarque().get());
                                 desc.setWrapText(true);
-                                Label prixTag = new Label(String.valueOf(myList.get(CurrentPage+2).getPrix()) + " ‎₽");
+                                Label prixTag = new Label(String.valueOf(myList.get(CurrentPage + 2).getPrix()) + " ‎₽");
                                 VB.setSpacing(5);
                                 VB.getChildren().addAll(label, desc, marque, mrq, Prix, prixTag);
                                 Details.setVisible(true);
@@ -397,14 +403,14 @@ public class AfficherAccessoiresController implements Initializable {
                         });
                         image4.setImage(img4);
                         label4.setText(myList.get(CurrentPage + 3).getNom().getValue());
-                         Details4.setOnAction(new EventHandler<ActionEvent>() {
+                        Details4.setOnAction(new EventHandler<ActionEvent>() {
                             @Override
                             public void handle(ActionEvent event) {
                                 ImageD.setImage(img4);
-                                Label desc = new Label(myList.get(CurrentPage+3).getDescription().get());
-                                Label mrq = new Label(myList.get(CurrentPage+3).getMarque().get());
+                                Label desc = new Label(myList.get(CurrentPage + 3).getDescription().get());
+                                Label mrq = new Label(myList.get(CurrentPage + 3).getMarque().get());
                                 desc.setWrapText(true);
-                                Label prixTag = new Label(String.valueOf(myList.get(CurrentPage+3).getPrix()) + " ‎₽");
+                                Label prixTag = new Label(String.valueOf(myList.get(CurrentPage + 3).getPrix()) + " ‎₽");
                                 VB.setSpacing(5);
                                 VB.getChildren().addAll(label, desc, marque, mrq, Prix, prixTag);
                                 Details.setVisible(true);
@@ -430,12 +436,12 @@ public class AfficherAccessoiresController implements Initializable {
                         Details5.setOnAction(new EventHandler<ActionEvent>() {
                             @Override
                             public void handle(ActionEvent event) {
-                                System.out.println(myList.get(CurrentPage+4).getIdProduit());
+                                System.out.println(myList.get(CurrentPage + 4).getIdProduit());
                                 ImageD.setImage(img5);
-                                Label desc = new Label(myList.get(CurrentPage+4).getDescription().get());
-                                Label mrq = new Label(myList.get(CurrentPage+4).getMarque().get());
+                                Label desc = new Label(myList.get(CurrentPage + 4).getDescription().get());
+                                Label mrq = new Label(myList.get(CurrentPage + 4).getMarque().get());
                                 desc.setWrapText(true);
-                                Label prixTag = new Label(String.valueOf(myList.get(CurrentPage+4).getPrix()) + " ‎₽");
+                                Label prixTag = new Label(String.valueOf(myList.get(CurrentPage + 4).getPrix()) + " ‎₽");
                                 VB.setSpacing(5);
                                 VB.getChildren().addAll(label, desc, marque, mrq, Prix, prixTag);
                                 Details.setVisible(true);
@@ -462,10 +468,10 @@ public class AfficherAccessoiresController implements Initializable {
                             @Override
                             public void handle(ActionEvent event) {
                                 ImageD.setImage(img6);
-                                Label desc = new Label(myList.get(CurrentPage+5).getDescription().get());
-                                Label mrq = new Label(myList.get(CurrentPage+5).getMarque().get());
+                                Label desc = new Label(myList.get(CurrentPage + 5).getDescription().get());
+                                Label mrq = new Label(myList.get(CurrentPage + 5).getMarque().get());
                                 desc.setWrapText(true);
-                                Label prixTag = new Label(String.valueOf(myList.get(CurrentPage+5).getPrix()) + " ‎₽");
+                                Label prixTag = new Label(String.valueOf(myList.get(CurrentPage + 5).getPrix()) + " ‎₽");
                                 VB.setSpacing(5);
                                 VB.getChildren().addAll(label, desc, marque, mrq, Prix, prixTag);
                                 Details.setVisible(true);
@@ -557,6 +563,58 @@ public class AfficherAccessoiresController implements Initializable {
     private void closeDetails(ActionEvent event) {
         Details.setVisible(false);
         VB.getChildren().clear();
-    }   
-    
+    }
+
+    @FXML
+    private void showAccessoires(ActionEvent event) {
+        try {
+            Parent SecondView;
+            SecondView = (Pane) FXMLLoader.load(getClass().getResource("AfficherAccessoires.fxml"));
+            Scene newScene = new Scene(SecondView);
+            Stage currStage = (Stage) Tous.getScene().getWindow();
+            currStage.setScene(newScene);
+        } catch (IOException ex) {
+            Logger.getLogger(ShopController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void showMaillots(ActionEvent event) {
+        try {
+            Parent SecondView;
+            SecondView = (Pane) FXMLLoader.load(getClass().getResource("AfficherMaillots.fxml"));
+            Scene newScene = new Scene(SecondView);
+            Stage currStage = (Stage) Tous.getScene().getWindow();
+            currStage.setScene(newScene);
+        } catch (IOException ex) {
+            Logger.getLogger(ShopController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void showChaussures(ActionEvent event) {
+        try {
+            Parent SecondView;
+            SecondView = (Pane) FXMLLoader.load(getClass().getResource("AfficherChassures.fxml"));
+            Scene newScene = new Scene(SecondView);
+            Stage currStage = (Stage) Tous.getScene().getWindow();
+            currStage.setScene(newScene);
+        } catch (IOException ex) {
+            Logger.getLogger(ShopController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void showAll(ActionEvent event) {
+        try {
+            Parent SecondView;
+            SecondView = (Pane) FXMLLoader.load(getClass().getResource("TousLesProduits.fxml"));
+            Scene newScene = new Scene(SecondView);
+            Stage currStage = (Stage) Tous.getScene().getWindow();
+            currStage.setScene(newScene);
+        } catch (IOException ex) {
+            Logger.getLogger(ShopController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }

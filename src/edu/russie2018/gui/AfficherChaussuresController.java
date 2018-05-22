@@ -13,11 +13,14 @@ import edu.russie2018.services.PanierService;
 import edu.russie2018.services.ProduitsService;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import static java.lang.Math.round;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -25,9 +28,12 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.ScrollPane;
@@ -557,6 +563,84 @@ public class AfficherChaussuresController implements Initializable {
     private void closeDetails(ActionEvent event) {
         Details.setVisible(false);
         VB.getChildren().clear();
+    }
+
+    @FXML
+    private void showAccessoires(ActionEvent event) {
+         try {
+            Parent SecondView;
+            SecondView = (Pane) FXMLLoader.load(getClass().getResource("AfficherAccessoires.fxml"));
+            Scene newScene = new Scene(SecondView);
+            Stage currStage = (Stage) Tous.getScene().getWindow();
+            currStage.setScene(newScene);
+        } catch (IOException ex) {
+            Logger.getLogger(ShopController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void showMaillots(ActionEvent event) {
+         try {
+            Parent SecondView;
+            SecondView = (Pane) FXMLLoader.load(getClass().getResource("AfficherMaillots.fxml"));
+            Scene newScene = new Scene(SecondView);
+            Stage currStage = (Stage) Tous.getScene().getWindow();
+            currStage.setScene(newScene);
+        } catch (IOException ex) {
+            Logger.getLogger(ShopController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void showChaussures(ActionEvent event) {
+         try {
+            Parent SecondView;
+            SecondView = (Pane) FXMLLoader.load(getClass().getResource("AfficherChaussures.fxml"));
+            Scene newScene = new Scene(SecondView);
+            Stage currStage = (Stage) Tous.getScene().getWindow();
+            currStage.setScene(newScene);
+        } catch (IOException ex) {
+            Logger.getLogger(ShopController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void showAll(ActionEvent event) {
+         try {
+            Parent SecondView;
+            SecondView = (Pane) FXMLLoader.load(getClass().getResource("TousLesProduits.fxml"));
+            Scene newScene = new Scene(SecondView);
+            Stage currStage = (Stage) Tous.getScene().getWindow();
+            currStage.setScene(newScene);
+        } catch (IOException ex) {
+            Logger.getLogger(ShopController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void showCommandes(ActionEvent event) {
+         try {
+            Parent SecondView;
+            SecondView = (Pane) FXMLLoader.load(getClass().getResource("Commandes.fxml"));
+            Scene newScene = new Scene(SecondView);
+            Stage currStage = (Stage) Tous.getScene().getWindow();
+            currStage.setScene(newScene);
+        } catch (IOException ex) {
+            Logger.getLogger(ShopController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void showTickets(ActionEvent event) {
+         try {
+            Parent SecondView;
+            SecondView = (Pane) FXMLLoader.load(getClass().getResource("ReserverTickets.fxml"));
+            Scene newScene = new Scene(SecondView);
+            Stage currStage = (Stage) Tous.getScene().getWindow();
+            currStage.setScene(newScene);
+        } catch (IOException ex) {
+            Logger.getLogger(ShopController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

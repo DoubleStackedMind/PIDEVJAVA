@@ -6,6 +6,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
@@ -16,7 +17,14 @@
 
 <Pane fx:id="rootpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.russie2018.gui.AfficherMaillotsController">
    <children>
-      <AnchorPane prefHeight="799.0" prefWidth="1023.0" style="-fx-background-color: White;" />
+      <AnchorPane prefHeight="799.0" prefWidth="1023.0" style="-fx-background-color: White;">
+         <children>
+            <ImageView fitHeight="1022.0" fitWidth="1038.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="file:/C:/Users/samia/Documents/NetBeansProjects/PIDEV/Images/unlimited%20unleashed%20neymar%20jr%20GIF%20by%20Nike-downsized_large.gif" />
+               </image>
+            </ImageView>
+         </children></AnchorPane>
       <AnchorPane fx:id="AnchorPane" prefHeight="800.0" prefWidth="1024.0" style="-fx-background-image: url('file:C:/Users/samia/Documents/NetBeansProjects/PIDEV/Images/mac-bar.png');">
          <children>
             <JFXButton fx:id="closeButton" layoutX="22.0" layoutY="11.0" onAction="#closeWindow" style="-fx-background-color: transparent; -fx-background-image: url('file:C:/Users/samia/Documents/NetBeansProjects/PIDEV/Images/close.png'); -fx-background-repeat: no-repeat; -fx-background-position: 90%;" text=" " />
@@ -100,29 +108,29 @@
                   </Label>
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="Accessoires" layoutX="82.0" layoutY="5.0" style="-fx-background-color: rgba(0,0,0,0.7);" text="ACCESSOIRES" textFill="WHITE">
+            <JFXButton fx:id="Accessoires" layoutX="82.0" layoutY="5.0" onAction="#showAccessoires" style="-fx-background-color: rgba(0,0,0,0.7);" text="ACCESSOIRES" textFill="WHITE">
                <font>
                   <Font name="Futura-CondensedBoldOblique" size="18.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="Maillots" layoutX="109.0" layoutY="46.0" prefHeight="36.0" prefWidth="113.0" style="-fx-background-color: rgba(0,0,0,0.7);" text="Maillots" textFill="WHITE">
+            <JFXButton fx:id="Maillots" layoutX="109.0" layoutY="46.0" onAction="#showMaillots" prefHeight="36.0" prefWidth="113.0" style="-fx-background-color: rgba(0,0,0,0.7);" text="Maillots" textFill="WHITE">
                <font>
                   <Font name="Futura-CondensedBoldOblique" size="18.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="Chaussures" layoutX="26.0" layoutY="93.0" prefHeight="36.0" prefWidth="113.0" style="-fx-background-color: rgba(0,0,0,0.7);" text="CHAUSSURES" textFill="WHITE">
+            <JFXButton fx:id="Chaussures" layoutX="26.0" layoutY="93.0" onAction="#showChaussures" prefHeight="36.0" prefWidth="113.0" style="-fx-background-color: rgba(0,0,0,0.7);" text="CHAUSSURES" textFill="WHITE">
                <font>
                   <Font name="Futura-CondensedBoldOblique" size="18.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="Tous" layoutX="22.0" layoutY="46.0" prefHeight="36.0" prefWidth="113.0" style="-fx-background-color: rgba(0,0,0,0.7);" text="TOUS" textFill="WHITE">
+            <JFXButton fx:id="Tous" layoutX="22.0" layoutY="46.0" onAction="#showAll" prefHeight="36.0" prefWidth="113.0" style="-fx-background-color: rgba(0,0,0,0.7);" text="TOUS" textFill="WHITE">
                <font>
                   <Font name="Futura-CondensedBoldOblique" size="18.0" />
                </font>
             </JFXButton>
             <Rectangle arcHeight="5.0" arcWidth="5.0" height="3.0" layoutX="220.0" layoutY="98.0" stroke="BLACK" strokeType="INSIDE" width="596.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" height="3.0" layoutX="222.0" layoutY="57.0" stroke="BLACK" strokeType="INSIDE" width="596.0" />
-            <JFXButton fx:id="Shop1" contentDisplay="RIGHT" layoutX="450.0" layoutY="58.0" text="PROMOTIONS">
+            <JFXButton fx:id="Shop1" contentDisplay="RIGHT" layoutX="450.0" layoutY="58.0" text="COMMANDES">
                <font>
                   <Font name="Futura-CondensedBoldOblique" size="18.0" />
                </font>

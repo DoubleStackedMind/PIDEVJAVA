@@ -61,7 +61,7 @@ public class MailSend {
         try{
             String host ="smtp.gmail.com" ;
             String user = "jawhar.b.a.96@gmail.com";
-            String pass = "awzxcvy24142710";
+            String pass = "";
             String too = to;
             String fro = from;
             String subject = Subject;

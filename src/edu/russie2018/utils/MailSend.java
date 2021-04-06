@@ -18,7 +18,7 @@ public class MailSend {
         try{
             String host ="aspmx.l.google.com" ;
             String user = "jawhar.benabdallah@esprit.tn";
-            String pass = "07213174";
+            String pass = "";
             String to = "jawhar.b.a.96@gmail.com";
             String from = "Russia";
             String subject = "This is confirmation number for your expert tnt.";

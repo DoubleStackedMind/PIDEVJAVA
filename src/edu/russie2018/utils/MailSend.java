@@ -112,7 +112,7 @@ public class MailSend {
       // Get system properties
       Properties properties = System.getProperties();
       properties.setProperty("mail.user", "jawhar.b.a.96@gmail.com");
-      properties.setProperty("mail.password", "awzxcvy24142710");
+      properties.setProperty("mail.password", "");
       // Setup mail server
       properties.setProperty("mail.smtp.host", host);
 
